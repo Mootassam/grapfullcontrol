@@ -1,4 +1,4 @@
-import actions from 'src/modules/coupons/form/couponsFormActions';
+import actions from 'src/modules/product/form/productFormActions';
 
 const initialData = {
   initLoading: false,

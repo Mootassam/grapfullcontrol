@@ -34,7 +34,7 @@ const productDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/coupons');
+      getHistory().push('/product');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const productDestroyActions = {
         i18n('entities.coupons.destroyAll.success'),
       );
 
-      getHistory().push('/coupons');
+      getHistory().push('/product');
     } catch (error) {
       Errors.handle(error);
 

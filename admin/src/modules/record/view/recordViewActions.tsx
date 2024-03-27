@@ -2,7 +2,7 @@ import CouponsService from 'src/modules/coupons/couponsService';
 import Errors from 'src/modules/shared/error/errors';
 import { getHistory } from 'src/modules/store';
 
-const prefix = 'COUPONS_VIEW';
+const prefix = 'RECORD_VIEW';
 
 const couponsViewActions = {
   FIND_STARTED: `${prefix}_FIND_STARTED`,

@@ -1,6 +1,6 @@
-import selectors from 'src/modules/coupons/list/couponsListSelectors';
+import selectors from 'src/modules/transaction/list/transactionListSelectors';
 import { i18n } from 'src/i18n';
-import exporterFields from 'src/modules/coupons/list/couponsListExporterFields';
+import exporterFields from 'src/modules/transaction/list/transactionListExporterFields';
 import Errors from 'src/modules/shared/error/errors';
 import Exporter from 'src/modules/shared/exporter/exporter';
 import TransactionService from 'src/modules/transaction/transactionService';

@@ -1,8 +1,8 @@
-import CouponsService from 'src/modules/coupons/couponsService';
+import CouponsService from 'src/modules/transaction/transactionService';
 import Errors from 'src/modules/shared/error/errors';
 import { getHistory } from 'src/modules/store';
 
-const prefix = 'COUPONS_VIEW';
+const prefix = 'TRANSACTION_VIEW';
 
 const couponsViewActions = {
   FIND_STARTED: `${prefix}_FIND_STARTED`,
@@ -28,7 +28,7 @@ const couponsViewActions = {
         type: couponsViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/coupons');
+      getHistory().push('/transaction');
     }
   },
 };

@@ -1,4 +1,4 @@
-import actions from 'src/modules/coupons/view/couponsViewActions';
+import actions from 'src/modules/product/view/productViewActions';
 
 const initialData = {
   loading: false,

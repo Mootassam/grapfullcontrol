@@ -1,4 +1,4 @@
-import actions from 'src/modules/coupons/list/couponsListActions';
+import actions from 'src/modules/product/list/productListActions';
 
 const INITIAL_PAGE_SIZE = 10;
 

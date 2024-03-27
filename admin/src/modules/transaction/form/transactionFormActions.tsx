@@ -4,7 +4,7 @@ import { getHistory } from 'src/modules/store';
 import { i18n } from 'src/i18n';
 import TransactionService from 'src/modules/transaction/transactionService';
 
-const prefix = 'COUPONS_FORM';
+const prefix = 'TRANSACTION_FORM';
 
 const transactionFormActions = {
   INIT_STARTED: `${prefix}_INIT_STARTED`,
@@ -44,7 +44,7 @@ const transactionFormActions = {
         type: transactionFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/coupons');
+      getHistory().push('/transaction');
     }
   },
 
@@ -64,7 +64,7 @@ const transactionFormActions = {
         i18n('entities.coupons.create.success'),
       );
 
-      getHistory().push('/coupons');
+      getHistory().push('/transaction');
     } catch (error) {
       Errors.handle(error);
 
@@ -90,7 +90,7 @@ const transactionFormActions = {
         i18n('entities.coupons.update.success'),
       );
 
-      getHistory().push('/coupons');
+      getHistory().push('/transaction');
     } catch (error) {
       Errors.handle(error);
 

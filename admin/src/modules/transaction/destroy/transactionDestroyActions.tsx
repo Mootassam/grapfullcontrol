@@ -1,12 +1,12 @@
-import listActions from 'src/modules/coupons/list/couponsListActions';
-import CouponsService from 'src/modules/coupons/couponsService';
+import listActions from 'src/modules/transaction/list/transactionListActions';
+import CouponsService from 'src/modules/transaction/transactionService';
 import Errors from 'src/modules/shared/error/errors';
 import { i18n } from 'src/i18n';
 import { getHistory } from 'src/modules/store';
 import Message from 'src/view/shared/message';
+import TransactionService from 'src/modules/transaction/transactionService';
 
-const prefix = 'COUPONS_DESTROY';
-
+const prefix = 'TRANSACTION_DESTROY';
 const transactionDestroyActions = {
   DESTROY_STARTED: `${prefix}_DESTROY_STARTED`,
   DESTROY_SUCCESS: `${prefix}_DESTROY_SUCCESS`,
@@ -22,7 +22,7 @@ const transactionDestroyActions = {
         type: transactionDestroyActions.DESTROY_STARTED,
       });
 
-      await CouponsService.destroyAll([id]);
+      await TransactionService.destroyAll([id]);
 
       dispatch({
         type: transactionDestroyActions.DESTROY_SUCCESS,
@@ -34,7 +34,7 @@ const transactionDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/coupons');
+      getHistory().push('/transaction');
     } catch (error) {
       Errors.handle(error);
 
@@ -67,7 +67,7 @@ const transactionDestroyActions = {
         i18n('entities.coupons.destroyAll.success'),
       );
 
-      getHistory().push('/coupons');
+      getHistory().push('/transaction');
     } catch (error) {
       Errors.handle(error);
 
