@@ -3,11 +3,11 @@ import MongooseQueryUtils from '../utils/mongooseQueryUtils';
 import AuditLogRepository from './auditLogRepository';
 import Error404 from '../../errors/Error404';
 import { IRepositoryOptions } from './IRepositoryOptions';
-import Campagne from '../models/campagne';
-import DetailsCampagne from '../models/detailsCampagne';
-import DetailsCampagneRepository from './detailsCampagneRepository';
-class CampagneRepository {
+import FileRepository from './fileRepository';
+import Vip from '../models/vip';
 
+class VipRepository {
+  
   static async create(data, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(
       options,
@@ -17,7 +17,7 @@ class CampagneRepository {
       options,
     );
 
-    const [record] = await Campagne(
+    const [record] = await Vip(
       options.database,
     ).create(
       [
@@ -38,6 +38,8 @@ class CampagneRepository {
       options,
     );
 
+    
+
     return this.findById(record.id, options);
   }
 
@@ -47,7 +49,7 @@ class CampagneRepository {
     );
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      Campagne(options.database).findById(id),
+      Vip(options.database).findById(id),
       options,
     );
 
@@ -58,7 +60,7 @@ class CampagneRepository {
       throw new Error404();
     }
 
-    await Campagne(options.database).updateOne(
+    await Vip(options.database).updateOne(
       { _id: id },
       {
         ...data,
@@ -77,6 +79,9 @@ class CampagneRepository {
     );
 
     record = await this.findById(id, options);
+
+
+
     return record;
   }
 
@@ -86,15 +91,9 @@ class CampagneRepository {
     );
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      Campagne(options.database).findById(id),
+      Vip(options.database).findById(id),
       options,
     );
-
-    if (record.details) {
-      record.details.forEach(detail => {
-        DetailsCampagneRepository.destroy(detail._id, options)
-      });
-    }
 
     if (
       !record ||
@@ -103,7 +102,7 @@ class CampagneRepository {
       throw new Error404();
     }
 
-    await Campagne(options.database).deleteOne({ _id: id }, options);
+    await Vip(options.database).deleteOne({ _id: id }, options);
 
     await this._createAuditLog(
       AuditLogRepository.DELETE,
@@ -121,7 +120,7 @@ class CampagneRepository {
     );
 
     return MongooseRepository.wrapWithSessionIfExists(
-      Campagne(options.database).countDocuments({
+      Vip(options.database).countDocuments({
         ...filter,
         tenant: currentTenant.id,
       }),
@@ -135,9 +134,9 @@ class CampagneRepository {
     );
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      Campagne(options.database)
+      Vip(options.database)
         .findById(id)
-        .populate('details'),
+      .populate('members'),
       options,
     );
 
@@ -160,7 +159,7 @@ class CampagneRepository {
     );
 
     let criteriaAnd: any = [];
-
+    
     criteriaAnd.push({
       tenant: currentTenant.id,
     });
@@ -183,12 +182,12 @@ class CampagneRepository {
         });
       }
 
-      if (filter.anneeRange) {
-        const [start, end] = filter.anneeRange;
+      if (filter.startdateRange) {
+        const [start, end] = filter.startdateRange;
 
         if (start !== undefined && start !== null && start !== '') {
           criteriaAnd.push({
-            annee: {
+            startdate: {
               $gte: start,
             },
           });
@@ -196,19 +195,19 @@ class CampagneRepository {
 
         if (end !== undefined && end !== null && end !== '') {
           criteriaAnd.push({
-            annee: {
+            startdate: {
               $lte: end,
             },
           });
         }
       }
 
-      if (filter.datedebutRange) {
-        const [start, end] = filter.datedebutRange;
+      if (filter.enddateRange) {
+        const [start, end] = filter.enddateRange;
 
         if (start !== undefined && start !== null && start !== '') {
           criteriaAnd.push({
-            datedebut: {
+            enddate: {
               $gte: start,
             },
           });
@@ -216,37 +215,11 @@ class CampagneRepository {
 
         if (end !== undefined && end !== null && end !== '') {
           criteriaAnd.push({
-            datedebut: {
+            enddate: {
               $lte: end,
             },
           });
         }
-      }
-
-      if (filter.datefinRange) {
-        const [start, end] = filter.datefinRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          criteriaAnd.push({
-            datefin: {
-              $gte: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          criteriaAnd.push({
-            datefin: {
-              $lte: end,
-            },
-          });
-        }
-      }
-
-      if (filter.statut) {
-        criteriaAnd.push({
-          statut: filter.statut
-        });
       }
 
       if (filter.createdAtRange) {
@@ -288,14 +261,14 @@ class CampagneRepository {
       ? { $and: criteriaAnd }
       : null;
 
-    let rows = await Campagne(options.database)
+    let rows = await Vip(options.database)
       .find(criteria)
       .skip(skip)
       .limit(limitEscaped)
       .sort(sort)
-      .populate('details');
+      .populate('members');
 
-    const count = await Campagne(
+    const count = await Vip(
       options.database,
     ).countDocuments(criteria);
 
@@ -321,31 +294,36 @@ class CampagneRepository {
           {
             _id: MongooseQueryUtils.uuid(search),
           },
-          { annee: search },
+          {
+            titre: {
+              $regex: MongooseQueryUtils.escapeRegExp(search),
+              $options: 'i',
+            }
+          },          
         ],
       });
     }
 
-    const sort = MongooseQueryUtils.sort('annee_ASC');
+    const sort = MongooseQueryUtils.sort('titre_ASC');
     const limitEscaped = Number(limit || 0) || undefined;
 
     const criteria = { $and: criteriaAnd };
 
-    const records = await Campagne(options.database)
+    const records = await Vip(options.database)
       .find(criteria)
       .limit(limitEscaped)
       .sort(sort);
 
     return records.map((record) => ({
       id: record.id,
-      label: record.annee,
+      label: record.titre,
     }));
   }
 
   static async _createAuditLog(action, id, data, options: IRepositoryOptions) {
     await AuditLogRepository.log(
       {
-        entityName: Campagne(options.database).modelName,
+        entityName: Vip(options.database).modelName,
         entityId: id,
         action,
         values: data,
@@ -363,10 +341,12 @@ class CampagneRepository {
       ? record.toObject()
       : record;
 
-
+    output.pv = await FileRepository.fillDownloadUrl(
+      output.pv,
+    );
 
     return output;
   }
 }
 
-export default CampagneRepository;
+export default VipRepository;

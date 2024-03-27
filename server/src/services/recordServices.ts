@@ -1,7 +1,7 @@
-import MandatRepository from '../database/repositories/mandatRepository';
-import Error400 from '../errors/Error400';
-import MongooseRepository from '../database/repositories/mongooseRepository';
-import { IServiceOptions } from './IServiceOptions';
+import Error400 from "../errors/Error400";
+import MongooseRepository from "../database/repositories/mongooseRepository";
+import { IServiceOptions } from "./IServiceOptions";
+import RecordRepository from "../database/repositories/recordRepository";
 
 export default class RecordServices {
   options: IServiceOptions;
@@ -12,11 +12,11 @@ export default class RecordServices {
 
   async create(data) {
     const session = await MongooseRepository.createSession(
-      this.options.database,
+      this.options.database
     );
 
     try {
-      const record = await MandatRepository.create(data, {
+      const record = await RecordRepository.create(data, {
         ...this.options,
         session,
       });
@@ -30,7 +30,7 @@ export default class RecordServices {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'mandat',
+        "mandat"
       );
 
       throw error;
@@ -39,18 +39,14 @@ export default class RecordServices {
 
   async update(id, data) {
     const session = await MongooseRepository.createSession(
-      this.options.database,
+      this.options.database
     );
 
     try {
-      const record = await MandatRepository.update(
-        id,
-        data,
-        {
-          ...this.options,
-          session,
-        },
-      );
+      const record = await RecordRepository.update(id, data, {
+        ...this.options,
+        session,
+      });
 
       await MongooseRepository.commitTransaction(session);
 
@@ -61,7 +57,7 @@ export default class RecordServices {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'mandat',
+        "mandat"
       );
 
       throw error;
@@ -70,12 +66,12 @@ export default class RecordServices {
 
   async destroyAll(ids) {
     const session = await MongooseRepository.createSession(
-      this.options.database,
+      this.options.database
     );
 
     try {
       for (const id of ids) {
-        await MandatRepository.destroy(id, {
+        await RecordRepository.destroy(id, {
           ...this.options,
           session,
         });
@@ -89,36 +85,29 @@ export default class RecordServices {
   }
 
   async findById(id) {
-    return MandatRepository.findById(id, this.options);
+    return RecordRepository.findById(id, this.options);
   }
 
   async findAllAutocomplete(search, limit) {
-    return MandatRepository.findAllAutocomplete(
-      search,
-      limit,
-      this.options,
-    );
+    return RecordRepository.findAllAutocomplete(search, limit, this.options);
   }
 
   async findAndCountAll(args) {
-    return MandatRepository.findAndCountAll(
-      args,
-      this.options,
-    );
+    return RecordRepository.findAndCountAll(args, this.options);
   }
 
   async import(data, importHash) {
     if (!importHash) {
       throw new Error400(
         this.options.language,
-        'importer.errors.importHashRequired',
+        "importer.errors.importHashRequired"
       );
     }
 
     if (await this._isImportHashExistent(importHash)) {
       throw new Error400(
         this.options.language,
-        'importer.errors.importHashExistent',
+        "importer.errors.importHashExistent"
       );
     }
 
@@ -131,11 +120,11 @@ export default class RecordServices {
   }
 
   async _isImportHashExistent(importHash) {
-    const count = await MandatRepository.count(
+    const count = await RecordRepository.count(
       {
         importHash,
       },
-      this.options,
+      this.options
     );
 
     return count > 0;

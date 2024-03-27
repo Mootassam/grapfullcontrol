@@ -1,7 +1,7 @@
-import MandatRepository from '../database/repositories/mandatRepository';
 import Error400 from '../errors/Error400';
 import MongooseRepository from '../database/repositories/mongooseRepository';
 import { IServiceOptions } from './IServiceOptions';
+import VipRepository from '../database/repositories/vipRepository';
 
 export default class VipServices {
   options: IServiceOptions;
@@ -16,7 +16,7 @@ export default class VipServices {
     );
 
     try {
-      const record = await MandatRepository.create(data, {
+      const record = await VipRepository.create(data, {
         ...this.options,
         session,
       });
@@ -30,7 +30,7 @@ export default class VipServices {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'mandat',
+        'vip',
       );
 
       throw error;
@@ -43,7 +43,7 @@ export default class VipServices {
     );
 
     try {
-      const record = await MandatRepository.update(
+      const record = await VipRepository.update(
         id,
         data,
         {
@@ -61,7 +61,7 @@ export default class VipServices {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'mandat',
+        'vip',
       );
 
       throw error;
@@ -75,7 +75,7 @@ export default class VipServices {
 
     try {
       for (const id of ids) {
-        await MandatRepository.destroy(id, {
+        await VipRepository.destroy(id, {
           ...this.options,
           session,
         });
@@ -89,11 +89,11 @@ export default class VipServices {
   }
 
   async findById(id) {
-    return MandatRepository.findById(id, this.options);
+    return VipRepository.findById(id, this.options);
   }
 
   async findAllAutocomplete(search, limit) {
-    return MandatRepository.findAllAutocomplete(
+    return VipRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
@@ -101,7 +101,7 @@ export default class VipServices {
   }
 
   async findAndCountAll(args) {
-    return MandatRepository.findAndCountAll(
+    return VipRepository.findAndCountAll(
       args,
       this.options,
     );
@@ -131,7 +131,7 @@ export default class VipServices {
   }
 
   async _isImportHashExistent(importHash) {
-    const count = await MandatRepository.count(
+    const count = await VipRepository.count(
       {
         importHash,
       },

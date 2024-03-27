@@ -3,9 +3,10 @@ import MongooseQueryUtils from '../utils/mongooseQueryUtils';
 import AuditLogRepository from './auditLogRepository';
 import Error404 from '../../errors/Error404';
 import { IRepositoryOptions } from './IRepositoryOptions';
-import Association from '../models/association';
+import FileRepository from './fileRepository';
+import Product from '../models/product';
 
-class AssociationRepository {
+class ProductRepository {
   
   static async create(data, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(
@@ -16,7 +17,7 @@ class AssociationRepository {
       options,
     );
 
-    const [record] = await Association(
+    const [record] = await Product(
       options.database,
     ).create(
       [
@@ -48,7 +49,7 @@ class AssociationRepository {
     );
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      Association(options.database).findById(id),
+      Product(options.database).findById(id),
       options,
     );
 
@@ -59,7 +60,7 @@ class AssociationRepository {
       throw new Error404();
     }
 
-    await Association(options.database).updateOne(
+    await Product(options.database).updateOne(
       { _id: id },
       {
         ...data,
@@ -90,7 +91,7 @@ class AssociationRepository {
     );
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      Association(options.database).findById(id),
+      Product(options.database).findById(id),
       options,
     );
 
@@ -101,7 +102,7 @@ class AssociationRepository {
       throw new Error404();
     }
 
-    await Association(options.database).deleteOne({ _id: id }, options);
+    await Product(options.database).deleteOne({ _id: id }, options);
 
     await this._createAuditLog(
       AuditLogRepository.DELETE,
@@ -119,7 +120,7 @@ class AssociationRepository {
     );
 
     return MongooseRepository.wrapWithSessionIfExists(
-      Association(options.database).countDocuments({
+      Product(options.database).countDocuments({
         ...filter,
         tenant: currentTenant.id,
       }),
@@ -133,8 +134,9 @@ class AssociationRepository {
     );
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      Association(options.database)
-        .findById(id),
+      Product(options.database)
+        .findById(id)
+      .populate('members'),
       options,
     );
 
@@ -169,70 +171,55 @@ class AssociationRepository {
         });
       }
 
-      if (filter.nom) {
+      if (filter.titre) {
         criteriaAnd.push({
-          nom: {
+          titre: {
             $regex: MongooseQueryUtils.escapeRegExp(
-              filter.nom,
+              filter.titre,
             ),
             $options: 'i',
           },
         });
       }
 
-      if (filter.description) {
-        criteriaAnd.push({
-          description: {
-            $regex: MongooseQueryUtils.escapeRegExp(
-              filter.description,
-            ),
-            $options: 'i',
-          },
-        });
+      if (filter.startdateRange) {
+        const [start, end] = filter.startdateRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          criteriaAnd.push({
+            startdate: {
+              $gte: start,
+            },
+          });
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          criteriaAnd.push({
+            startdate: {
+              $lte: end,
+            },
+          });
+        }
       }
 
-      if (filter.adresse) {
-        criteriaAnd.push({
-          adresse: {
-            $regex: MongooseQueryUtils.escapeRegExp(
-              filter.adresse,
-            ),
-            $options: 'i',
-          },
-        });
-      }
+      if (filter.enddateRange) {
+        const [start, end] = filter.enddateRange;
 
-      if (filter.phone) {
-        criteriaAnd.push({
-          phone: {
-            $regex: MongooseQueryUtils.escapeRegExp(
-              filter.phone,
-            ),
-            $options: 'i',
-          },
-        });
-      }
+        if (start !== undefined && start !== null && start !== '') {
+          criteriaAnd.push({
+            enddate: {
+              $gte: start,
+            },
+          });
+        }
 
-      if (filter.email) {
-        criteriaAnd.push({
-          email: {
-            $regex: MongooseQueryUtils.escapeRegExp(
-              filter.email,
-            ),
-            $options: 'i',
-          },
-        });
-      }
-
-      if (filter.tva) {
-        criteriaAnd.push({
-          tva: {
-            $regex: MongooseQueryUtils.escapeRegExp(
-              filter.tva,
-            ),
-            $options: 'i',
-          },
-        });
+        if (end !== undefined && end !== null && end !== '') {
+          criteriaAnd.push({
+            enddate: {
+              $lte: end,
+            },
+          });
+        }
       }
 
       if (filter.createdAtRange) {
@@ -274,13 +261,14 @@ class AssociationRepository {
       ? { $and: criteriaAnd }
       : null;
 
-    let rows = await Association(options.database)
+    let rows = await Product(options.database)
       .find(criteria)
       .skip(skip)
       .limit(limitEscaped)
-      .sort(sort);
+      .sort(sort)
+      .populate('members');
 
-    const count = await Association(
+    const count = await Product(
       options.database,
     ).countDocuments(criteria);
 
@@ -307,7 +295,7 @@ class AssociationRepository {
             _id: MongooseQueryUtils.uuid(search),
           },
           {
-            nom: {
+            titre: {
               $regex: MongooseQueryUtils.escapeRegExp(search),
               $options: 'i',
             }
@@ -316,26 +304,26 @@ class AssociationRepository {
       });
     }
 
-    const sort = MongooseQueryUtils.sort('nom_ASC');
+    const sort = MongooseQueryUtils.sort('titre_ASC');
     const limitEscaped = Number(limit || 0) || undefined;
 
     const criteria = { $and: criteriaAnd };
 
-    const records = await Association(options.database)
+    const records = await Product(options.database)
       .find(criteria)
       .limit(limitEscaped)
       .sort(sort);
 
     return records.map((record) => ({
       id: record.id,
-      label: record.nom,
+      label: record.titre,
     }));
   }
 
   static async _createAuditLog(action, id, data, options: IRepositoryOptions) {
     await AuditLogRepository.log(
       {
-        entityName: Association(options.database).modelName,
+        entityName: Product(options.database).modelName,
         entityId: id,
         action,
         values: data,
@@ -353,10 +341,12 @@ class AssociationRepository {
       ? record.toObject()
       : record;
 
-
+    output.pv = await FileRepository.fillDownloadUrl(
+      output.pv,
+    );
 
     return output;
   }
 }
 
-export default AssociationRepository;
+export default ProductRepository;

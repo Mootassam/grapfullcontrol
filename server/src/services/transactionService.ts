@@ -1,7 +1,7 @@
-import MandatRepository from '../database/repositories/mandatRepository';
 import Error400 from '../errors/Error400';
 import MongooseRepository from '../database/repositories/mongooseRepository';
 import { IServiceOptions } from './IServiceOptions';
+import TransactionRepository from '../database/repositories/TransactionRepository';
 
 export default class TransactionService {
   options: IServiceOptions;
@@ -16,7 +16,7 @@ export default class TransactionService {
     );
 
     try {
-      const record = await MandatRepository.create(data, {
+      const record = await TransactionRepository.create(data, {
         ...this.options,
         session,
       });
@@ -43,7 +43,7 @@ export default class TransactionService {
     );
 
     try {
-      const record = await MandatRepository.update(
+      const record = await TransactionRepository.update(
         id,
         data,
         {
@@ -75,7 +75,7 @@ export default class TransactionService {
 
     try {
       for (const id of ids) {
-        await MandatRepository.destroy(id, {
+        await TransactionRepository.destroy(id, {
           ...this.options,
           session,
         });
@@ -89,11 +89,11 @@ export default class TransactionService {
   }
 
   async findById(id) {
-    return MandatRepository.findById(id, this.options);
+    return TransactionRepository.findById(id, this.options);
   }
 
   async findAllAutocomplete(search, limit) {
-    return MandatRepository.findAllAutocomplete(
+    return TransactionRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
@@ -101,7 +101,7 @@ export default class TransactionService {
   }
 
   async findAndCountAll(args) {
-    return MandatRepository.findAndCountAll(
+    return TransactionRepository.findAndCountAll(
       args,
       this.options,
     );
@@ -131,7 +131,7 @@ export default class TransactionService {
   }
 
   async _isImportHashExistent(importHash) {
-    const count = await MandatRepository.count(
+    const count = await TransactionRepository.count(
       {
         importHash,
       },

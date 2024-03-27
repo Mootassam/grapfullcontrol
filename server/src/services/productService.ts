@@ -1,7 +1,7 @@
-import MandatRepository from '../database/repositories/mandatRepository';
 import Error400 from '../errors/Error400';
 import MongooseRepository from '../database/repositories/mongooseRepository';
 import { IServiceOptions } from './IServiceOptions';
+import ProductRepository from '../database/repositories/productRepository';
 
 export default class ProductServices {
   options: IServiceOptions;
@@ -16,7 +16,7 @@ export default class ProductServices {
     );
 
     try {
-      const record = await MandatRepository.create(data, {
+      const record = await ProductRepository.create(data, {
         ...this.options,
         session,
       });
@@ -30,7 +30,7 @@ export default class ProductServices {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'mandat',
+        'product',
       );
 
       throw error;
@@ -43,7 +43,7 @@ export default class ProductServices {
     );
 
     try {
-      const record = await MandatRepository.update(
+      const record = await ProductRepository.update(
         id,
         data,
         {
@@ -61,7 +61,7 @@ export default class ProductServices {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'mandat',
+        'product',
       );
 
       throw error;
@@ -75,7 +75,7 @@ export default class ProductServices {
 
     try {
       for (const id of ids) {
-        await MandatRepository.destroy(id, {
+        await ProductRepository.destroy(id, {
           ...this.options,
           session,
         });
@@ -89,11 +89,11 @@ export default class ProductServices {
   }
 
   async findById(id) {
-    return MandatRepository.findById(id, this.options);
+    return ProductRepository.findById(id, this.options);
   }
 
   async findAllAutocomplete(search, limit) {
-    return MandatRepository.findAllAutocomplete(
+    return ProductRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
@@ -101,7 +101,7 @@ export default class ProductServices {
   }
 
   async findAndCountAll(args) {
-    return MandatRepository.findAndCountAll(
+    return ProductRepository.findAndCountAll(
       args,
       this.options,
     );
@@ -131,7 +131,7 @@ export default class ProductServices {
   }
 
   async _isImportHashExistent(importHash) {
-    const count = await MandatRepository.count(
+    const count = await ProductRepository.count(
       {
         importHash,
       },

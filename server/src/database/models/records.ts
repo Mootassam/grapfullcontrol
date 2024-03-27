@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 export default (database) => {
   try {
-    return database.model("record");
+    return database.model("records");
   } catch (error) {
     // continue, because model doesnt exist
   }
@@ -75,5 +75,5 @@ export default (database) => {
     getters: true,
   });
 
-  return database.model("record", RecordSchema);
+  return database.model("records", RecordSchema);
 };

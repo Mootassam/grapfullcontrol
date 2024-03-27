@@ -20,19 +20,15 @@ export default class CategoryService {
         ...this.options,
         session,
       });
-
       await MongooseRepository.commitTransaction(session);
-
       return record;
     } catch (error) {
       await MongooseRepository.abortTransaction(session);
-
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
         "category"
       );
-
       throw error;
     }
   }

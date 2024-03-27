@@ -3,11 +3,11 @@ import MongooseQueryUtils from '../utils/mongooseQueryUtils';
 import AuditLogRepository from './auditLogRepository';
 import Error404 from '../../errors/Error404';
 import { IRepositoryOptions } from './IRepositoryOptions';
-import ProduitCategorie from '../models/produitCategorie';
-import Produit from '../models/produit';
+import FileRepository from './fileRepository';
+import Records from '../models/records';
 
-class ProduitCategorieRepository {
-
+class RecordRepository {
+  
   static async create(data, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(
       options,
@@ -17,7 +17,7 @@ class ProduitCategorieRepository {
       options,
     );
 
-    const [record] = await ProduitCategorie(
+    const [record] = await Records(
       options.database,
     ).create(
       [
@@ -38,13 +38,7 @@ class ProduitCategorieRepository {
       options,
     );
 
-    // await MongooseRepository.refreshTwoWayRelationOneToMany(
-    //   record,
-    //   'produit',
-    //   Produit(options.database),
-    //   'category',
-    //   options,
-    // );
+    
 
     return this.findById(record.id, options);
   }
@@ -55,7 +49,7 @@ class ProduitCategorieRepository {
     );
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      ProduitCategorie(options.database).findById(id),
+      Records(options.database).findById(id),
       options,
     );
 
@@ -66,7 +60,7 @@ class ProduitCategorieRepository {
       throw new Error404();
     }
 
-    await ProduitCategorie(options.database).updateOne(
+    await Records(options.database).updateOne(
       { _id: id },
       {
         ...data,
@@ -86,13 +80,7 @@ class ProduitCategorieRepository {
 
     record = await this.findById(id, options);
 
-    // await MongooseRepository.refreshTwoWayRelationOneToMany(
-    //   record,
-    //   'produit',
-    //   Produit(options.database),
-    //   'category',
-    //   options,
-    // );
+
 
     return record;
   }
@@ -103,7 +91,7 @@ class ProduitCategorieRepository {
     );
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      ProduitCategorie(options.database).findById(id),
+      Records(options.database).findById(id),
       options,
     );
 
@@ -114,7 +102,7 @@ class ProduitCategorieRepository {
       throw new Error404();
     }
 
-    await ProduitCategorie(options.database).deleteOne({ _id: id }, options);
+    await Records(options.database).deleteOne({ _id: id }, options);
 
     await this._createAuditLog(
       AuditLogRepository.DELETE,
@@ -132,7 +120,7 @@ class ProduitCategorieRepository {
     );
 
     return MongooseRepository.wrapWithSessionIfExists(
-      ProduitCategorie(options.database).countDocuments({
+      Records(options.database).countDocuments({
         ...filter,
         tenant: currentTenant.id,
       }),
@@ -146,9 +134,9 @@ class ProduitCategorieRepository {
     );
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      ProduitCategorie(options.database)
+      Records(options.database)
         .findById(id)
-        .populate('produit'),
+      .populate('members'),
       options,
     );
 
@@ -171,7 +159,7 @@ class ProduitCategorieRepository {
     );
 
     let criteriaAnd: any = [];
-
+    
     criteriaAnd.push({
       tenant: currentTenant.id,
     });
@@ -192,6 +180,46 @@ class ProduitCategorieRepository {
             $options: 'i',
           },
         });
+      }
+
+      if (filter.startdateRange) {
+        const [start, end] = filter.startdateRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          criteriaAnd.push({
+            startdate: {
+              $gte: start,
+            },
+          });
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          criteriaAnd.push({
+            startdate: {
+              $lte: end,
+            },
+          });
+        }
+      }
+
+      if (filter.enddateRange) {
+        const [start, end] = filter.enddateRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          criteriaAnd.push({
+            enddate: {
+              $gte: start,
+            },
+          });
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          criteriaAnd.push({
+            enddate: {
+              $lte: end,
+            },
+          });
+        }
       }
 
       if (filter.createdAtRange) {
@@ -233,14 +261,14 @@ class ProduitCategorieRepository {
       ? { $and: criteriaAnd }
       : null;
 
-    let rows = await ProduitCategorie(options.database)
+    let rows = await Records(options.database)
       .find(criteria)
       .skip(skip)
       .limit(limitEscaped)
       .sort(sort)
-      .populate('produit');;
+      .populate('members');
 
-    const count = await ProduitCategorie(
+    const count = await Records(
       options.database,
     ).countDocuments(criteria);
 
@@ -271,7 +299,7 @@ class ProduitCategorieRepository {
               $regex: MongooseQueryUtils.escapeRegExp(search),
               $options: 'i',
             }
-          },
+          },          
         ],
       });
     }
@@ -281,7 +309,7 @@ class ProduitCategorieRepository {
 
     const criteria = { $and: criteriaAnd };
 
-    const records = await ProduitCategorie(options.database)
+    const records = await Records(options.database)
       .find(criteria)
       .limit(limitEscaped)
       .sort(sort);
@@ -295,7 +323,7 @@ class ProduitCategorieRepository {
   static async _createAuditLog(action, id, data, options: IRepositoryOptions) {
     await AuditLogRepository.log(
       {
-        entityName: ProduitCategorie(options.database).modelName,
+        entityName: Records(options.database).modelName,
         entityId: id,
         action,
         values: data,
@@ -313,10 +341,12 @@ class ProduitCategorieRepository {
       ? record.toObject()
       : record;
 
-
+    output.pv = await FileRepository.fillDownloadUrl(
+      output.pv,
+    );
 
     return output;
   }
 }
 
-export default ProduitCategorieRepository;
+export default RecordRepository;

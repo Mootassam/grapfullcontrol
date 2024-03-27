@@ -3,20 +3,16 @@ import MongooseQueryUtils from "../utils/mongooseQueryUtils";
 import AuditLogRepository from "./auditLogRepository";
 import Error404 from "../../errors/Error404";
 import { IRepositoryOptions } from "./IRepositoryOptions";
-import DetailsCampagne from "../models/detailsCampagne";
 import FileRepository from "./fileRepository";
-import Campagne from "../models/campagne";
-import mongoose from "mongoose";
+import Transaction from "../models/transaction";
 
-const Schema = mongoose.Schema;
-
-class DetailsCampagneRepository {
+class TransactionRepository {
   static async create(data, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
     const currentUser = MongooseRepository.getCurrentUser(options);
 
-    const [record] = await DetailsCampagne(options.database).create(
+    const [record] = await Transaction(options.database).create(
       [
         {
           ...data,
@@ -35,14 +31,6 @@ class DetailsCampagneRepository {
       options
     );
 
-    await MongooseRepository.refreshTwoWayRelationOneToMany(
-      record,
-      "campagne",
-      Campagne(options.database),
-      "details",
-      options
-    );
-
     return this.findById(record.id, options);
   }
 
@@ -50,7 +38,7 @@ class DetailsCampagneRepository {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      DetailsCampagne(options.database).findById(id),
+      Transaction(options.database).findById(id),
       options
     );
 
@@ -58,7 +46,7 @@ class DetailsCampagneRepository {
       throw new Error404();
     }
 
-    await DetailsCampagne(options.database).updateOne(
+    await Transaction(options.database).updateOne(
       { _id: id },
       {
         ...data,
@@ -71,14 +59,6 @@ class DetailsCampagneRepository {
 
     record = await this.findById(id, options);
 
-    await MongooseRepository.refreshTwoWayRelationOneToMany(
-      record,
-      "campagne",
-      Campagne(options.database),
-      "details",
-      options
-    );
-
     return record;
   }
 
@@ -86,7 +66,7 @@ class DetailsCampagneRepository {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      DetailsCampagne(options.database).findById(id),
+      Transaction(options.database).findById(id),
       options
     );
 
@@ -94,23 +74,16 @@ class DetailsCampagneRepository {
       throw new Error404();
     }
 
-    await DetailsCampagne(options.database).deleteOne({ _id: id }, options);
+    await Transaction(options.database).deleteOne({ _id: id }, options);
 
     await this._createAuditLog(AuditLogRepository.DELETE, id, record, options);
-
-    await MongooseRepository.destroyRelationToMany(
-      id,
-      Campagne(options.database),
-      "details",
-      options
-    );
   }
 
   static async count(filter, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
     return MongooseRepository.wrapWithSessionIfExists(
-      DetailsCampagne(options.database).countDocuments({
+      Transaction(options.database).countDocuments({
         ...filter,
         tenant: currentTenant.id,
       }),
@@ -120,11 +93,9 @@ class DetailsCampagneRepository {
 
   static async findById(id, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
+
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      DetailsCampagne(options.database)
-        .findById(id)
-        .populate("adherent")
-        .populate("palier"),
+      Transaction(options.database).findById(id).populate("members"),
       options
     );
 
@@ -142,161 +113,33 @@ class DetailsCampagneRepository {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
     let criteriaAnd: any = [];
-    let idcampagne = new mongoose.Types.ObjectId(filter.campagne);
 
     criteriaAnd.push({
       tenant: currentTenant.id,
-      campagne: idcampagne,
     });
 
     if (filter) {
       if (filter.id) {
         criteriaAnd.push({
           ["_id"]: MongooseQueryUtils.uuid(filter.id),
-        });
-      }
-
-      if (filter.adherent) {
-        criteriaAnd.push({
-          adherent: MongooseQueryUtils.uuid(filter.adherent),
-        });
-      }
-
-      if (filter.palier) {
-        criteriaAnd.push({
-          palier: MongooseQueryUtils.uuid(filter.palier),
-        });
-      }
-
-      if (filter.statutPay) {
-        criteriaAnd.push({
-          statutPay: filter.statutPay,
-        });
-      }
-      if (filter.campagne) {
-        criteriaAnd.push({
-          campagne: idcampagne,
-        });
-      }
-
-      if (filter.montantRange) {
-        const [start, end] = filter.montantRange;
-
-        if (start !== undefined && start !== null && start !== "") {
-          criteriaAnd.push({
-            montant: {
-              $gte: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== "") {
-          criteriaAnd.push({
-            montant: {
-              $lte: end,
-            },
-          });
-        }
-      }
-
-      if (filter.typePay) {
-        criteriaAnd.push({
-          typePay: filter.typePay,
-        });
-      }
-
-      if (filter.createdAtRange) {
-        const [start, end] = filter.createdAtRange;
-
-        if (start !== undefined && start !== null && start !== "") {
-          criteriaAnd.push({
-            ["createdAt"]: {
-              $gte: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== "") {
-          criteriaAnd.push({
-            ["createdAt"]: {
-              $lte: end,
-            },
-          });
-        }
-      }
-    }
-
-    const sort = MongooseQueryUtils.sort(orderBy || "createdAt_DESC");
-
-    const skip = Number(offset || 0) || undefined;
-    const limitEscaped = Number(limit || 0) || undefined;
-    const criteria = criteriaAnd.length ? { $and: criteriaAnd } : null;
-
-    let rows = await DetailsCampagne(options.database)
-      .find(criteria)
-      .skip(skip)
-      .limit(limitEscaped)
-      .sort(sort)
-      .populate("adherent")
-      .populate("palier");
-
-    const count = await DetailsCampagne(options.database).countDocuments(
-      criteria
-    );
-
-    rows = await Promise.all(rows.map(this._fillFileDownloadUrls));
-
-    return { rows, count };
-  }
-
-  static async findAdherentAndCountAll(
-    { filter, limit = 0, offset = 0, orderBy = "" },
-    options: IRepositoryOptions
-  ) {
-    const currentTenant = MongooseRepository.getCurrentTenant(options);
-
-    let criteriaAnd: any = [];
-
-    let iduser = new mongoose.Types.ObjectId(filter.iduser);
-
-    criteriaAnd.push({
-      tenant: currentTenant.id,
-    });
-
-    criteriaAnd.push({
-      adherent: iduser,
-    });
-
-    if (filter) {
-      if (filter.id) {
-        criteriaAnd.push({
-          ["_id"]: MongooseQueryUtils.uuid(filter.id),
-        });
-      }
-
-      if (filter.palier) {
-        criteriaAnd.push({
-          palier: MongooseQueryUtils.uuid(filter.palier),
-        });
-      }
-
-      if (filter.statutPay) {
-        criteriaAnd.push({
-          statutPay: filter.statutPay,
         });
       }
 
       if (filter.titre) {
         criteriaAnd.push({
-          titre: filter.titre,
+          titre: {
+            $regex: MongooseQueryUtils.escapeRegExp(filter.titre),
+            $options: "i",
+          },
         });
       }
-      if (filter.montantRange) {
-        const [start, end] = filter.montantRange;
+
+      if (filter.startdateRange) {
+        const [start, end] = filter.startdateRange;
 
         if (start !== undefined && start !== null && start !== "") {
           criteriaAnd.push({
-            montant: {
+            startdate: {
               $gte: start,
             },
           });
@@ -304,17 +147,31 @@ class DetailsCampagneRepository {
 
         if (end !== undefined && end !== null && end !== "") {
           criteriaAnd.push({
-            montant: {
+            startdate: {
               $lte: end,
             },
           });
         }
       }
 
-      if (filter.typePay) {
-        criteriaAnd.push({
-          typePay: filter.typePay,
-        });
+      if (filter.enddateRange) {
+        const [start, end] = filter.enddateRange;
+
+        if (start !== undefined && start !== null && start !== "") {
+          criteriaAnd.push({
+            enddate: {
+              $gte: start,
+            },
+          });
+        }
+
+        if (end !== undefined && end !== null && end !== "") {
+          criteriaAnd.push({
+            enddate: {
+              $lte: end,
+            },
+          });
+        }
       }
 
       if (filter.createdAtRange) {
@@ -344,15 +201,14 @@ class DetailsCampagneRepository {
     const limitEscaped = Number(limit || 0) || undefined;
     const criteria = criteriaAnd.length ? { $and: criteriaAnd } : null;
 
-    let rows = await DetailsCampagne(options.database)
+    let rows = await Transaction(options.database)
       .find(criteria)
       .skip(skip)
       .limit(limitEscaped)
       .sort(sort)
-      .populate("adherent")
-      .populate("palier");
+      .populate("members");
 
-    const count = await DetailsCampagne(options.database).countDocuments();
+    const count = await Transaction(options.database).countDocuments(criteria);
 
     rows = await Promise.all(rows.map(this._fillFileDownloadUrls));
 
@@ -374,30 +230,36 @@ class DetailsCampagneRepository {
           {
             _id: MongooseQueryUtils.uuid(search),
           },
+          {
+            titre: {
+              $regex: MongooseQueryUtils.escapeRegExp(search),
+              $options: "i",
+            },
+          },
         ],
       });
     }
 
-    const sort = MongooseQueryUtils.sort("id_ASC");
+    const sort = MongooseQueryUtils.sort("titre_ASC");
     const limitEscaped = Number(limit || 0) || undefined;
 
     const criteria = { $and: criteriaAnd };
 
-    const records = await DetailsCampagne(options.database)
+    const records = await Transaction(options.database)
       .find(criteria)
       .limit(limitEscaped)
       .sort(sort);
 
     return records.map((record) => ({
       id: record.id,
-      label: record.id,
+      label: record.titre,
     }));
   }
 
   static async _createAuditLog(action, id, data, options: IRepositoryOptions) {
     await AuditLogRepository.log(
       {
-        entityName: DetailsCampagne(options.database).modelName,
+        entityName: Transaction(options.database).modelName,
         entityId: id,
         action,
         values: data,
@@ -413,52 +275,10 @@ class DetailsCampagneRepository {
 
     const output = record.toObject ? record.toObject() : record;
 
-    output.facture = await FileRepository.fillDownloadUrl(output.facture);
+    output.pv = await FileRepository.fillDownloadUrl(output.pv);
 
     return output;
   }
-  // !api for mobile   //
-  // !list adhesions for the currentUser //
-
-  static async findDetailsCompagne(options: IRepositoryOptions) {
-    const currentUSer = MongooseRepository.getCurrentUser(options);
-    const record = await DetailsCampagne(options.database)
-      .find(
-        {
-          adherent: currentUSer.id,
-        },
-        {
-          typePay: 1,
-          montant: 1,
-          palier: 1,
-          titre: 1,
-          facture: 1,
-          statutPay: 1,
-        }
-      )
-      .populate("palier");
-
-    const count = await DetailsCampagne(options.database)
-      .find({
-        adherent: currentUSer.id,
-      })
-      .find(
-        {
-          adherent: currentUSer.id,
-        },
-        {
-          typePay: 1,
-          montant: 1,
-          palier: 1,
-          titre: 1,
-          facture: 1,
-          statutPay: 1,
-        }
-      )
-      .populate("palier")
-      .countDocuments();
-    return { record, count };
-  }
 }
 
-export default DetailsCampagneRepository;
+export default TransactionRepository;
