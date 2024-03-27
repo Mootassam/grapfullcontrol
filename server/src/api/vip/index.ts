@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/mandat`,
+    require('./mandatCreate').default,
+  );
+  app.put(
+    `/tenant/:tenantId/mandat/:id`,
+    require('./mandatUpdate').default,
+  );
+  app.post(
+    `/tenant/:tenantId/mandat/import`,
+    require('./mandatImport').default,
+  );
+  app.delete(
+    `/tenant/:tenantId/mandat`,
+    require('./mandatDestroy').default,
+  );
+  app.get(
+    `/tenant/:tenantId/mandat/autocomplete`,
+    require('./mandatAutocomplete').default,
+  );
+  app.get(
+    `/tenant/:tenantId/mandat`,
+    require('./mandatList').default,
+  );
+  app.get(
+    `/tenant/:tenantId/mandat/:id`,
+    require('./mandatFind').default,
+  );
+};

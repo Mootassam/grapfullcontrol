@@ -68,22 +68,9 @@ require('./tenant').default(routes);
 require('./file').default(routes);
 require('./user').default(routes);
 require('./settings').default(routes);
-require('./association').default(routes);
-require('./mandat').default(routes);
-require('./categorieMouv').default(routes);
-require('./mouvements').default(routes);
-require('./campagne').default(routes);
-require('./detailsCampagne').default(routes);
-require('./palier').default(routes);
-require('./historiquePoints').default(routes);
-require('./projet').default(routes);
-require('./votes').default(routes);
-require('./dons').default(routes);
-require('./produitCategorie').default(routes);
-require('./produit').default(routes);
+
 require('./social').default(routes);
-require('./produitCommande').default(routes);
-require('./commandLine').default(routes);
+
 require('./category').default(routes);
 
 // Loads the Tenant if the :tenantId param is passed
