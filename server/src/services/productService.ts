@@ -1,9 +1,9 @@
-import PalierRepository from '../database/repositories/palierRepository';
+import MandatRepository from '../database/repositories/mandatRepository';
 import Error400 from '../errors/Error400';
 import MongooseRepository from '../database/repositories/mongooseRepository';
 import { IServiceOptions } from './IServiceOptions';
 
-export default class PalierService {
+export default class ProductServices {
   options: IServiceOptions;
 
   constructor(options) {
@@ -16,7 +16,7 @@ export default class PalierService {
     );
 
     try {
-      const record = await PalierRepository.create(data, {
+      const record = await MandatRepository.create(data, {
         ...this.options,
         session,
       });
@@ -30,7 +30,7 @@ export default class PalierService {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'palier',
+        'mandat',
       );
 
       throw error;
@@ -43,7 +43,7 @@ export default class PalierService {
     );
 
     try {
-      const record = await PalierRepository.update(
+      const record = await MandatRepository.update(
         id,
         data,
         {
@@ -61,7 +61,7 @@ export default class PalierService {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'palier',
+        'mandat',
       );
 
       throw error;
@@ -75,7 +75,7 @@ export default class PalierService {
 
     try {
       for (const id of ids) {
-        await PalierRepository.destroy(id, {
+        await MandatRepository.destroy(id, {
           ...this.options,
           session,
         });
@@ -89,11 +89,11 @@ export default class PalierService {
   }
 
   async findById(id) {
-    return PalierRepository.findById(id, this.options);
+    return MandatRepository.findById(id, this.options);
   }
 
   async findAllAutocomplete(search, limit) {
-    return PalierRepository.findAllAutocomplete(
+    return MandatRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
@@ -101,7 +101,7 @@ export default class PalierService {
   }
 
   async findAndCountAll(args) {
-    return PalierRepository.findAndCountAll(
+    return MandatRepository.findAndCountAll(
       args,
       this.options,
     );
@@ -131,7 +131,7 @@ export default class PalierService {
   }
 
   async _isImportHashExistent(importHash) {
-    const count = await PalierRepository.count(
+    const count = await MandatRepository.count(
       {
         importHash,
       },

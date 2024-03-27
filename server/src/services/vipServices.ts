@@ -1,9 +1,9 @@
-import HistoriquePointsRepository from "../database/repositories/historiquePointsRepository";
-import Error400 from "../errors/Error400";
-import MongooseRepository from "../database/repositories/mongooseRepository";
-import { IServiceOptions } from "./IServiceOptions";
+import MandatRepository from '../database/repositories/mandatRepository';
+import Error400 from '../errors/Error400';
+import MongooseRepository from '../database/repositories/mongooseRepository';
+import { IServiceOptions } from './IServiceOptions';
 
-export default class HistoriquePointsService {
+export default class VipServices {
   options: IServiceOptions;
 
   constructor(options) {
@@ -12,11 +12,11 @@ export default class HistoriquePointsService {
 
   async create(data) {
     const session = await MongooseRepository.createSession(
-      this.options.database
+      this.options.database,
     );
 
     try {
-      const record = await HistoriquePointsRepository.create(data, {
+      const record = await MandatRepository.create(data, {
         ...this.options,
         session,
       });
@@ -30,7 +30,7 @@ export default class HistoriquePointsService {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        "historiquePoints"
+        'mandat',
       );
 
       throw error;
@@ -39,14 +39,18 @@ export default class HistoriquePointsService {
 
   async update(id, data) {
     const session = await MongooseRepository.createSession(
-      this.options.database
+      this.options.database,
     );
 
     try {
-      const record = await HistoriquePointsRepository.update(id, data, {
-        ...this.options,
-        session,
-      });
+      const record = await MandatRepository.update(
+        id,
+        data,
+        {
+          ...this.options,
+          session,
+        },
+      );
 
       await MongooseRepository.commitTransaction(session);
 
@@ -57,7 +61,7 @@ export default class HistoriquePointsService {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        "historiquePoints"
+        'mandat',
       );
 
       throw error;
@@ -66,12 +70,12 @@ export default class HistoriquePointsService {
 
   async destroyAll(ids) {
     const session = await MongooseRepository.createSession(
-      this.options.database
+      this.options.database,
     );
 
     try {
       for (const id of ids) {
-        await HistoriquePointsRepository.destroy(id, {
+        await MandatRepository.destroy(id, {
           ...this.options,
           session,
         });
@@ -85,25 +89,21 @@ export default class HistoriquePointsService {
   }
 
   async findById(id) {
-    return HistoriquePointsRepository.findById(id, this.options);
+    return MandatRepository.findById(id, this.options);
   }
 
   async findAllAutocomplete(search, limit) {
-    return HistoriquePointsRepository.findAllAutocomplete(
+    return MandatRepository.findAllAutocomplete(
       search,
       limit,
-      this.options
+      this.options,
     );
   }
 
   async findAndCountAll(args) {
-    return HistoriquePointsRepository.findAndCountAll(args, this.options);
-  }
-
-  async findHistPointsAndCountAll(args) {
-    return HistoriquePointsRepository.findHistPointsAndCountAll(
+    return MandatRepository.findAndCountAll(
       args,
-      this.options
+      this.options,
     );
   }
 
@@ -111,14 +111,14 @@ export default class HistoriquePointsService {
     if (!importHash) {
       throw new Error400(
         this.options.language,
-        "importer.errors.importHashRequired"
+        'importer.errors.importHashRequired',
       );
     }
 
     if (await this._isImportHashExistent(importHash)) {
       throw new Error400(
         this.options.language,
-        "importer.errors.importHashExistent"
+        'importer.errors.importHashExistent',
       );
     }
 
@@ -131,18 +131,13 @@ export default class HistoriquePointsService {
   }
 
   async _isImportHashExistent(importHash) {
-    const count = await HistoriquePointsRepository.count(
+    const count = await MandatRepository.count(
       {
         importHash,
       },
-      this.options
+      this.options,
     );
 
     return count > 0;
-  }
-  // !api for mobile   //
-  // !list Gamifications for the currentUser //
-  async findGamifications() {
-    return HistoriquePointsRepository.findGamifications(this.options);
   }
 }

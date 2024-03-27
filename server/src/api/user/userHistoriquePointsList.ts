@@ -1,7 +1,6 @@
 import PermissionChecker from '../../services/user/permissionChecker';
 import ApiResponseHandler from '../apiResponseHandler';
 import Permissions from '../../security/permissions';
-import HistoriquePointsService from '../../services/historiquePointsService';
 
 export default async (req, res, next) => {
   try {
@@ -9,9 +8,7 @@ export default async (req, res, next) => {
       Permissions.values.historiquePointsRead,
     );
 
-    const payload = await new HistoriquePointsService(
-      req,
-    ).findHistPointsAndCountAll(req.query);
+    const payload = ""
 
     await ApiResponseHandler.success(req, res, payload);
   } catch (error) {

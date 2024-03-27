@@ -1,9 +1,9 @@
-import AssociationRepository from '../database/repositories/associationRepository';
+import MandatRepository from '../database/repositories/mandatRepository';
 import Error400 from '../errors/Error400';
 import MongooseRepository from '../database/repositories/mongooseRepository';
 import { IServiceOptions } from './IServiceOptions';
 
-export default class AssociationService {
+export default class TransactionService {
   options: IServiceOptions;
 
   constructor(options) {
@@ -16,7 +16,7 @@ export default class AssociationService {
     );
 
     try {
-      const record = await AssociationRepository.create(data, {
+      const record = await MandatRepository.create(data, {
         ...this.options,
         session,
       });
@@ -30,7 +30,7 @@ export default class AssociationService {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'association',
+        'mandat',
       );
 
       throw error;
@@ -43,7 +43,7 @@ export default class AssociationService {
     );
 
     try {
-      const record = await AssociationRepository.update(
+      const record = await MandatRepository.update(
         id,
         data,
         {
@@ -61,7 +61,7 @@ export default class AssociationService {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'association',
+        'mandat',
       );
 
       throw error;
@@ -75,7 +75,7 @@ export default class AssociationService {
 
     try {
       for (const id of ids) {
-        await AssociationRepository.destroy(id, {
+        await MandatRepository.destroy(id, {
           ...this.options,
           session,
         });
@@ -89,11 +89,11 @@ export default class AssociationService {
   }
 
   async findById(id) {
-    return AssociationRepository.findById(id, this.options);
+    return MandatRepository.findById(id, this.options);
   }
 
   async findAllAutocomplete(search, limit) {
-    return AssociationRepository.findAllAutocomplete(
+    return MandatRepository.findAllAutocomplete(
       search,
       limit,
       this.options,
@@ -101,7 +101,7 @@ export default class AssociationService {
   }
 
   async findAndCountAll(args) {
-    return AssociationRepository.findAndCountAll(
+    return MandatRepository.findAndCountAll(
       args,
       this.options,
     );
@@ -131,7 +131,7 @@ export default class AssociationService {
   }
 
   async _isImportHashExistent(importHash) {
-    const count = await AssociationRepository.count(
+    const count = await MandatRepository.count(
       {
         importHash,
       },

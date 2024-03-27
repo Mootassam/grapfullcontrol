@@ -1,7 +1,7 @@
 import PermissionChecker from '../../services/user/permissionChecker';
 import ApiResponseHandler from '../apiResponseHandler';
 import Permissions from '../../security/permissions';
-import MandatService from '../../services/mandatService';
+import VipServices from '../../services/vipServices';
 
 export default async (req, res, next) => {
   try {
@@ -9,7 +9,7 @@ export default async (req, res, next) => {
       Permissions.values.mandatEdit,
     );
 
-    const payload = await new MandatService(req).update(
+    const payload = await new VipServices(req).update(
       req.params.id,
       req.body.data,
     );
