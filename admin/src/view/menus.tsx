@@ -36,7 +36,7 @@ export default [
 
   {
     id: '0',
-    path: 'Level',
+    path: 'vip',
     exact: true,
     icon: 'fas fa-crown',
     label: i18n('dashboard.Level'),

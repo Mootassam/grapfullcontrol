@@ -10,14 +10,12 @@ const privateRoutes = [
     permissionRequired: permissions.userRead,
     exact: true,
   },
-
   {
     path: '/profile',
     loader: () => import('src/view/auth/ProfileFormPage'),
     permissionRequired: null,
     exact: true,
   },
-
   {
     path: '/company',
     loader: () => import('src/view/company/company'),
@@ -31,7 +29,6 @@ const privateRoutes = [
     permissionRequired: permissions.couponsRead,
     exact: true,
   },
-
   {
     path: '/category',
     loader: () =>
@@ -67,6 +64,35 @@ const privateRoutes = [
     loader: () =>
       import('src/view/category/view/CategoryViewPage'),
     permissionRequired: permissions.categoryRead,
+    exact: true,
+  },
+
+  {
+    path: '/product',
+    loader: () =>
+      import('src/view/product/list/CouponsListPage'),
+    permissionRequired: permissions.couponsRead,
+    exact: true,
+  },
+  {
+    path: '/record',
+    loader: () =>
+      import('src/view/record/list/CouponsListPage'),
+    permissionRequired: permissions.couponsRead,
+    exact: true,
+  },
+  {
+    path: '/transaction',
+    loader: () =>
+      import('src/view/transaction/list/CouponsListPage'),
+    permissionRequired: permissions.couponsRead,
+    exact: true,
+  },
+  {
+    path: '/vip',
+    loader: () =>
+      import('src/view/vip/list/CouponsListPage'),
+    permissionRequired: permissions.couponsRead,
     exact: true,
   },
 
