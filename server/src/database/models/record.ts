@@ -4,39 +4,40 @@ const Schema = mongoose.Schema;
 
 export default (database) => {
   try {
-    return database.model("transaction");
+    return database.model("record");
   } catch (error) {
     // continue, because model doesnt exist
   }
 
-  const CategorySchema = new Schema(
+  const RecordSchema = new Schema(
     {
-      status: {
-        type: String,
-        enum: ["enable", "disable"],
-        default: "enable",
-      },
-      amount: {
-        type: String,
-      },
-      type: {
-        type: String,
-        enum: ["withdraw", "deposit"],
-        default: "withdraw",
-      },
       user: {
         type: Schema.Types.ObjectId,
         ref: "user",
         required: true,
       },
 
-      datetransaction: {
+      product: {
+        type: Schema.Types.ObjectId,
+        ref: "product",
+        required: true,
+      },
+      status: {
+        type: String,
+        enum: ["pending", "completed", "canceled"],
+        default: "pending",
+      },
+      date: {
         type: Date,
       },
+      number: {
+        type: Number,
+        required: true,
+      },
+
       tenant: {
         type: Schema.Types.ObjectId,
         ref: "tenant",
-        required: true,
       },
       createdBy: {
         type: Schema.Types.ObjectId,
@@ -51,7 +52,7 @@ export default (database) => {
     { timestamps: true }
   );
 
-  CategorySchema.index(
+  RecordSchema.index(
     { importHash: 1, tenant: 1 },
     {
       unique: true,
@@ -61,18 +62,18 @@ export default (database) => {
     }
   );
 
-  CategorySchema.virtual("id").get(function () {
+  RecordSchema.virtual("id").get(function () {
     // @ts-ignore
     return this._id.toHexString();
   });
 
-  CategorySchema.set("toJSON", {
+  RecordSchema.set("toJSON", {
     getters: true,
   });
 
-  CategorySchema.set("toObject", {
+  RecordSchema.set("toObject", {
     getters: true,
   });
 
-  return database.model("transaction", CategorySchema);
+  return database.model("record", RecordSchema);
 };
