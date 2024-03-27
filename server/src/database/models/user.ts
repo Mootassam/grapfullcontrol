@@ -90,8 +90,7 @@ export default (database) => {
       unique: true,
       partialFilterExpression: {
         importHash: { $type: "string" },
-      },import { invitation } from './../../../email-templates/invitation.html';
-
+      },
     }
   );
 
