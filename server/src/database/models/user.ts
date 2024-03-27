@@ -12,44 +12,37 @@ export default (database) => {
 
   const UserSchema = new Schema(
     {
-      passportNumber: {
-        type: String,
-      },
+      fullName: { type: String, maxlength: 255 },
+
+      phoneNumber: { type: String, maxlength: 24 },
+
       passportPhoto: [FileSchema],
       passportDocument: [FileSchema],
-      nationality: {
-        type: String,
-      },
+
       country: {
         type: String,
       },
-      state: {
+
+      erc20: {
         type: String,
       },
-      payee: {
-        type: Boolean,
-        default: false,
+      trc20: {
+        type: String,
       },
-      bearthday: {
-        type: Date,
+
+      balance: {
+        type: Number,
       },
-      visastart: {
-        type: Date,
-      },
-      visaend: {
-        type: Date,
-      },
-      couponId: {
+
+  invitationcode:{
+    type:String,
+  },
+
+      vip: {
         type: Schema.Types.ObjectId,
-        ref: "produit",
+        ref: "vip",
       },
-      visaDocument: {
-        type: String,
-      },
-      fullName: { type: String, maxlength: 255 },
-      firstName: { type: String, maxlength: 80 },
-      lastName: { type: String, maxlength: 175 },
-      phoneNumber: { type: String, maxlength: 24 },
+
       email: {
         type: String,
         maxlength: 255,
@@ -97,7 +90,8 @@ export default (database) => {
       unique: true,
       partialFilterExpression: {
         importHash: { $type: "string" },
-      },
+      },import { invitation } from './../../../email-templates/invitation.html';
+
     }
   );
 
