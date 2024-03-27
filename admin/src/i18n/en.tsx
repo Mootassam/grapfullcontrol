@@ -94,28 +94,28 @@ const en = {
     },
     category: {
       name: 'category',
-      label: 'Categories',
-      menu: 'Categories',
+      label: 'Social Media',
+      menu: 'Social Media',
       exporterFileName: 'category_export',
 
       list: {
         menu: 'Categories',
-        title: 'Categories',
+        title: 'Social Media',
       },
       create: {
-        success: 'Category successfully saved',
+        success: 'Number successfully saved',
       },
       update: {
-        success: 'Category successfully saved',
+        success: 'Number successfully saved',
       },
       destroy: {
-        success: 'Category successfully deleted',
+        success: 'Number successfully deleted',
       },
       destroyAll: {
-        success: 'Category(s) successfully deleted',
+        success: 'Number(s) successfully deleted',
       },
       edit: {
-        title: 'Edit Category',
+        title: 'Edit Number',
       },
       fields: {
         id: 'Id',
@@ -142,13 +142,13 @@ const en = {
       placeholders: {},
       hints: {},
       new: {
-        title: 'New Category',
+        title: 'New Number',
       },
       view: {
-        title: 'View Category',
+        title: 'View Number',
       },
       importer: {
-        title: 'Import Categories',
+        title: 'Import Number',
         fileName: 'category_import_template',
         hint: 'Files/Images columns must be the URLs of the files separated by space.',
       },

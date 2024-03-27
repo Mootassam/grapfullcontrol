@@ -19,6 +19,12 @@ const privateRoutes = [
   },
 
   {
+    path: '/company',
+    loader: () => import('src/view/company/company'),
+    permissionRequired: null,
+    exact: true,
+  },
+  {
     path: '/visa',
     loader: () =>
       import('src/view/coupons/list/CouponsListPage'),
