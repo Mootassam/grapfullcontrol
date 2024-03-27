@@ -1,7 +1,7 @@
 import PermissionChecker from '../../services/user/permissionChecker';
 import ApiResponseHandler from '../apiResponseHandler';
 import Permissions from '../../security/permissions';
-import MandatService from '../../services/mandatService';
+import TransactionService from '../../services/transactionService';
 
 export default async (req, res, next) => {
   try {
@@ -9,7 +9,7 @@ export default async (req, res, next) => {
       Permissions.values.mandatDestroy,
     );
 
-    await new MandatService(req).destroyAll(
+    await new TransactionService(req).destroyAll(
       req.query.ids,
     );
 
