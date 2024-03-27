@@ -1,30 +1,30 @@
 export default (app) => {
   app.post(
-    `/tenant/:tenantId/mandat`,
-    require('./mandatCreate').default,
+    `/tenant/:tenantId/product`,
+    require('./productCreate').default,
   );
   app.put(
-    `/tenant/:tenantId/mandat/:id`,
-    require('./mandatUpdate').default,
+    `/tenant/:tenantId/product/:id`,
+    require('./productUpdate').default,
   );
   app.post(
-    `/tenant/:tenantId/mandat/import`,
-    require('./mandatImport').default,
+    `/tenant/:tenantId/product/import`,
+    require('./productImport').default,
   );
   app.delete(
-    `/tenant/:tenantId/mandat`,
-    require('./mandatDestroy').default,
+    `/tenant/:tenantId/product`,
+    require('./productDestroy').default,
   );
   app.get(
-    `/tenant/:tenantId/mandat/autocomplete`,
-    require('./mandatAutocomplete').default,
+    `/tenant/:tenantId/product/autocomplete`,
+    require('./productAutocomplete').default,
   );
   app.get(
-    `/tenant/:tenantId/mandat`,
-    require('./mandatList').default,
+    `/tenant/:tenantId/product`,
+    require('./productList').default,
   );
   app.get(
-    `/tenant/:tenantId/mandat/:id`,
-    require('./mandatFind').default,
+    `/tenant/:tenantId/product/:id`,
+    require('./productFind').default,
   );
 };

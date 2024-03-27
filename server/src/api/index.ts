@@ -60,7 +60,6 @@ const routes = express.Router();
 
 // Enable Passport for Social Sign-in
 authSocial(app, routes);
-
 require('./auditLog').default(routes);
 require('./auth').default(routes);
 require('./plan').default(routes);
@@ -68,11 +67,8 @@ require('./tenant').default(routes);
 require('./file').default(routes);
 require('./user').default(routes);
 require('./settings').default(routes);
-
 require('./social').default(routes);
-
 require('./category').default(routes);
-
 // Loads the Tenant if the :tenantId param is passed
 routes.param('tenantId', tenantMiddleware);
 

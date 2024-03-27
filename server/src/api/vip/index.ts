@@ -1,30 +1,30 @@
 export default (app) => {
   app.post(
-    `/tenant/:tenantId/mandat`,
-    require('./mandatCreate').default,
+    `/tenant/:tenantId/vip`,
+    require('./vipCreate').default,
   );
   app.put(
-    `/tenant/:tenantId/mandat/:id`,
-    require('./mandatUpdate').default,
+    `/tenant/:tenantId/vip/:id`,
+    require('./vipUpdate').default,
   );
   app.post(
-    `/tenant/:tenantId/mandat/import`,
-    require('./mandatImport').default,
+    `/tenant/:tenantId/vip/import`,
+    require('./vipImport').default,
   );
   app.delete(
-    `/tenant/:tenantId/mandat`,
-    require('./mandatDestroy').default,
+    `/tenant/:tenantId/vip`,
+    require('./vipDestroy').default,
   );
   app.get(
-    `/tenant/:tenantId/mandat/autocomplete`,
-    require('./mandatAutocomplete').default,
+    `/tenant/:tenantId/vip/autocomplete`,
+    require('./vipAutocomplete').default,
   );
   app.get(
-    `/tenant/:tenantId/mandat`,
-    require('./mandatList').default,
+    `/tenant/:tenantId/vip`,
+    require('./vipList').default,
   );
   app.get(
-    `/tenant/:tenantId/mandat/:id`,
-    require('./mandatFind').default,
+    `/tenant/:tenantId/vip/:id`,
+    require('./vipFind').default,
   );
 };
