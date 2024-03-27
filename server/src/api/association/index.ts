@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/association`,
+    require('./associationCreate').default,
+  );
+  app.put(
+    `/tenant/:tenantId/association/:id`,
+    require('./associationUpdate').default,
+  );
+  app.post(
+    `/tenant/:tenantId/association/import`,
+    require('./associationImport').default,
+  );
+  app.delete(
+    `/tenant/:tenantId/association`,
+    require('./associationDestroy').default,
+  );
+  app.get(
+    `/tenant/:tenantId/association/autocomplete`,
+    require('./associationAutocomplete').default,
+  );
+  app.get(
+    `/tenant/:tenantId/association`,
+    require('./associationList').default,
+  );
+  app.get(
+    `/tenant/:tenantId/association/:id`,
+    require('./associationFind').default,
+  );
+};

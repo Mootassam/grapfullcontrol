@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/categorie-mouv`,
+    require('./categorieMouvCreate').default,
+  );
+  app.put(
+    `/tenant/:tenantId/categorie-mouv/:id`,
+    require('./categorieMouvUpdate').default,
+  );
+  app.post(
+    `/tenant/:tenantId/categorie-mouv/import`,
+    require('./categorieMouvImport').default,
+  );
+  app.delete(
+    `/tenant/:tenantId/categorie-mouv`,
+    require('./categorieMouvDestroy').default,
+  );
+  app.get(
+    `/tenant/:tenantId/categorie-mouv/autocomplete`,
+    require('./categorieMouvAutocomplete').default,
+  );
+  app.get(
+    `/tenant/:tenantId/categorie-mouv`,
+    require('./categorieMouvList').default,
+  );
+  app.get(
+    `/tenant/:tenantId/categorie-mouv/:id`,
+    require('./categorieMouvFind').default,
+  );
+};

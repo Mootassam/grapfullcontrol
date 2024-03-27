@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/palier`,
+    require('./palierCreate').default,
+  );
+  app.put(
+    `/tenant/:tenantId/palier/:id`,
+    require('./palierUpdate').default,
+  );
+  app.post(
+    `/tenant/:tenantId/palier/import`,
+    require('./palierImport').default,
+  );
+  app.delete(
+    `/tenant/:tenantId/palier`,
+    require('./palierDestroy').default,
+  );
+  app.get(
+    `/tenant/:tenantId/palier/autocomplete`,
+    require('./palierAutocomplete').default,
+  );
+  app.get(
+    `/tenant/:tenantId/palier`,
+    require('./palierList').default,
+  );
+  app.get(
+    `/tenant/:tenantId/palier/:id`,
+    require('./palierFind').default,
+  );
+};

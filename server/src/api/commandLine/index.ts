@@ -1,0 +1,30 @@
+export default (app) => {
+  app.post(
+    `/tenant/:tenantId/command-line`,
+    require("./commandLineCreate").default
+  );
+  app.put(
+    `/tenant/:tenantId/command-line/:id`,
+    require("./commandLineUpdate").default
+  );
+  app.post(
+    `/tenant/:tenantId/command-line/import`,
+    require("./commandLineImport").default
+  );
+  app.delete(
+    `/tenant/:tenantId/command-line`,
+    require("./commandLineDestroy").default
+  );
+  app.get(
+    `/tenant/:tenantId/command-line/autocomplete`,
+    require("./commandLineAutocomplete").default
+  );
+  app.get(
+    `/tenant/:tenantId/command-line`,
+    require("./commandLineList").default
+  );
+  app.get(
+    `/tenant/:tenantId/command-line/:id`,
+    require("./commandLineFind").default
+  );
+};
