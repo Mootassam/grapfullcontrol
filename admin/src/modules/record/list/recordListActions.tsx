@@ -1,13 +1,13 @@
-import CouponsService from 'src/modules/coupons/couponsService';
 import selectors from 'src/modules/coupons/list/couponsListSelectors';
 import { i18n } from 'src/i18n';
 import exporterFields from 'src/modules/coupons/list/couponsListExporterFields';
 import Errors from 'src/modules/shared/error/errors';
 import Exporter from 'src/modules/shared/exporter/exporter';
+import RecordService from 'src/modules/record/recordService';
 
-const prefix = 'COUPONS_LIST';
+const prefix = 'RECORD_LIST';
 
-const couponsListActions = {
+const recordListActions = {
   FETCH_STARTED: `${prefix}_FETCH_STARTED`,
   FETCH_SUCCESS: `${prefix}_FETCH_SUCCESS`,
   FETCH_ERROR: `${prefix}_FETCH_ERROR`,
@@ -26,29 +26,29 @@ const couponsListActions = {
 
   doClearAllSelected() {
     return {
-      type: couponsListActions.CLEAR_ALL_SELECTED,
+      type: recordListActions.CLEAR_ALL_SELECTED,
     };
   },
 
   doToggleAllSelected() {
     return {
-      type: couponsListActions.TOGGLE_ALL_SELECTED,
+      type: recordListActions.TOGGLE_ALL_SELECTED,
     };
   },
 
   doToggleOneSelected(id) {
     return {
-      type: couponsListActions.TOGGLE_ONE_SELECTED,
+      type: recordListActions.TOGGLE_ONE_SELECTED,
       payload: id,
     };
   },
 
   doReset: () => async (dispatch) => {
     dispatch({
-      type: couponsListActions.RESETED,
+      type: recordListActions.RESETED,
     });
 
-    dispatch(couponsListActions.doFetch());
+    dispatch(recordListActions.doFetch());
   },
 
   doExport: () => async (dispatch, getState) => {
@@ -58,11 +58,11 @@ const couponsListActions = {
       }
 
       dispatch({
-        type: couponsListActions.EXPORT_STARTED,
+        type: recordListActions.EXPORT_STARTED,
       });
 
       const filter = selectors.selectFilter(getState());
-      const response = await CouponsService.list(
+      const response = await RecordService.list(
         filter,
         selectors.selectOrderBy(getState()),
         null,
@@ -75,13 +75,13 @@ const couponsListActions = {
       ).transformAndExportAsExcelFile(response.rows);
 
       dispatch({
-        type: couponsListActions.EXPORT_SUCCESS,
+        type: recordListActions.EXPORT_SUCCESS,
       });
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: couponsListActions.EXPORT_ERROR,
+        type: recordListActions.EXPORT_ERROR,
       });
     }
   },
@@ -89,20 +89,20 @@ const couponsListActions = {
   doChangePagination:
     (pagination) => async (dispatch, getState) => {
       dispatch({
-        type: couponsListActions.PAGINATION_CHANGED,
+        type: recordListActions.PAGINATION_CHANGED,
         payload: pagination,
       });
 
-      dispatch(couponsListActions.doFetchCurrentFilter());
+      dispatch(recordListActions.doFetchCurrentFilter());
     },
 
   doChangeSort: (sorter) => async (dispatch, getState) => {
     dispatch({
-      type: couponsListActions.SORTER_CHANGED,
+      type: recordListActions.SORTER_CHANGED,
       payload: sorter,
     });
 
-    dispatch(couponsListActions.doFetchCurrentFilter());
+    dispatch(recordListActions.doFetchCurrentFilter());
   },
 
   doFetchCurrentFilter:
@@ -112,7 +112,7 @@ const couponsListActions = {
         getState(),
       );
       dispatch(
-        couponsListActions.doFetch(filter, rawFilter, true),
+        recordListActions.doFetch(filter, rawFilter, true),
       );
     },
 
@@ -121,11 +121,11 @@ const couponsListActions = {
     async (dispatch, getState) => {
       try {
         dispatch({
-          type: couponsListActions.FETCH_STARTED,
+          type: recordListActions.FETCH_STARTED,
           payload: { filter, rawFilter, keepPagination },
         });
 
-        const response = await CouponsService.list(
+        const response = await RecordService.list(
           filter,
           selectors.selectOrderBy(getState()),
           selectors.selectLimit(getState()),
@@ -133,7 +133,7 @@ const couponsListActions = {
         );
 
         dispatch({
-          type: couponsListActions.FETCH_SUCCESS,
+          type: recordListActions.FETCH_SUCCESS,
           payload: {
             rows: response.rows,
             count: response.count,
@@ -143,10 +143,10 @@ const couponsListActions = {
         Errors.handle(error);
 
         dispatch({
-          type: couponsListActions.FETCH_ERROR,
+          type: recordListActions.FETCH_ERROR,
         });
       }
     },
 };
 
-export default couponsListActions;
+export default recordListActions;

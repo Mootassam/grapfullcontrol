@@ -1,4 +1,4 @@
-import actions from 'src/modules/coupons/destroy/couponsDestroyActions';
+import actions from 'src/modules/record/destroy/recordDestroyActions';
 
 const initialData = {
   loading: false,
@@ -49,4 +49,3 @@ export default (state = initialData, { type, payload }) => {
 
   return state;
 };
-

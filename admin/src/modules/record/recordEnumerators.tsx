@@ -1,6 +1,6 @@
-const couponsEnumerators = {
+const recordEnumerators = {
   status: ['enable', 'disable'],
   type: ['multiple', 'single'],
 };
 
-export default couponsEnumerators;
+export default recordEnumerators;

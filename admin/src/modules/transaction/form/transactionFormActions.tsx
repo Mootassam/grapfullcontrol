@@ -1,12 +1,12 @@
-import CouponsService from 'src/modules/coupons/couponsService';
 import Errors from 'src/modules/shared/error/errors';
 import Message from 'src/view/shared/message';
 import { getHistory } from 'src/modules/store';
 import { i18n } from 'src/i18n';
+import TransactionService from 'src/modules/transaction/transactionService';
 
 const prefix = 'COUPONS_FORM';
 
-const couponsFormActions = {
+const transactionFormActions = {
   INIT_STARTED: `${prefix}_INIT_STARTED`,
   INIT_SUCCESS: `${prefix}_INIT_SUCCESS`,
   INIT_ERROR: `${prefix}_INIT_ERROR`,
@@ -22,7 +22,7 @@ const couponsFormActions = {
   doInit: (id) => async (dispatch) => {
     try {
       dispatch({
-        type: couponsFormActions.INIT_STARTED,
+        type: transactionFormActions.INIT_STARTED,
       });
 
       let record = {};
@@ -30,18 +30,18 @@ const couponsFormActions = {
       const isEdit = Boolean(id);
 
       if (isEdit) {
-        record = await CouponsService.find(id);
+        record = await TransactionService.find(id);
       }
 
       dispatch({
-        type: couponsFormActions.INIT_SUCCESS,
+        type: transactionFormActions.INIT_SUCCESS,
         payload: record,
       });
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: couponsFormActions.INIT_ERROR,
+        type: transactionFormActions.INIT_ERROR,
       });
 
       getHistory().push('/coupons');
@@ -51,13 +51,13 @@ const couponsFormActions = {
   doCreate: (values) => async (dispatch) => {
     try {
       dispatch({
-        type: couponsFormActions.CREATE_STARTED,
+        type: transactionFormActions.CREATE_STARTED,
       });
 
-      await CouponsService.create(values);
+      await TransactionService.create(values);
 
       dispatch({
-        type: couponsFormActions.CREATE_SUCCESS,
+        type: transactionFormActions.CREATE_SUCCESS,
       });
 
       Message.success(
@@ -69,7 +69,7 @@ const couponsFormActions = {
       Errors.handle(error);
 
       dispatch({
-        type: couponsFormActions.CREATE_ERROR,
+        type: transactionFormActions.CREATE_ERROR,
       });
     }
   },
@@ -77,13 +77,13 @@ const couponsFormActions = {
   doUpdate: (id, values) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: couponsFormActions.UPDATE_STARTED,
+        type: transactionFormActions.UPDATE_STARTED,
       });
 
-      await CouponsService.update(id, values);
+      await TransactionService.update(id, values);
 
       dispatch({
-        type: couponsFormActions.UPDATE_SUCCESS,
+        type: transactionFormActions.UPDATE_SUCCESS,
       });
 
       Message.success(
@@ -95,10 +95,10 @@ const couponsFormActions = {
       Errors.handle(error);
 
       dispatch({
-        type: couponsFormActions.UPDATE_ERROR,
+        type: transactionFormActions.UPDATE_ERROR,
       });
     }
   },
 };
 
-export default couponsFormActions;
+export default transactionFormActions;

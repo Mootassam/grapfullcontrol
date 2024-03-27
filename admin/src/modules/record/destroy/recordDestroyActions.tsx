@@ -1,13 +1,13 @@
 import listActions from 'src/modules/coupons/list/couponsListActions';
-import CouponsService from 'src/modules/coupons/couponsService';
 import Errors from 'src/modules/shared/error/errors';
 import { i18n } from 'src/i18n';
 import { getHistory } from 'src/modules/store';
 import Message from 'src/view/shared/message';
+import RecordService from 'src/modules/record/recordService';
 
-const prefix = 'COUPONS_DESTROY';
+const prefix = 'RECORD_DESTROY';
 
-const couponsDestroyActions = {
+const recordDestroyActions = {
   DESTROY_STARTED: `${prefix}_DESTROY_STARTED`,
   DESTROY_SUCCESS: `${prefix}_DESTROY_SUCCESS`,
   DESTROY_ERROR: `${prefix}_DESTROY_ERROR`,
@@ -19,13 +19,13 @@ const couponsDestroyActions = {
   doDestroy: (id) => async (dispatch) => {
     try {
       dispatch({
-        type: couponsDestroyActions.DESTROY_STARTED,
+        type: recordDestroyActions.DESTROY_STARTED,
       });
 
-      await CouponsService.destroyAll([id]);
+      await RecordService.destroyAll([id]);
 
       dispatch({
-        type: couponsDestroyActions.DESTROY_SUCCESS,
+        type: recordDestroyActions.DESTROY_SUCCESS,
       });
 
       Message.success(
@@ -34,14 +34,14 @@ const couponsDestroyActions = {
 
       dispatch(listActions.doFetchCurrentFilter());
 
-      getHistory().push('/coupons');
+      getHistory().push('/record');
     } catch (error) {
       Errors.handle(error);
 
       dispatch(listActions.doFetchCurrentFilter());
 
       dispatch({
-        type: couponsDestroyActions.DESTROY_ERROR,
+        type: recordDestroyActions.DESTROY_ERROR,
       });
     }
   },
@@ -49,13 +49,13 @@ const couponsDestroyActions = {
   doDestroyAll: (ids) => async (dispatch) => {
     try {
       dispatch({
-        type: couponsDestroyActions.DESTROY_ALL_STARTED,
+        type: recordDestroyActions.DESTROY_ALL_STARTED,
       });
 
-      await CouponsService.destroyAll(ids);
+      await RecordService.destroyAll(ids);
 
       dispatch({
-        type: couponsDestroyActions.DESTROY_ALL_SUCCESS,
+        type: recordDestroyActions.DESTROY_ALL_SUCCESS,
       });
 
       if (listActions) {
@@ -67,17 +67,17 @@ const couponsDestroyActions = {
         i18n('entities.coupons.destroyAll.success'),
       );
 
-      getHistory().push('/coupons');
+      getHistory().push('/record');
     } catch (error) {
       Errors.handle(error);
 
       dispatch(listActions.doFetchCurrentFilter());
 
       dispatch({
-        type: couponsDestroyActions.DESTROY_ALL_ERROR,
+        type: recordDestroyActions.DESTROY_ALL_ERROR,
       });
     }
   },
 };
 
-export default couponsDestroyActions;
+export default recordDestroyActions;

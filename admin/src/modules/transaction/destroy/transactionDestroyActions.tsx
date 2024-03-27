@@ -7,7 +7,7 @@ import Message from 'src/view/shared/message';
 
 const prefix = 'COUPONS_DESTROY';
 
-const couponsDestroyActions = {
+const transactionDestroyActions = {
   DESTROY_STARTED: `${prefix}_DESTROY_STARTED`,
   DESTROY_SUCCESS: `${prefix}_DESTROY_SUCCESS`,
   DESTROY_ERROR: `${prefix}_DESTROY_ERROR`,
@@ -19,13 +19,13 @@ const couponsDestroyActions = {
   doDestroy: (id) => async (dispatch) => {
     try {
       dispatch({
-        type: couponsDestroyActions.DESTROY_STARTED,
+        type: transactionDestroyActions.DESTROY_STARTED,
       });
 
       await CouponsService.destroyAll([id]);
 
       dispatch({
-        type: couponsDestroyActions.DESTROY_SUCCESS,
+        type: transactionDestroyActions.DESTROY_SUCCESS,
       });
 
       Message.success(
@@ -41,7 +41,7 @@ const couponsDestroyActions = {
       dispatch(listActions.doFetchCurrentFilter());
 
       dispatch({
-        type: couponsDestroyActions.DESTROY_ERROR,
+        type: transactionDestroyActions.DESTROY_ERROR,
       });
     }
   },
@@ -49,13 +49,13 @@ const couponsDestroyActions = {
   doDestroyAll: (ids) => async (dispatch) => {
     try {
       dispatch({
-        type: couponsDestroyActions.DESTROY_ALL_STARTED,
+        type: transactionDestroyActions.DESTROY_ALL_STARTED,
       });
 
       await CouponsService.destroyAll(ids);
 
       dispatch({
-        type: couponsDestroyActions.DESTROY_ALL_SUCCESS,
+        type: transactionDestroyActions.DESTROY_ALL_SUCCESS,
       });
 
       if (listActions) {
@@ -74,10 +74,10 @@ const couponsDestroyActions = {
       dispatch(listActions.doFetchCurrentFilter());
 
       dispatch({
-        type: couponsDestroyActions.DESTROY_ALL_ERROR,
+        type: transactionDestroyActions.DESTROY_ALL_ERROR,
       });
     }
   },
 };
 
-export default couponsDestroyActions;
+export default transactionDestroyActions;

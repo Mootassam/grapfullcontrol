@@ -1,12 +1,12 @@
-import CouponsService from 'src/modules/coupons/couponsService';
 import Errors from 'src/modules/shared/error/errors';
 import Message from 'src/view/shared/message';
 import { getHistory } from 'src/modules/store';
 import { i18n } from 'src/i18n';
+import RecordService from 'src/modules/record/recordService';
 
-const prefix = 'COUPONS_FORM';
+const prefix = 'RECORD_FORM';
 
-const couponsFormActions = {
+const recordFormActions = {
   INIT_STARTED: `${prefix}_INIT_STARTED`,
   INIT_SUCCESS: `${prefix}_INIT_SUCCESS`,
   INIT_ERROR: `${prefix}_INIT_ERROR`,
@@ -22,7 +22,7 @@ const couponsFormActions = {
   doInit: (id) => async (dispatch) => {
     try {
       dispatch({
-        type: couponsFormActions.INIT_STARTED,
+        type: recordFormActions.INIT_STARTED,
       });
 
       let record = {};
@@ -30,46 +30,46 @@ const couponsFormActions = {
       const isEdit = Boolean(id);
 
       if (isEdit) {
-        record = await CouponsService.find(id);
+        record = await RecordService.find(id);
       }
 
       dispatch({
-        type: couponsFormActions.INIT_SUCCESS,
+        type: recordFormActions.INIT_SUCCESS,
         payload: record,
       });
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: couponsFormActions.INIT_ERROR,
+        type: recordFormActions.INIT_ERROR,
       });
 
-      getHistory().push('/coupons');
+      getHistory().push('/record');
     }
   },
 
   doCreate: (values) => async (dispatch) => {
     try {
       dispatch({
-        type: couponsFormActions.CREATE_STARTED,
+        type: recordFormActions.CREATE_STARTED,
       });
 
-      await CouponsService.create(values);
+      await RecordService.create(values);
 
       dispatch({
-        type: couponsFormActions.CREATE_SUCCESS,
+        type: recordFormActions.CREATE_SUCCESS,
       });
 
       Message.success(
         i18n('entities.coupons.create.success'),
       );
 
-      getHistory().push('/coupons');
+      getHistory().push('/record');
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: couponsFormActions.CREATE_ERROR,
+        type: recordFormActions.CREATE_ERROR,
       });
     }
   },
@@ -77,28 +77,28 @@ const couponsFormActions = {
   doUpdate: (id, values) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: couponsFormActions.UPDATE_STARTED,
+        type: recordFormActions.UPDATE_STARTED,
       });
 
-      await CouponsService.update(id, values);
+      await RecordService.update(id, values);
 
       dispatch({
-        type: couponsFormActions.UPDATE_SUCCESS,
+        type: recordFormActions.UPDATE_SUCCESS,
       });
 
       Message.success(
         i18n('entities.coupons.update.success'),
       );
 
-      getHistory().push('/coupons');
+      getHistory().push('/record');
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: couponsFormActions.UPDATE_ERROR,
+        type: recordFormActions.UPDATE_ERROR,
       });
     }
   },
 };
 
-export default couponsFormActions;
+export default recordFormActions;

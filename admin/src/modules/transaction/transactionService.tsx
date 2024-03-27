@@ -1,7 +1,7 @@
 import authAxios from 'src/modules/shared/axios/authAxios';
 import AuthCurrentTenant from 'src/modules/auth/authCurrentTenant';
 
-export default class CouponsService {
+export default class TransactionService {
   static async update(id, data) {
     const body = {
       id,
@@ -11,7 +11,7 @@ export default class CouponsService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.put(
-      `/tenant/${tenantId}/coupons/${id}`,
+      `/tenant/${tenantId}/transaction/${id}`,
       body,
     );
 
@@ -26,7 +26,7 @@ export default class CouponsService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.delete(
-      `/tenant/${tenantId}/coupons`,
+      `/tenant/${tenantId}/transaction`,
       {
         params,
       },
@@ -43,7 +43,7 @@ export default class CouponsService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/coupons`,
+      `/tenant/${tenantId}/transaction`,
       body,
     );
 
@@ -59,7 +59,7 @@ export default class CouponsService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/coupons/import`,
+      `/tenant/${tenantId}/transaction/import`,
       body,
     );
 
@@ -70,7 +70,7 @@ export default class CouponsService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/coupons/${id}`,
+      `/tenant/${tenantId}/transaction/${id}`,
     );
 
     return response.data;
@@ -87,7 +87,7 @@ export default class CouponsService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/coupons`,
+      `/tenant/${tenantId}/transaction`,
       {
         params,
       },
@@ -103,7 +103,7 @@ export default class CouponsService {
     };
     const tenantId = AuthCurrentTenant.get();
     const response = await authAxios.get(
-      `/tenant/${tenantId}/coupons/autocomplete`,
+      `/tenant/${tenantId}/transaction/autocomplete`,
       {
         params,
       },

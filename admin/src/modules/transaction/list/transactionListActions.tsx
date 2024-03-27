@@ -1,13 +1,13 @@
-import CouponsService from 'src/modules/coupons/couponsService';
 import selectors from 'src/modules/coupons/list/couponsListSelectors';
 import { i18n } from 'src/i18n';
 import exporterFields from 'src/modules/coupons/list/couponsListExporterFields';
 import Errors from 'src/modules/shared/error/errors';
 import Exporter from 'src/modules/shared/exporter/exporter';
+import TransactionService from 'src/modules/transaction/transactionService';
 
-const prefix = 'COUPONS_LIST';
+const prefix = 'TRANSACTION_LIST';
 
-const couponsListActions = {
+const transactionListActions = {
   FETCH_STARTED: `${prefix}_FETCH_STARTED`,
   FETCH_SUCCESS: `${prefix}_FETCH_SUCCESS`,
   FETCH_ERROR: `${prefix}_FETCH_ERROR`,
@@ -26,29 +26,29 @@ const couponsListActions = {
 
   doClearAllSelected() {
     return {
-      type: couponsListActions.CLEAR_ALL_SELECTED,
+      type: transactionListActions.CLEAR_ALL_SELECTED,
     };
   },
 
   doToggleAllSelected() {
     return {
-      type: couponsListActions.TOGGLE_ALL_SELECTED,
+      type: transactionListActions.TOGGLE_ALL_SELECTED,
     };
   },
 
   doToggleOneSelected(id) {
     return {
-      type: couponsListActions.TOGGLE_ONE_SELECTED,
+      type: transactionListActions.TOGGLE_ONE_SELECTED,
       payload: id,
     };
   },
 
   doReset: () => async (dispatch) => {
     dispatch({
-      type: couponsListActions.RESETED,
+      type: transactionListActions.RESETED,
     });
 
-    dispatch(couponsListActions.doFetch());
+    dispatch(transactionListActions.doFetch());
   },
 
   doExport: () => async (dispatch, getState) => {
@@ -58,11 +58,11 @@ const couponsListActions = {
       }
 
       dispatch({
-        type: couponsListActions.EXPORT_STARTED,
+        type: transactionListActions.EXPORT_STARTED,
       });
 
       const filter = selectors.selectFilter(getState());
-      const response = await CouponsService.list(
+      const response = await TransactionService.list(
         filter,
         selectors.selectOrderBy(getState()),
         null,
@@ -75,13 +75,13 @@ const couponsListActions = {
       ).transformAndExportAsExcelFile(response.rows);
 
       dispatch({
-        type: couponsListActions.EXPORT_SUCCESS,
+        type: transactionListActions.EXPORT_SUCCESS,
       });
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: couponsListActions.EXPORT_ERROR,
+        type: transactionListActions.EXPORT_ERROR,
       });
     }
   },
@@ -89,20 +89,22 @@ const couponsListActions = {
   doChangePagination:
     (pagination) => async (dispatch, getState) => {
       dispatch({
-        type: couponsListActions.PAGINATION_CHANGED,
+        type: transactionListActions.PAGINATION_CHANGED,
         payload: pagination,
       });
 
-      dispatch(couponsListActions.doFetchCurrentFilter());
+      dispatch(
+        transactionListActions.doFetchCurrentFilter(),
+      );
     },
 
   doChangeSort: (sorter) => async (dispatch, getState) => {
     dispatch({
-      type: couponsListActions.SORTER_CHANGED,
+      type: transactionListActions.SORTER_CHANGED,
       payload: sorter,
     });
 
-    dispatch(couponsListActions.doFetchCurrentFilter());
+    dispatch(transactionListActions.doFetchCurrentFilter());
   },
 
   doFetchCurrentFilter:
@@ -112,7 +114,11 @@ const couponsListActions = {
         getState(),
       );
       dispatch(
-        couponsListActions.doFetch(filter, rawFilter, true),
+        transactionListActions.doFetch(
+          filter,
+          rawFilter,
+          true,
+        ),
       );
     },
 
@@ -121,11 +127,11 @@ const couponsListActions = {
     async (dispatch, getState) => {
       try {
         dispatch({
-          type: couponsListActions.FETCH_STARTED,
+          type: transactionListActions.FETCH_STARTED,
           payload: { filter, rawFilter, keepPagination },
         });
 
-        const response = await CouponsService.list(
+        const response = await TransactionService.list(
           filter,
           selectors.selectOrderBy(getState()),
           selectors.selectLimit(getState()),
@@ -133,7 +139,7 @@ const couponsListActions = {
         );
 
         dispatch({
-          type: couponsListActions.FETCH_SUCCESS,
+          type: transactionListActions.FETCH_SUCCESS,
           payload: {
             rows: response.rows,
             count: response.count,
@@ -143,10 +149,10 @@ const couponsListActions = {
         Errors.handle(error);
 
         dispatch({
-          type: couponsListActions.FETCH_ERROR,
+          type: transactionListActions.FETCH_ERROR,
         });
       }
     },
 };
 
-export default couponsListActions;
+export default transactionListActions;

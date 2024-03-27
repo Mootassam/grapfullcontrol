@@ -1,7 +1,7 @@
 import authAxios from 'src/modules/shared/axios/authAxios';
 import AuthCurrentTenant from 'src/modules/auth/authCurrentTenant';
 
-export default class CouponsService {
+export default class RecordService {
   static async update(id, data) {
     const body = {
       id,
