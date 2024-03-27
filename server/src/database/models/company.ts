@@ -1,41 +1,35 @@
 import mongoose from "mongoose";
-import FileSchema from "./schemas/fileSchema";
 const Schema = mongoose.Schema;
 
 export default (database) => {
   try {
-    return database.model("product");
+    return database.model("company");
   } catch (error) {
     // continue, because model doesnt exist
   }
 
-  const ProductSchema = new Schema(
+  const CompanySchema = new Schema(
     {
       title: {
         type: String,
-      },
-      amount: {
-        type: String,
-      },
-      Commission: {
-        type: String,
-      },
-      photo: [FileSchema],
-
-      //   status: {
-      //     type: String,
-      //     enum: ['enable', 'disable'],
-      //     default: 'enable',
-      //   },
-      vip: {
-        type: Schema.Types.ObjectId,
-        ref: "vip",
         required: true,
       },
+      companydetails: {
+        type: String,
+        required: true,
+      },
+      tc: {
+        type: String,
+        required: true,
+      },
+      faqs: {
+        type: String,
+        required: true,
+      },
+
       tenant: {
         type: Schema.Types.ObjectId,
         ref: "tenant",
-        required: true,
       },
       createdBy: {
         type: Schema.Types.ObjectId,
@@ -50,7 +44,7 @@ export default (database) => {
     { timestamps: true }
   );
 
-  ProductSchema.index(
+  CompanySchema.index(
     { importHash: 1, tenant: 1 },
     {
       unique: true,
@@ -60,18 +54,18 @@ export default (database) => {
     }
   );
 
-  ProductSchema.virtual("id").get(function () {
+  CompanySchema.virtual("id").get(function () {
     // @ts-ignore
     return this._id.toHexString();
   });
 
-  ProductSchema.set("toJSON", {
+  CompanySchema.set("toJSON", {
     getters: true,
   });
 
-  ProductSchema.set("toObject", {
+  CompanySchema.set("toObject", {
     getters: true,
   });
 
-  return database.model("product", ProductSchema);
+  return database.model("company", CompanySchema);
 };

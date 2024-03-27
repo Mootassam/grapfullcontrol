@@ -9,7 +9,7 @@ export default (database) => {
     // continue, because model doesnt exist
   }
 
-  const CategorySchema = new Schema(
+  const VipSchema = new Schema(
     {
       title: {
         type: String,
@@ -51,7 +51,7 @@ export default (database) => {
     { timestamps: true },
   );
 
-  CategorySchema.index(
+  VipSchema.index(
     { importHash: 1, tenant: 1 },
     {
       unique: true,
@@ -61,18 +61,18 @@ export default (database) => {
     },
   );
 
-  CategorySchema.virtual('id').get(function () {
+  VipSchema.virtual('id').get(function () {
     // @ts-ignore
     return this._id.toHexString();
   });
 
-  CategorySchema.set('toJSON', {
+  VipSchema.set('toJSON', {
     getters: true,
   });
 
-  CategorySchema.set('toObject', {
+  VipSchema.set('toObject', {
     getters: true,
   });
 
-  return database.model('vip', CategorySchema);
+  return database.model('vip', VipSchema);
 };

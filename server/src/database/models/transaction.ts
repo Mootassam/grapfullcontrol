@@ -9,7 +9,7 @@ export default (database) => {
     // continue, because model doesnt exist
   }
 
-  const CategorySchema = new Schema(
+  const TransactionSchema = new Schema(
     {
       status: {
         type: String,
@@ -51,7 +51,7 @@ export default (database) => {
     { timestamps: true }
   );
 
-  CategorySchema.index(
+  TransactionSchema.index(
     { importHash: 1, tenant: 1 },
     {
       unique: true,
@@ -61,18 +61,18 @@ export default (database) => {
     }
   );
 
-  CategorySchema.virtual("id").get(function () {
+  TransactionSchema.virtual("id").get(function () {
     // @ts-ignore
     return this._id.toHexString();
   });
 
-  CategorySchema.set("toJSON", {
+  TransactionSchema.set("toJSON", {
     getters: true,
   });
 
-  CategorySchema.set("toObject", {
+  TransactionSchema.set("toObject", {
     getters: true,
   });
 
-  return database.model("transaction", CategorySchema);
+  return database.model("transaction", TransactionSchema);
 };
