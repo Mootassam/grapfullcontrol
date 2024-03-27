@@ -70,28 +70,28 @@ const privateRoutes = [
   {
     path: '/product',
     loader: () =>
-      import('src/view/product/list/CouponsListPage'),
+      import('src/view/product/list/ProductListPage'),
     permissionRequired: permissions.couponsRead,
     exact: true,
   },
   {
     path: '/record',
     loader: () =>
-      import('src/view/record/list/CouponsListPage'),
+      import('src/view/record/list/RecordListPage'),
     permissionRequired: permissions.couponsRead,
     exact: true,
   },
   {
     path: '/transaction',
     loader: () =>
-      import('src/view/transaction/list/CouponsListPage'),
+      import('src/view/transaction/list/TransactionListPage'),
     permissionRequired: permissions.couponsRead,
     exact: true,
   },
   {
     path: '/vip',
     loader: () =>
-      import('src/view/vip/list/CouponsListPage'),
+      import('src/view/vip/list/VipListPage'),
     permissionRequired: permissions.couponsRead,
     exact: true,
   },
