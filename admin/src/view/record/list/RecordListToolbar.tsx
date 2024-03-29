@@ -1,10 +1,10 @@
 import { i18n } from 'src/i18n';
 import auditLogSelectors from 'src/modules/auditLog/auditLogSelectors';
-import couponsSelectors from 'src/modules/coupons/couponsSelectors';
-import destroyActions from 'src/modules/coupons/destroy/couponsDestroyActions';
-import destroySelectors from 'src/modules/coupons/destroy/couponsDestroySelectors';
-import actions from 'src/modules/coupons/list/couponsListActions';
-import selectors from 'src/modules/coupons/list/couponsListSelectors';
+import couponsSelectors from 'src/modules/record/recordSelectors';
+import destroyActions from 'src/modules/record/destroy/recordDestroyActions';
+import destroySelectors from 'src/modules/record/destroy/recordDestroySelectors';
+import actions from 'src/modules/record/list/recordListActions';
+import selectors from 'src/modules/record/list/recordListSelectors';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';

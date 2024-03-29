@@ -1,4 +1,4 @@
-import CouponsService from 'src/modules/coupons/couponsService';
+import CouponsService from 'src/modules/record/recordService';
 import Errors from 'src/modules/shared/error/errors';
 import { getHistory } from 'src/modules/store';
 

@@ -1,6 +1,6 @@
 import { i18n } from 'src/i18n';
-import actions from 'src/modules/coupons/list/couponsListActions';
-import selectors from 'src/modules/coupons/list/couponsListSelectors';
+import actions from 'src/modules/vip/list/vipListActions';
+import selectors from 'src/modules/vip/list/vipListSelectors';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm, FormProvider } from 'react-hook-form';
@@ -15,7 +15,7 @@ import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
 import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import couponsEnumerators from 'src/modules/coupons/couponsEnumerators';
+import couponsEnumerators from 'src/modules/vip/vipEnumerators';
 
 const schema = yup.object().shape({
   title: yupFilterSchemas.string(

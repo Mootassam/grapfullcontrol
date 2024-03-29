@@ -7,7 +7,7 @@ const permissions = Permissions.values;
 export default [
   {
     id: '0',
-    path: 'user',
+    path: '/user',
     exact: true,
     icon: 'fas fa-users',
     label: i18n('dashboard.menu'),
@@ -17,7 +17,7 @@ export default [
 
   {
     id: '0',
-    path: 'company',
+    path: '/company',
     exact: true,
     icon: 'fa-solid fa-building',
     label: i18n('dashboard.company'),
@@ -26,7 +26,7 @@ export default [
   },
   {
     id: '0',
-    path: 'category',
+    path: '/category',
     exact: true,
     icon: 'fab fa-whatsapp',
     label: i18n('dashboard.check'),
@@ -36,7 +36,7 @@ export default [
 
   {
     id: '0',
-    path: 'vip',
+    path: '/vip',
     exact: true,
     icon: 'fas fa-crown',
     label: i18n('dashboard.Level'),
@@ -45,7 +45,7 @@ export default [
   },
   {
     id: '0',
-    path: 'transaction',
+    path: '/transaction',
     exact: true,
     icon: 'fas fa-exchange-alt active',
     label: i18n('dashboard.transaction'),
@@ -54,7 +54,7 @@ export default [
   },
   {
     id: '0',
-    path: 'record',
+    path: '/record',
     exact: true,
     icon: 'fas fa-clipboard',
     label: i18n('dashboard.record'),
@@ -63,7 +63,7 @@ export default [
   },
   {
     id: '0',
-    path: 'product',
+    path: '/product',
     exact: true,
     icon: 'fas fa-shirt',
     label: i18n('dashboard.product'),

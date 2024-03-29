@@ -11,7 +11,7 @@ export default class RecordService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.put(
-      `/tenant/${tenantId}/coupons/${id}`,
+      `/tenant/${tenantId}/record/${id}`,
       body,
     );
 
@@ -26,7 +26,7 @@ export default class RecordService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.delete(
-      `/tenant/${tenantId}/coupons`,
+      `/tenant/${tenantId}/record`,
       {
         params,
       },
@@ -43,7 +43,7 @@ export default class RecordService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/coupons`,
+      `/tenant/${tenantId}/record`,
       body,
     );
 
@@ -59,7 +59,7 @@ export default class RecordService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/coupons/import`,
+      `/tenant/${tenantId}/record/import`,
       body,
     );
 
@@ -70,7 +70,7 @@ export default class RecordService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/coupons/${id}`,
+      `/tenant/${tenantId}/record/${id}`,
     );
 
     return response.data;
@@ -87,7 +87,7 @@ export default class RecordService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/coupons`,
+      `/tenant/${tenantId}/record`,
       {
         params,
       },
@@ -103,7 +103,7 @@ export default class RecordService {
     };
     const tenantId = AuthCurrentTenant.get();
     const response = await authAxios.get(
-      `/tenant/${tenantId}/coupons/autocomplete`,
+      `/tenant/${tenantId}/record/autocomplete`,
       {
         params,
       },

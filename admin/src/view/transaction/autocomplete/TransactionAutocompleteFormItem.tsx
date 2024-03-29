@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import CouponsService from 'src/modules/coupons/couponsService';
-import CouponsFormModal from 'src/view/coupons/form/CouponsFormModal';
+import CouponsService from 'src/modules/transaction/transactionService';
+import CouponsFormModal from 'src/view/transaction/form/TransactionFormModal';
 import AutocompleteInMemoryFormItem from 'src/view/shared/form/items/AutocompleteInMemoryFormItem';
 import { useFormContext } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import selectors from 'src/modules/coupons/couponsSelectors';
+import selectors from 'src/modules/transaction/transactionSelectors';
 
 function CouponsAutocompleteFormItem(props) {
   const { setValue, getValues } = useFormContext();

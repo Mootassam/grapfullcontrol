@@ -64,7 +64,7 @@ const productFormActions = {
         i18n('entities.coupons.create.success'),
       );
 
-      getHistory().push('/coupons');
+      getHistory().push('/product');
     } catch (error) {
       Errors.handle(error);
 

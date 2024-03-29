@@ -1,6 +1,6 @@
-import selectors from 'src/modules/coupons/list/couponsListSelectors';
+import selectors from 'src/modules/record/list/recordListSelectors';
 import { i18n } from 'src/i18n';
-import exporterFields from 'src/modules/coupons/list/couponsListExporterFields';
+import exporterFields from 'src/modules/record/list/recordListExporterFields';
 import Errors from 'src/modules/shared/error/errors';
 import Exporter from 'src/modules/shared/exporter/exporter';
 import RecordService from 'src/modules/record/recordService';

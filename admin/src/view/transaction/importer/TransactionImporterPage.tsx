@@ -1,8 +1,8 @@
 import React from 'react';
 import { i18n } from 'src/i18n';
-import actions from 'src/modules/coupons/importer/couponsImporterActions';
-import fields from 'src/modules/coupons/importer/couponsImporterFields';
-import selectors from 'src/modules/coupons/importer/couponsImporterSelectors';
+import actions from 'src/modules/transaction/importer/transactionImporterActions';
+import fields from 'src/modules/transaction/importer/transactionImporterFields';
+import selectors from 'src/modules/transaction/importer/transactionImporterSelectors';
 import ContentWrapper from 'src/view/layout/styles/ContentWrapper';
 import Breadcrumb from 'src/view/shared/Breadcrumb';
 import importerHoc from 'src/view/shared/importer/Importer';

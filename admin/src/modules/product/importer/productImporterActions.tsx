@@ -1,6 +1,6 @@
 import importerActions from 'src/modules/shared/importer/importerActions';
-import selectors from 'src/modules/coupons/importer/couponsImporterSelectors';
-import fields from 'src/modules/coupons/importer/couponsImporterFields';
+import selectors from 'src/modules/product/importer/productImporterSelectors';
+import fields from 'src/modules/product/importer/productImporterFields';
 import { i18n } from 'src/i18n';
 import ProductService from 'src/modules/product/productService';
 

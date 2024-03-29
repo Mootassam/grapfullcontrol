@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
-import selectors from 'src/modules/coupons/couponsSelectors';
+import selectors from 'src/modules/record/recordSelectors';
 
 function CouponsListItem(props) {
   const hasPermissionToRead = useSelector(

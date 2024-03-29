@@ -1,4 +1,4 @@
-import listActions from 'src/modules/coupons/list/couponsListActions';
+import listActions from 'src/modules/product/list/productListActions';
 import Errors from 'src/modules/shared/error/errors';
 import { i18n } from 'src/i18n';
 import { getHistory } from 'src/modules/store';

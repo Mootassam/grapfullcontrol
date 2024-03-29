@@ -2,8 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { i18n } from 'src/i18n';
 import Errors from 'src/modules/shared/error/errors';
-import CouponsForm from 'src/view/coupons/form/CouponsForm';
-import CouponsService from 'src/modules/coupons/couponsService';
+import CouponsForm from 'src/view/record/form/RecordForm';
+import CouponsService from 'src/modules/record/recordService';
 
 function CouponsFormModal(props) {
   const modalRef = useRef<any>();

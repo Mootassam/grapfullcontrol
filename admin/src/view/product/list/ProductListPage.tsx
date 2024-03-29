@@ -1,8 +1,8 @@
 import React from 'react';
 import { i18n } from 'src/i18n';
-import CouponsListFilter from 'src/view/coupons/list/CouponsListFilter';
-import CouponsListTable from 'src/view/coupons/list/CouponsListTable';
-import CouponsListToolbar from 'src/view/coupons/list/CouponsListToolbar';
+import CouponsListFilter from 'src/view/product/list/ProductListFilter';
+import CouponsListTable from 'src/view/product/list/ProductListTable';
+import CouponsListToolbar from 'src/view/product/list/ProductListToolbar';
 import ContentWrapper from 'src/view/layout/styles/ContentWrapper';
 import Breadcrumb from 'src/view/shared/Breadcrumb';
 import PageTitle from 'src/view/shared/styles/PageTitle';

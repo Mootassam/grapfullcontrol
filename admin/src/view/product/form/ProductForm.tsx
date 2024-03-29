@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import couponsEnumerators from 'src/modules/coupons/couponsEnumerators';
+import couponsEnumerators from 'src/modules/product/productEnumerators';
 
 const schema = yup.object().shape({
   title: yupFormSchemas.string(

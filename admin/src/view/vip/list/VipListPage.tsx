@@ -1,8 +1,8 @@
 import React from 'react';
 import { i18n } from 'src/i18n';
-import CouponsListFilter from 'src/view/coupons/list/CouponsListFilter';
-import CouponsListTable from 'src/view/coupons/list/CouponsListTable';
-import CouponsListToolbar from 'src/view/coupons/list/CouponsListToolbar';
+import VipListFilter from 'src/view/vip/list/VipListFilter';
+import VipListTable from 'src/view/vip/list/VipListTable';
+import VipListToolbar from 'src/view/vip/list/VipListToolbar';
 import ContentWrapper from 'src/view/layout/styles/ContentWrapper';
 import Breadcrumb from 'src/view/shared/Breadcrumb';
 import PageTitle from 'src/view/shared/styles/PageTitle';
@@ -28,12 +28,12 @@ function CouponsListPage(props) {
         </PageTitle>
         </Col>
             <Col md="auto">
-        <CouponsListToolbar />
+        <VipListToolbar />
         </Col>
           </Row>
         </Container>
-        <CouponsListFilter />
-        <CouponsListTable />
+        <VipListFilter />
+        <VipListTable />
       </ContentWrapper>
     </>
   );

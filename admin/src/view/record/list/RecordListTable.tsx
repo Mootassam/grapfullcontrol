@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { i18n } from 'src/i18n';
-import couponsSelectors from 'src/modules/coupons/couponsSelectors';
-import destroyActions from 'src/modules/coupons/destroy/couponsDestroyActions';
-import destroySelectors from 'src/modules/coupons/destroy/couponsDestroySelectors';
-import actions from 'src/modules/coupons/list/couponsListActions';
-import selectors from 'src/modules/coupons/list/couponsListSelectors';
+import couponsSelectors from 'src/modules/record/recordSelectors';
+import destroyActions from 'src/modules/record/destroy/recordDestroyActions';
+import destroySelectors from 'src/modules/record/destroy/recordDestroySelectors';
+import actions from 'src/modules/record/list/recordListActions';
+import selectors from 'src/modules/record/list/recordListSelectors';
 import TableColumnHeader from 'src/view/shared/table/TableColumnHeader';
 import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import Spinner from 'src/view/shared/Spinner';
 import TableWrapper from 'src/view/shared/styles/TableWrapper';
 import Pagination from 'src/view/shared/table/Pagination';
-import actionsForm from 'src/modules/coupons/form/couponsFormActions';
+import actionsForm from 'src/modules/record/form/recordFormActions';
 
 function CouponsListTable(props) {
   const [recordIdToDestroy, setRecordIdToDestroy] =

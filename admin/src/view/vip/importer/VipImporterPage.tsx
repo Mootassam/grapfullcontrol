@@ -1,8 +1,8 @@
 import React from 'react';
 import { i18n } from 'src/i18n';
-import actions from 'src/modules/coupons/importer/couponsImporterActions';
-import fields from 'src/modules/coupons/importer/couponsImporterFields';
-import selectors from 'src/modules/coupons/importer/couponsImporterSelectors';
+import actions from 'src/modules/vip/importer/vipImporterActions';
+import fields from 'src/modules/vip/importer/vipImporterFields';
+import selectors from 'src/modules/vip/importer/vipImporterSelectors';
 import ContentWrapper from 'src/view/layout/styles/ContentWrapper';
 import Breadcrumb from 'src/view/shared/Breadcrumb';
 import importerHoc from 'src/view/shared/importer/Importer';
@@ -21,7 +21,7 @@ function CouponsImportPage() {
       <Breadcrumb
         items={[
           [i18n('dashboard.menu'), '/'],
-          [i18n('entities.coupons.menu'), '/coupons'],
+          [i18n('entities.coupons.menu'), '/vip'],
           [i18n('entities.coupons.importer.title')],
         ]}
       />
