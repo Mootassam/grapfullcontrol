@@ -1,8 +1,8 @@
-import list from 'src/modules/coupons/list/couponsListReducers';
-import form from 'src/modules/coupons/form/couponsFormReducers';
-import view from 'src/modules/coupons/view/couponsViewReducers';
-import destroy from 'src/modules/coupons/destroy/couponsDestroyReducers';
-import importerReducer from 'src/modules/coupons/importer/couponsImporterReducers';
+import list from 'src/modules/transaction/list/transactionListReducers';
+import form from 'src/modules/transaction/form/transactionFormReducers';
+import view from 'src/modules/transaction/view/transactionViewReducers';
+import destroy from 'src/modules/transaction/destroy/transactionDestroyReducers';
+import importerReducer from 'src/modules/transaction/importer/transactionImporterReducers';
 import { combineReducers } from 'redux';
 
 export default combineReducers({

@@ -1,4 +1,4 @@
-import listActions from 'src/modules/coupons/list/couponsListActions';
+import listActions from 'src/modules/transaction/list/transactionListActions';
 import vipService from 'src/modules/vip/vipService';
 import Errors from 'src/modules/shared/error/errors';
 import { i18n } from 'src/i18n';

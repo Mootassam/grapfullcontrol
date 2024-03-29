@@ -47,7 +47,7 @@ function CouponsViewToolbar(props) {
   return (
     <Toolbar>
       {hasPermissionToEdit && (
-        <Link to={`/coupons/${id}/edit`}>
+        <Link to={`/transaction/${id}/edit`}>
           <button className="btn btn-primary" type="button">
             <ButtonIcon iconClass="fas fa-edit" />
             {i18n('common.edit')}

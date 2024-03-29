@@ -1,5 +1,5 @@
 import schemas from 'src/modules/shared/yup/yupImporterSchemas';
-import { i18n } from 'src/i18n';import couponsEnumerators from 'src/modules/coupons/couponsEnumerators';
+import { i18n } from 'src/i18n';import couponsEnumerators from 'src/modules/transaction/transactionEnumerators';
 
 export default [
   {

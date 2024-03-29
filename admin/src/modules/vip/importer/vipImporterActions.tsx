@@ -1,7 +1,7 @@
 import importerActions from 'src/modules/shared/importer/importerActions';
-import selectors from 'src/modules/coupons/importer/couponsImporterSelectors';
-import CouponsService from 'src/modules/coupons/couponsService';
-import fields from 'src/modules/coupons/importer/couponsImporterFields';
+import selectors from 'src/modules/transaction/importer/transactionImporterSelectors';
+import CouponsService from 'src/modules/transaction/transactionService';
+import fields from 'src/modules/transaction/importer/transactionImporterFields';
 import { i18n } from 'src/i18n';
 
 const couponsImporterActions = importerActions(

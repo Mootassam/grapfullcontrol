@@ -248,14 +248,14 @@ function CouponsListTable(props) {
                   <td className="td-actions">
                     <Link
                       className="btn btn-link"
-                      to={`/coupons/${row.id}`}
+                      to={`/vip/${row.id}`}
                     >
                       {i18n('common.view')}
                     </Link>
                     {hasPermissionToEdit && (
                       <Link
                         className="btn btn-link"
-                        to={`/coupons/${row.id}/edit`}
+                        to={`/vip/${row.id}/edit`}
                       >
                         {i18n('common.edit')}
                       </Link>

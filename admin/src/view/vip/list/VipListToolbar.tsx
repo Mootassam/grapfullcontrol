@@ -142,7 +142,7 @@ function CouponsToolbar(props) {
   return (
     <Toolbar>
       {hasPermissionToCreate && (
-        <Link to="/coupons/new">
+        <Link to="/vip/new">
           <span
             data-tip={i18n('common.new')}
             data-for="charge-list-toolbar-new-tooltip"
@@ -159,7 +159,7 @@ function CouponsToolbar(props) {
       )}
 
       {hasPermissionToImport && (
-        <Link to="/coupons/importer">
+        <Link to="/vip/importer">
           <span
             data-tip={i18n('common.import')}
             data-for="charge-list-toolbar-import-tooltip"

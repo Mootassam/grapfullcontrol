@@ -1,4 +1,4 @@
-import actions from 'src/modules/coupons/destroy/couponsDestroyActions';
+import actions from 'src/modules/transaction/destroy/transactionDestroyActions';
 
 const initialData = {
   loading: false,

@@ -29,7 +29,7 @@ function CouponsViewItem(props) {
         <div key={record.id}>
           <Link
             className="btn btn-link"
-            to={`/coupons/${record.id}`}
+            to={`/product/${record.id}`}
           >
             {record.id}
           </Link>
