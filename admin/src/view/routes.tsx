@@ -67,6 +67,8 @@ const privateRoutes = [
     exact: true,
   },
 
+  
+  // product routes 
   {
     path: '/product',
     loader: () =>
@@ -74,6 +76,40 @@ const privateRoutes = [
     permissionRequired: permissions.couponsRead,
     exact: true,
   },
+
+  {
+    path: '/product/new',
+    loader: () =>
+      import('src/view/product/form/ProductFormPage'),
+    permissionRequired: permissions.categoryCreate,
+    exact: true,
+  },
+  {
+    path: '/product/importer',
+    loader: () =>
+      import(
+        'src/view/product/importer/ProductImporterPage'
+      ),
+    permissionRequired: permissions.categoryImport,
+    exact: true,
+  },
+  {
+    path: '/product/:id/edit',
+    loader: () =>
+      import('src/view/product/form/ProductFormPage'),
+    permissionRequired: permissions.categoryEdit,
+    exact: true,
+  },
+  {
+    path: '/product/:id',
+    loader: () =>
+      import('src/view/product/view/ProductViewPage'),
+    permissionRequired: permissions.categoryRead,
+    exact: true,
+  },
+
+
+  // record routes 
   {
     path: '/record',
     loader: () =>
@@ -82,12 +118,86 @@ const privateRoutes = [
     exact: true,
   },
   {
+    path: '/record/new',
+    loader: () =>
+      import('src/view/record/form/RecordFormPage'),
+    permissionRequired: permissions.categoryCreate,
+    exact: true,
+  },
+  {
+    path: '/record/importer',
+    loader: () =>
+      import(
+        'src/view/record/importer/RecordImporterPage'
+      ),
+    permissionRequired: permissions.categoryImport,
+    exact: true,
+  },
+  {
+    path: '/record/:id/edit',
+    loader: () =>
+      import('src/view/record/form/RecordFormPage'),
+    permissionRequired: permissions.categoryEdit,
+    exact: true,
+  },
+  {
+    path: '/record/:id',
+    loader: () =>
+      import('src/view/record/view/RecordViewPage'),
+    permissionRequired: permissions.categoryRead,
+    exact: true,
+  },
+
+
+
+// transaction routes 
+
+  {
     path: '/transaction',
     loader: () =>
       import('src/view/transaction/list/TransactionListPage'),
     permissionRequired: permissions.couponsRead,
     exact: true,
   },
+
+  {
+    path: '/transaction/new',
+    loader: () =>
+      import('src/view/transaction/form/TransactionFormPage'),
+    permissionRequired: permissions.categoryCreate,
+    exact: true,
+  },
+  {
+    path: '/transaction/importer',
+    loader: () =>
+      import(
+        'src/view/transaction/importer/TransactionImporterPage'
+      ),
+    permissionRequired: permissions.categoryImport,
+    exact: true,
+  },
+  {
+    path: '/transaction/:id/edit',
+    loader: () =>
+      import('src/view/transaction/form/TransactionFormPage'),
+    permissionRequired: permissions.categoryEdit,
+    exact: true,
+  },
+  {
+    path: '/transaction/:id',
+    loader: () =>
+      import('src/view/transaction/view/TransactionViewPage'),
+    permissionRequired: permissions.categoryRead,
+    exact: true,
+  },
+
+
+
+
+
+
+  // vip routes 
+
   {
     path: '/vip',
     loader: () =>
@@ -95,6 +205,43 @@ const privateRoutes = [
     permissionRequired: permissions.couponsRead,
     exact: true,
   },
+
+  {
+    path: '/vip/new',
+    loader: () =>
+      import('src/view/vip/form/VipFormPage'),
+    permissionRequired: permissions.categoryCreate,
+    exact: true,
+  },
+  {
+    path: '/vip/importer',
+    loader: () =>
+      import(
+        'src/view/vip/importer/VipImporterPage'
+      ),
+    permissionRequired: permissions.categoryImport,
+    exact: true,
+  },
+  {
+    path: '/vip/:id/edit',
+    loader: () =>
+      import('src/view/vip/form/VipFormPage'),
+    permissionRequired: permissions.categoryEdit,
+    exact: true,
+  },
+  {
+    path: '/vip/:id',
+    loader: () =>
+      import('src/view/vip/view/VipViewPage'),
+    permissionRequired: permissions.categoryRead,
+    exact: true,
+  },
+
+
+
+
+//  coupons routes 
+
 
   {
     path: '/coupons',

@@ -18,37 +18,32 @@ const schema = yup.object().shape({
       required: true,
     },
   ),
-  codeName: yupFormSchemas.string(
-    i18n('entities.coupons.fields.codeName'),
+  entrylimit: yupFormSchemas.string(
+    i18n('entities.level.fields.entrylimit'),
     {
 
     },
   ),
-  discount: yupFormSchemas.decimal(
-    i18n('entities.coupons.fields.discount'),
+  levellimit: yupFormSchemas.decimal(
+    i18n('entities.coupons.fields.levellimit'),
     {
       required: true,
     },
   ),
-  noOfTimes: yupFormSchemas.integer(
-    i18n('entities.coupons.fields.noOfTimes'),
+  dailyorder: yupFormSchemas.integer(
+    i18n('entities.coupons.fields.dailyorder'),
     {
       required: true,
     },
   ),
-  status: yupFormSchemas.enumerator(
-    i18n('entities.coupons.fields.status'),
-    {
-      options: couponsEnumerators.status,
-    },
-  ),
-  type: yupFormSchemas.enumerator(
-    i18n('entities.coupons.fields.type'),
+  comisionrate: yupFormSchemas.integer(
+    i18n('entities.coupons.fields.comisionrate'),
     {
       required: true,
-      options: couponsEnumerators.type,
     },
   ),
+
+
 });
 
 function CouponsForm(props) {
