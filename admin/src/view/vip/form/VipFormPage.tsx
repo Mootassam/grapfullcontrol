@@ -64,7 +64,7 @@ function CouponsFormPage(props) {
             record={record}
             isEditing={isEditing}
             onSubmit={doSubmit}
-            onCancel={() => getHistory().push('/coupons')}
+            onCancel={() => getHistory().push('/vip')}
           />
         )}
       </ContentWrapper>

@@ -28,7 +28,7 @@ const couponsViewActions = {
         type: couponsViewActions.FIND_ERROR,
       });
 
-      getHistory().push('/coupons');
+      getHistory().push('/record');
     }
   },
 };

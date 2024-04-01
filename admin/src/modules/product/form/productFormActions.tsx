@@ -90,7 +90,7 @@ const productFormActions = {
         i18n('entities.coupons.update.success'),
       );
 
-      getHistory().push('/coupons');
+      getHistory().push('/product');
     } catch (error) {
       Errors.handle(error);
 

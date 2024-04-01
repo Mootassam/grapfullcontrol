@@ -90,7 +90,7 @@ const vipFormActions = {
         i18n('entities.coupons.update.success'),
       );
 
-      getHistory().push('/coupons');
+      getHistory().push('/vip');
     } catch (error) {
       Errors.handle(error);
 
