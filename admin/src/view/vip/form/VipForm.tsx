@@ -10,6 +10,8 @@ import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import couponsEnumerators from 'src/modules/vip/vipEnumerators';
+import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
+import Storage from 'src/security/storage';
 
 const schema = yup.object().shape({
   title: yupFormSchemas.string(
@@ -51,12 +53,12 @@ function CouponsForm(props) {
     const record = props.record || {};
 
     return {
-      title: record.title,
-      codeName: record.codeName,
-      discount: record.discount,
-      noOfTimes: record.noOfTimes,
-      // status: record.status,
-      type: record.type,
+      title : record.title, 
+      photo: record.photo,
+      entrylimit : record.entrylimit, 
+      levellimit : record.levellimit, 
+      dailyorder : record.dailyorder, 
+      comisionrate : record.comisionrate, 
     };
   });
 
@@ -85,21 +87,53 @@ function CouponsForm(props) {
               <InputFormItem
                 name="title"
                 label={i18n(
-                  'entities.coupons.fields.title',
+                  'entities.vip.fields.title',
                 )}
                 required={true}
                 autoFocus
               />
             </div>
-           
-
             <div className="col-lg-7 col-md-8 col-12">
-              <InputNumberFormItem
-                name="noOfTimes"
+            <ImagesFormItem
+                name="photo"
                 label={i18n(
-                  'entities.coupons.fields.noOfTimes',
+                  'entities.paymentsettings.fields.photo',
+                )}
+                required={false}
+                storage={
+                  Storage.values.paymentsettingsPhoto
+                }
+                max={undefined}
+              />
+               </div>
+
+               <div className="col-lg-7 col-md-8 col-12">
+              <InputNumberFormItem
+                name="dailyorder"
+                label={i18n(
+                  'entities.coupons.fields.dailyorder',
                 )}
                 required={true}
+              />
+            </div>
+            <div className="col-lg-7 col-md-8 col-12">
+              <InputNumberFormItem
+                name="comisionrate"
+                label={i18n(
+                  'entities.coupons.fields.comisionrate',
+                )}
+                required={true}
+              />
+            </div>
+
+            <div className="col-lg-7 col-md-8 col-12">
+              <InputFormItem
+                name="levellimit"
+                label={i18n(
+                  'entities.vip.fields.levellimit',
+                )}
+                required={true}
+                autoFocus
               />
             </div>
             {/* <div className="col-lg-7 col-md-8 col-12">
@@ -120,30 +154,8 @@ function CouponsForm(props) {
               />
             </div> */}
 
-            <div className="col-lg-7 col-md-8 col-12">
-              <SelectFormItem
-                name="type"
-                label={i18n('entities.coupons.fields.type')}
-                options={couponsEnumerators.type.map(
-                  (value) => ({
-                    value,
-                    label: i18n(
-                      `entities.coupons.enumerators.type.${value}`,
-                    ),
-                  }),
-                )}
-                required={true}
-              />
-            </div>
-            <div className="col-lg-7 col-md-8 col-12">
-              <InputFormItem
-                name="discount"
-                label={i18n(
-                  'entities.coupons.fields.discount',
-                )}
-                required={true}
-              />
-            </div>
+    
+         
           </div>
 
           <div className="form-buttons">

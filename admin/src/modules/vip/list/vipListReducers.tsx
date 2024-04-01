@@ -1,4 +1,4 @@
-import actions from 'src/modules/transaction/list/transactionListActions';
+import actions from 'src/modules/vip/list/vipListActions';
 
 const INITIAL_PAGE_SIZE = 10;
 

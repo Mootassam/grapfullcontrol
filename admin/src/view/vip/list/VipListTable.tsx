@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { i18n } from 'src/i18n';
@@ -54,6 +54,7 @@ function CouponsListTable(props) {
     setRecordIdToDestroy(null);
   };
 
+  
   const doChangeSort = (field) => {
     const order =
       sorter.field === field && sorter.order === 'ascend'
@@ -92,7 +93,7 @@ function CouponsListTable(props) {
   return (
     <TableWrapper>
       <div className="table-responsive">
-        <table className="table table-striped     mt-2">
+        <table className="table table-striped mt-2">
           <thead className="thead">
             <tr>
               <TableColumnHeader className="th-checkbox">
@@ -153,15 +154,7 @@ function CouponsListTable(props) {
                 align="right"
               />
 
-              <TableColumnHeader
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'status'}
-                label={i18n(
-                  'entities.coupons.fields.status',
-                )}
-              />
+         
               <TableColumnHeader className="th-actions" />
             </tr>
           </thead>
@@ -207,44 +200,15 @@ function CouponsListTable(props) {
                     </div>
                   </th>
                   <td>{row.title}</td>
-                  <td>{row.type}</td>
+                  <td>{row.comisionrate}</td>
 
                   <td style={{ textAlign: 'right' }}>
-                    {row.noOfTimes}
+                    {row.dailyorder}
                   </td>
                   <td style={{ textAlign: 'right' }}>
-                    {row.discount}
+                    {row.levellimit}
                   </td>
-                  <td>
-                    <select
-                      className="form-control"
-                      name="status"
-                      onChange={(e) =>
-                        formSubmit(row.id, e)
-                      }
-                    >
-                      {row.status === 'enable' && (
-                        <>
-                          <option value="enable">
-                            Enable
-                          </option>
-                          <option value="disable">
-                            Disable
-                          </option>
-                        </>
-                      )}
-                      {row.status === 'disable' && (
-                        <>
-                          <option value="disable">
-                            Disable
-                          </option>
-                          <option value="enable">
-                            Enable
-                          </option>
-                        </>
-                      )}
-                    </select>
-                  </td>
+                 
                   <td className="td-actions">
                     <Link
                       className="btn btn-link"

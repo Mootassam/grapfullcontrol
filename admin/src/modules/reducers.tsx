@@ -8,6 +8,9 @@ import settings from 'src/modules/settings/settingsReducers';
 import numbers from 'src/modules/numbers/numberReducers';
 import coupons from 'src/modules/coupons/couponsReducers';
 import category from 'src/modules/category/categoryReducers';
+import vip from 'src/modules/vip/vipReducers'
+import transaction from 'src/modules/transaction/transactionReducers'
+import product from 'src/modules/product/productReducers'
 import { combineReducers } from 'redux';
 export default (history) =>
   combineReducers({
@@ -16,6 +19,9 @@ export default (history) =>
     category,
     auth,
     coupons,
+    vip,
+    transaction,
+    product,
     tenant,
     user,
     auditLog,

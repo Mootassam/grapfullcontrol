@@ -1,13 +1,14 @@
 import vipService from 'src/modules/vip/vipService';
-import selectors from 'src/modules/transaction/list/transactionListSelectors';
+import selectors from 'src/modules/vip/list/vipListSelectors';
 import { i18n } from 'src/i18n';
-import exporterFields from 'src/modules/transaction/list/transactionListExporterFields';
+import exporterFields from 'src/modules/vip/list/vipListExporterFields';
 import Errors from 'src/modules/shared/error/errors';
 import Exporter from 'src/modules/shared/exporter/exporter';
 
-const prefix = 'TRANSACTION_LIST';
+const prefix = 'VIP_LIST';
 
 const vipListActions = {
+
   FETCH_STARTED: `${prefix}_FETCH_STARTED`,
   FETCH_SUCCESS: `${prefix}_FETCH_SUCCESS`,
   FETCH_ERROR: `${prefix}_FETCH_ERROR`,
@@ -92,7 +93,6 @@ const vipListActions = {
         type: vipListActions.PAGINATION_CHANGED,
         payload: pagination,
       });
-
       dispatch(vipListActions.doFetchCurrentFilter());
     },
 
@@ -124,14 +124,12 @@ const vipListActions = {
           type: vipListActions.FETCH_STARTED,
           payload: { filter, rawFilter, keepPagination },
         });
-
         const response = await vipService.list(
           filter,
           selectors.selectOrderBy(getState()),
           selectors.selectLimit(getState()),
           selectors.selectOffset(getState()),
         );
-
         dispatch({
           type: vipListActions.FETCH_SUCCESS,
           payload: {
@@ -141,7 +139,6 @@ const vipListActions = {
         });
       } catch (error) {
         Errors.handle(error);
-
         dispatch({
           type: vipListActions.FETCH_ERROR,
         });

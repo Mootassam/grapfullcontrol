@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectRaw = (state) => state.coupons.list;
+const selectRaw = (state) => state.vip.list;
 
 const selectLoading = createSelector(
   [selectRaw],
