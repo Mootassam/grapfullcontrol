@@ -6,7 +6,7 @@ import { useFormContext } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import selectors from 'src/modules/transaction/transactionSelectors';
 
-function CouponsAutocompleteFormItem(props) {
+function TransactionAutocompleteFormItem(props) {
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -98,4 +98,4 @@ function CouponsAutocompleteFormItem(props) {
   );
 }
 
-export default CouponsAutocompleteFormItem;
+export default TransactionAutocompleteFormItem;

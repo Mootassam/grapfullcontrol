@@ -4,7 +4,7 @@ import ViewWrapper from 'src/view/shared/styles/ViewWrapper';
 import { i18n } from 'src/i18n';
 import TextViewItem from 'src/view/shared/view/TextViewItem';
 
-function CouponsView(props) {
+function TransactionView(props) {
   const { record, loading } = props;
 
   if (loading || !record) {
@@ -56,4 +56,4 @@ function CouponsView(props) {
   );
 }
 
-export default CouponsView;
+export default TransactionView;

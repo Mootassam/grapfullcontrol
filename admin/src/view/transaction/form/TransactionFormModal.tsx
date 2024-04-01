@@ -5,7 +5,7 @@ import Errors from 'src/modules/shared/error/errors';
 import CouponsForm from 'src/view/transaction/form/TransactionForm';
 import CouponsService from 'src/modules/transaction/transactionService';
 
-function CouponsFormModal(props) {
+function TransactionForm(props) {
   const modalRef = useRef<any>();
   const [saveLoading, setSaveLoading] = useState(false);
 
@@ -66,4 +66,4 @@ function CouponsFormModal(props) {
   );
 }
 
-export default CouponsFormModal;
+export default TransactionForm;

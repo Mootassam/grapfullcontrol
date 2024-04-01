@@ -8,7 +8,7 @@ import Breadcrumb from 'src/view/shared/Breadcrumb';
 import importerHoc from 'src/view/shared/importer/Importer';
 import PageTitle from 'src/view/shared/styles/PageTitle';
 
-function CouponsImportPage() {
+function TransactionImporterPage() {
   const Importer = importerHoc(
     selectors,
     actions,
@@ -37,4 +37,4 @@ function CouponsImportPage() {
   );
 }
 
-export default CouponsImportPage;
+export default TransactionImporterPage;

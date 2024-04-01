@@ -68,7 +68,7 @@ const previewRenders = {
   },
 };
 
-function CouponsListFilter(props) {
+function TransactionListFilter(props) {
   const rawFilter = useSelector(selectors.selectRawFilter);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(false);
@@ -218,4 +218,4 @@ function CouponsListFilter(props) {
   );
 }
 
-export default CouponsListFilter;
+export default TransactionListFilter;

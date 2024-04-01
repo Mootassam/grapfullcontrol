@@ -10,7 +10,7 @@ import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import Toolbar from 'src/view/shared/styles/Toolbar';
 import ButtonIcon from 'src/view/shared/ButtonIcon';
 
-function CouponsViewToolbar(props) {
+function TransactionViewToolbar(props) {
   const [destroyConfirmVisible, setDestroyConfirmVisible] =
     useState(false);
 
@@ -96,4 +96,4 @@ function CouponsViewToolbar(props) {
   );
 }
 
-export default CouponsViewToolbar;
+export default TransactionViewToolbar;

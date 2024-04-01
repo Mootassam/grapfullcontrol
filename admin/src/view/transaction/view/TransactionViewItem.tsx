@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import selectors from 'src/modules/transaction/transactionSelectors';
 
-function CouponsViewItem(props) {
+function TransactionViewItem(props) {
   const hasPermissionToRead = useSelector(
     selectors.selectPermissionToRead,
   );
@@ -56,9 +56,9 @@ function CouponsViewItem(props) {
   );
 }
 
-CouponsViewItem.propTypes = {
+TransactionViewItem.propTypes = {
   label: PropTypes.string,
   value: PropTypes.any,
 };
 
-export default CouponsViewItem;
+export default TransactionViewItem;

@@ -7,61 +7,48 @@ import FormWrapper from 'src/view/shared/styles/FormWrapper';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import couponsEnumerators from 'src/modules/transaction/transactionEnumerators';
+import UserAutocompleteFormItem from 'src/view/user/autocomplete/UserAutocompleteFormItem';
 
 const schema = yup.object().shape({
-  title: yupFormSchemas.string(
-    i18n('entities.coupons.fields.title'),
-    {
-      required: true,
-    },
-  ),
-  codeName: yupFormSchemas.string(
-    i18n('entities.coupons.fields.codeName'),
-    {
-
-    },
-  ),
-  discount: yupFormSchemas.decimal(
-    i18n('entities.coupons.fields.discount'),
-    {
-      required: true,
-    },
-  ),
-  noOfTimes: yupFormSchemas.integer(
-    i18n('entities.coupons.fields.noOfTimes'),
-    {
-      required: true,
-    },
-  ),
   status: yupFormSchemas.enumerator(
     i18n('entities.coupons.fields.status'),
     {
       options: couponsEnumerators.status,
     },
   ),
+
   type: yupFormSchemas.enumerator(
-    i18n('entities.coupons.fields.type'),
+    i18n('entities.transaction.fields.type'),
     {
-      required: true,
-      options: couponsEnumerators.type,
+      options: couponsEnumerators.status,
     },
   ),
+  user: yupFormSchemas.relationToOne(
+    i18n('entities.transaction.fields.user'),
+    {
+      required: true,
+    },
+  ),
+
+  amount: yupFormSchemas.decimal(
+    i18n('entities.transaction.fields.amount'),
+    {
+      required: true,
+    },
+  ),
+  
 });
 
-function CouponsForm(props) {
+function TransactionForm(props) {
   const [initialValues] = useState(() => {
     const record = props.record || {};
-
     return {
-      title: record.title,
-      codeName: record.codeName,
-      discount: record.discount,
-      noOfTimes: record.noOfTimes,
-      // status: record.status,
-      type: record.type,
+      status: record.status || [],
+      type: record.type || [],
+      user: record.user ||[],
+      amount: record.amount,
     };
   });
 
@@ -86,6 +73,21 @@ function CouponsForm(props) {
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="row">
+          <div className="col-lg-7 col-md-8 col-12">
+              <SelectFormItem
+                name="type"
+                label={i18n('entities.coupons.fields.status')}
+                options={couponsEnumerators.status.map(
+                  (value) => ({
+                    value,
+                    label: i18n(
+                      `entities.coupons.enumerators.status.${value}`,
+                    ),
+                  }),
+                )}
+                required={true}
+              />
+            </div>
             <div className="col-lg-7 col-md-8 col-12">
               <InputFormItem
                 name="title"
@@ -99,31 +101,14 @@ function CouponsForm(props) {
            
 
             <div className="col-lg-7 col-md-8 col-12">
-              <InputNumberFormItem
-                name="noOfTimes"
+              <UserAutocompleteFormItem
+                name="user"
                 label={i18n(
-                  'entities.coupons.fields.noOfTimes',
+                  'entities.transaction.fields.user',
                 )}
                 required={true}
               />
             </div>
-            {/* <div className="col-lg-7 col-md-8 col-12">
-              <SelectFormItem
-                name="status"
-                label={i18n(
-                  'entities.coupons.fields.status',
-                )}
-                options={couponsEnumerators.status.map(
-                  (value) => ({
-                    value,
-                    label: i18n(
-                      `entities.coupons.enumerators.status.${value}`,
-                    ),
-                  }),
-                )}
-                required={false}
-              />
-            </div> */}
 
             <div className="col-lg-7 col-md-8 col-12">
               <SelectFormItem
@@ -140,6 +125,7 @@ function CouponsForm(props) {
                 required={true}
               />
             </div>
+
             <div className="col-lg-7 col-md-8 col-12">
               <InputFormItem
                 name="discount"
@@ -195,4 +181,4 @@ function CouponsForm(props) {
   );
 }
 
-export default CouponsForm;
+export default TransactionForm;

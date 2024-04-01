@@ -201,6 +201,7 @@ function CouponsListTable(props) {
                     </div>
                   </th>
                   
+             
                   <VipListItem
                       value={row.vip}
                     />

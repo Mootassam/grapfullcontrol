@@ -11,7 +11,7 @@ import Breadcrumb from 'src/view/shared/Breadcrumb';
 import Spinner from 'src/view/shared/Spinner';
 import PageTitle from 'src/view/shared/styles/PageTitle';
 
-function CouponsFormPage(props) {
+function TransactionFormPage(props) {
   const [dispatched, setDispatched] = useState(false);
   const dispatch = useDispatch();
   const match = useRouteMatch();
@@ -72,4 +72,4 @@ function CouponsFormPage(props) {
   );
 }
 
-export default CouponsFormPage;
+export default TransactionFormPage;

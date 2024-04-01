@@ -10,7 +10,7 @@ import ContentWrapper from 'src/view/layout/styles/ContentWrapper';
 import Breadcrumb from 'src/view/shared/Breadcrumb';
 import PageTitle from 'src/view/shared/styles/PageTitle';
 
-function CouponsPage() {
+function TransactionViewPage() {
   const dispatch = useDispatch();
   const match = useRouteMatch();
 
@@ -44,4 +44,4 @@ function CouponsPage() {
   );
 }
 
-export default CouponsPage;
+export default TransactionViewPage;

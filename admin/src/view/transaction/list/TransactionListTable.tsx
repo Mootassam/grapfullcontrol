@@ -14,7 +14,7 @@ import TableWrapper from 'src/view/shared/styles/TableWrapper';
 import Pagination from 'src/view/shared/table/Pagination';
 import actionsForm from 'src/modules/transaction/form/transactionFormActions';
 
-function CouponsListTable(props) {
+function TransactionListTable(props) {
   const [recordIdToDestroy, setRecordIdToDestroy] =
     useState(null);
   const dispatch = useDispatch();
@@ -297,4 +297,4 @@ function CouponsListTable(props) {
   );
 }
 
-export default CouponsListTable;
+export default TransactionListTable;

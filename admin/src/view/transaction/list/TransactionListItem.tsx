@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import selectors from 'src/modules/transaction/transactionSelectors';
 
-function CouponsListItem(props) {
+function TransactionListItem(props) {
   const hasPermissionToRead = useSelector(
     selectors.selectPermissionToRead,
   );
@@ -54,8 +54,8 @@ function CouponsListItem(props) {
   );
 }
 
-CouponsListItem.propTypes = {
+TransactionListItem.propTypes = {
   value: PropTypes.any,
 };
 
-export default CouponsListItem;
+export default TransactionListItem;

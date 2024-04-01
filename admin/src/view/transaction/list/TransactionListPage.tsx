@@ -8,7 +8,7 @@ import Breadcrumb from 'src/view/shared/Breadcrumb';
 import PageTitle from 'src/view/shared/styles/PageTitle';
 import { Col, Container, Row } from 'react-bootstrap';
 
-function CouponsListPage(props) {
+function TransactionListPage(props) {
   return (
     <>
       <Breadcrumb
@@ -39,4 +39,4 @@ function CouponsListPage(props) {
   );
 }
 
-export default CouponsListPage;
+export default TransactionListPage;

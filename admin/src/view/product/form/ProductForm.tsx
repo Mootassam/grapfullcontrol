@@ -63,7 +63,6 @@ function ProductForm(props) {
   });
 
   const onSubmit = (values) => {
-    alert("im the best in the world")
     props.onSubmit(props.record?.id, values);
   };
 

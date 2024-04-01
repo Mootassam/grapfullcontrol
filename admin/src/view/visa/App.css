@@ -92,8 +92,6 @@
   }
 }
 
-
-
 .group__check {
   display: flex;
   gap: 13px;
@@ -111,3 +109,4 @@
   padding: 20px;
   background-color: #212529;
 }
+
