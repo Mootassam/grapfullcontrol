@@ -23,12 +23,24 @@ const privateRoutes = [
     exact: true,
   },
   {
-    path: '/visa',
-    loader: () =>
-      import('src/view/coupons/list/CouponsListPage'),
-    permissionRequired: permissions.couponsRead,
+    path: '/faqs',
+    loader: () => import('src/view/company/Faqs'),
+    permissionRequired: null,
     exact: true,
   },
+  {
+    path: '/companydetail',
+    loader: () => import('src/view/company/companyDetails'),
+    permissionRequired: null,
+    exact: true,
+  },
+  {
+    path: '/tc',
+    loader: () => import('src/view/company/Tc'),
+    permissionRequired: null,
+    exact: true,
+  },
+
   {
     path: '/category',
     loader: () =>

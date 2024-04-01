@@ -12,43 +12,39 @@ import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import couponsEnumerators from 'src/modules/record/recordEnumerators';
 
 const schema = yup.object().shape({
-  title: yupFormSchemas.string(
-    i18n('entities.coupons.fields.title'),
+  user: yupFormSchemas.relationToOne(
+    i18n('entities.record.fields.user'),
     {
       required: true,
     },
   ),
-  codeName: yupFormSchemas.string(
-    i18n('entities.coupons.fields.codeName'),
+  product: yupFormSchemas.string(
+    i18n('entities.record.fields.product'),
     {
-
-    },
-  ),
-  discount: yupFormSchemas.decimal(
-    i18n('entities.coupons.fields.discount'),
-    {
-      required: true,
-    },
-  ),
-  noOfTimes: yupFormSchemas.integer(
-    i18n('entities.coupons.fields.noOfTimes'),
-    {
-      required: true,
     },
   ),
   status: yupFormSchemas.enumerator(
-    i18n('entities.coupons.fields.status'),
+    i18n('entities.record.fields.status'),
     {
       options: couponsEnumerators.status,
     },
   ),
-  type: yupFormSchemas.enumerator(
-    i18n('entities.coupons.fields.type'),
+
+  date: yupFormSchemas.date(
+    i18n('entities.record.fields.date'),
     {
-      required: true,
-      options: couponsEnumerators.type,
+
     },
   ),
+  number: yupFormSchemas.integer(
+    i18n('entities.record.fields.number'),
+    {
+      required: true,
+    },
+  ),
+  // eslint-disable-next-line no-dupe-keys
+
+
 });
 
 function CouponsForm(props) {

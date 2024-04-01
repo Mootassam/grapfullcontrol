@@ -14,18 +14,18 @@
   align-items: center;
   gap: 20px;
 }
-
 .company__item:hover {
   background-color: cadetblue;
   color: white;
   outline: 0px;
 }
-
 .company__text {
   font-size: 18px;
   font-weight: 500;
 }
-
 .item__company {
   font-size: 54px;
+}
+.remove__ligne {
+  text-decoration: none;
 }
