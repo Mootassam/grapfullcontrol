@@ -8,60 +8,52 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import couponsEnumerators from 'src/modules/product/productEnumerators';
+import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
+import Storage from 'src/security/storage';
+import VipAutocompleteFormItem from 'src/view/vip/autocomplete/VipAutocompleteFormItem';
 
 const schema = yup.object().shape({
-  title: yupFormSchemas.string(
-    i18n('entities.coupons.fields.title'),
+  vip: yupFormSchemas.relationToOne(
+    i18n('entities.product.fields.vip'),
     {
       required: true,
     },
   ),
-  codeName: yupFormSchemas.string(
-    i18n('entities.coupons.fields.codeName'),
+  title: yupFormSchemas.string(
+    i18n('entities.product.fields.title'),
     {
 
     },
   ),
-  discount: yupFormSchemas.decimal(
-    i18n('entities.coupons.fields.discount'),
+  amount: yupFormSchemas.integer(
+    i18n('entities.product.fields.amount'),
     {
-      required: true,
+
     },
   ),
-  noOfTimes: yupFormSchemas.integer(
-    i18n('entities.coupons.fields.noOfTimes'),
-    {
-      required: true,
-    },
+  commission: yupFormSchemas.string(
+    i18n('entities.product.fields.commission'),
+    {},
   ),
-  status: yupFormSchemas.enumerator(
-    i18n('entities.coupons.fields.status'),
-    {
-      options: couponsEnumerators.status,
-    },
+  photo: yupFormSchemas.images(
+    i18n('entities.product.fields.photo'),
+    {},
   ),
-  type: yupFormSchemas.enumerator(
-    i18n('entities.coupons.fields.type'),
-    {
-      required: true,
-      options: couponsEnumerators.type,
-    },
-  ),
+
+
+
 });
 
-function CouponsForm(props) {
+function ProductForm(props) {
   const [initialValues] = useState(() => {
     const record = props.record || {};
 
     return {
       title: record.title,
-      codeName: record.codeName,
-      discount: record.discount,
-      noOfTimes: record.noOfTimes,
-      // status: record.status,
-      type: record.type,
+      amount: record.amount,
+      commission: record.commission,
+      vip: record.vip,
+      photo: record.photo,
     };
   });
 
@@ -72,6 +64,7 @@ function CouponsForm(props) {
   });
 
   const onSubmit = (values) => {
+    alert("im the best in the world")
     props.onSubmit(props.record?.id, values);
   };
 
@@ -87,68 +80,57 @@ function CouponsForm(props) {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="row">
             <div className="col-lg-7 col-md-8 col-12">
+              <VipAutocompleteFormItem
+                name="vip"
+                label={i18n('entities.vip.fields.vip')}
+                required={true}
+                showCreate={!props.modal}
+              />
+            </div>
+            <div className="col-lg-7 col-md-8 col-12">
               <InputFormItem
                 name="title"
                 label={i18n(
-                  'entities.coupons.fields.title',
+                  'entities.product.fields.title',
                 )}
                 required={true}
                 autoFocus
               />
             </div>
-           
 
             <div className="col-lg-7 col-md-8 col-12">
               <InputNumberFormItem
-                name="noOfTimes"
-                label={i18n(
-                  'entities.coupons.fields.noOfTimes',
-                )}
+                name="amount"
+                label={i18n('entities.vip.fields.amount')}
                 required={true}
               />
             </div>
-            {/* <div className="col-lg-7 col-md-8 col-12">
-              <SelectFormItem
-                name="status"
-                label={i18n(
-                  'entities.coupons.fields.status',
-                )}
-                options={couponsEnumerators.status.map(
-                  (value) => ({
-                    value,
-                    label: i18n(
-                      `entities.coupons.enumerators.status.${value}`,
-                    ),
-                  }),
-                )}
-                required={false}
-              />
-            </div> */}
 
             <div className="col-lg-7 col-md-8 col-12">
-              <SelectFormItem
-                name="type"
-                label={i18n('entities.coupons.fields.type')}
-                options={couponsEnumerators.type.map(
-                  (value) => ({
-                    value,
-                    label: i18n(
-                      `entities.coupons.enumerators.type.${value}`,
-                    ),
-                  }),
+              <InputNumberFormItem
+                name="commission"
+                label={i18n(
+                  'entities.vip.fields.commission',
                 )}
                 required={true}
               />
             </div>
             <div className="col-lg-7 col-md-8 col-12">
-              <InputFormItem
-                name="discount"
+              <ImagesFormItem
+                name="photo"
                 label={i18n(
-                  'entities.coupons.fields.discount',
+                  'entities.paymentsettings.fields.photo',
                 )}
-                required={true}
+                required={false}
+                storage={
+                  Storage.values.paymentsettingsPhoto
+                }
+                max={undefined}
               />
             </div>
+
+
+       
           </div>
 
           <div className="form-buttons">
@@ -195,4 +177,4 @@ function CouponsForm(props) {
   );
 }
 
-export default CouponsForm;
+export default ProductForm;

@@ -36,7 +36,7 @@ const en = {
   },
 
   app: {
-    title: 'Check Satus',
+    title: 'Admin Panel',
   },
 
   api: {

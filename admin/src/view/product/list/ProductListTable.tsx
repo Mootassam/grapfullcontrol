@@ -13,6 +13,7 @@ import Spinner from 'src/view/shared/Spinner';
 import TableWrapper from 'src/view/shared/styles/TableWrapper';
 import Pagination from 'src/view/shared/table/Pagination';
 import actionsForm from 'src/modules/product/form/productFormActions';
+import VipListItem from 'src/view/vip/list/VipListItem';
 
 function CouponsListTable(props) {
   const [recordIdToDestroy, setRecordIdToDestroy] =
@@ -89,6 +90,9 @@ function CouponsListTable(props) {
     let data = { status: e.target.value };
     dispatch(actionsForm.doUpdate(id, data));
   };
+
+
+  
   return (
     <TableWrapper>
       <div className="table-responsive">
@@ -120,7 +124,7 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'title'}
                 label={i18n(
-                  'entities.coupons.fields.title',
+                  'entities.product.fields.vip',
                 )}
               />
               <TableColumnHeader
@@ -129,7 +133,7 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'type'}
                 label={i18n(
-                  'entities.coupons.fields.type',
+                  'entities.product.fields.title',
                 )}
               />
               <TableColumnHeader
@@ -138,7 +142,7 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'noOfTimes'}
                 label={i18n(
-                  'entities.coupons.fields.noOfTimes',
+                  'entities.product.fields.amount',
                 )}
                 align="right"
               />
@@ -148,19 +152,9 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'discount'}
                 label={i18n(
-                  'entities.coupons.fields.discount',
+                  'entities.product.fields.commission',
                 )}
                 align="right"
-              />
-
-              <TableColumnHeader
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'status'}
-                label={i18n(
-                  'entities.coupons.fields.status',
-                )}
               />
               <TableColumnHeader className="th-actions" />
             </tr>
@@ -207,44 +201,18 @@ function CouponsListTable(props) {
                     </div>
                   </th>
                   <td>{row.title}</td>
-                  <td>{row.type}</td>
+          
+                  <VipListItem
+                      value={row.vip}
+                    />
 
                   <td style={{ textAlign: 'right' }}>
-                    {row.noOfTimes}
+                    {row.amount}
                   </td>
                   <td style={{ textAlign: 'right' }}>
-                    {row.discount}
+                    {row.commission}
                   </td>
-                  <td>
-                    <select
-                      className="form-control"
-                      name="status"
-                      onChange={(e) =>
-                        formSubmit(row.id, e)
-                      }
-                    >
-                      {row.status === 'enable' && (
-                        <>
-                          <option value="enable">
-                            Enable
-                          </option>
-                          <option value="disable">
-                            Disable
-                          </option>
-                        </>
-                      )}
-                      {row.status === 'disable' && (
-                        <>
-                          <option value="disable">
-                            Disable
-                          </option>
-                          <option value="enable">
-                            Enable
-                          </option>
-                        </>
-                      )}
-                    </select>
-                  </td>
+             
                   <td className="td-actions">
                     <Link
                       className="btn btn-link"

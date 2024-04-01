@@ -20,6 +20,10 @@ const schema = yup.object().shape({
       required: true,
     },
   ),
+  photo: yupFormSchemas.images(
+    i18n('entities.coupons.fields.photo'),
+    {},
+  ),
   entrylimit: yupFormSchemas.string(
     i18n('entities.level.fields.entrylimit'),
     {

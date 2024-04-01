@@ -6,7 +6,7 @@ import { useFormContext } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import selectors from 'src/modules/vip/vipSelectors';
 
-function CouponsAutocompleteFormItem(props) {
+function VipAutocompleteFormItem(props) {
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -70,7 +70,6 @@ function CouponsAutocompleteFormItem(props) {
       if (!originalValue) {
         return null;
       }
-
       return {
         id: originalValue.value,
         label: originalValue.label,
@@ -98,4 +97,4 @@ function CouponsAutocompleteFormItem(props) {
   );
 }
 
-export default CouponsAutocompleteFormItem;
+export default VipAutocompleteFormItem;

@@ -17,16 +17,10 @@ export default (database) => {
       amount: {
         type: String,
       },
-      Commission: {
+      commission: {
         type: String,
       },
       photo: [FileSchema],
-
-      //   status: {
-      //     type: String,
-      //     enum: ['enable', 'disable'],
-      //     default: 'enable',
-      //   },
       vip: {
         type: Schema.Types.ObjectId,
         ref: "vip",
