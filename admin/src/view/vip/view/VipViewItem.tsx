@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import selectors from 'src/modules/coupons/couponsSelectors';
+import selectors from 'src/modules/product/productSelectors';
 
-function CouponsViewItem(props) {
+function VipViewItem(props) {
+
   const hasPermissionToRead = useSelector(
     selectors.selectPermissionToRead,
   );
@@ -56,9 +57,9 @@ function CouponsViewItem(props) {
   );
 }
 
-CouponsViewItem.propTypes = {
+VipViewItem.propTypes = {
   label: PropTypes.string,
   value: PropTypes.any,
 };
 
-export default CouponsViewItem;
+export default VipViewItem;

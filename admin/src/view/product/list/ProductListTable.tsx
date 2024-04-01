@@ -122,7 +122,7 @@ function CouponsListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'title'}
+                name={'vip'}
                 label={i18n(
                   'entities.product.fields.vip',
                 )}
@@ -131,7 +131,7 @@ function CouponsListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'type'}
+                name={'title'}
                 label={i18n(
                   'entities.product.fields.title',
                 )}
@@ -200,11 +200,12 @@ function CouponsListTable(props) {
                       </label>
                     </div>
                   </th>
-                  <td>{row.title}</td>
-          
+                  
                   <VipListItem
                       value={row.vip}
                     />
+                  <td>{row.title}</td>
+          
 
                   <td style={{ textAlign: 'right' }}>
                     {row.amount}

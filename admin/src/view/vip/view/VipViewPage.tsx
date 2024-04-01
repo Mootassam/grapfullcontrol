@@ -26,8 +26,8 @@ function CouponsPage() {
       <Breadcrumb
         items={[
           [i18n('dashboard.menu'), '/'],
-          [i18n('entities.coupons.menu'), '/coupons'],
-          [i18n('entities.coupons.view.title')],
+          [i18n('entities.product.menu'), '/product'],
+          [i18n('entities.product.view.title')],
         ]}
       />
 

@@ -3,9 +3,12 @@ import Spinner from 'src/view/shared/Spinner';
 import ViewWrapper from 'src/view/shared/styles/ViewWrapper';
 import { i18n } from 'src/i18n';
 import TextViewItem from 'src/view/shared/view/TextViewItem';
+import VipViewItem from 'src/view/vip/view/VipViewItem';
 
 function CouponsView(props) {
   const { record, loading } = props;
+
+
 
   if (loading || !record) {
     return <Spinner />;
@@ -13,6 +16,10 @@ function CouponsView(props) {
 
   return (
     <ViewWrapper>
+      <VipViewItem  label={i18n('entities.product.fields.vip')}
+    value={record.vip} />
+
+    
       <TextViewItem
         label={i18n('entities.coupons.fields.title')}
         value={record.title}
@@ -20,38 +27,17 @@ function CouponsView(props) {
 
       <TextViewItem
         label={i18n('entities.coupons.fields.codeName')}
-        value={record.codeName}
+        value={record.amount}
       />
 
       <TextViewItem
         label={i18n('entities.coupons.fields.discount')}
-        value={record.discount}
+        value={record.commission}
       />
 
-      <TextViewItem
-        label={i18n('entities.coupons.fields.noOfTimes')}
-        value={record.noOfTimes}
-      />
+  
 
-      <TextViewItem
-        label={i18n('entities.coupons.fields.status')}
-        value={
-          record.status &&
-          i18n(
-            `entities.coupons.enumerators.status.${record.status}`,
-          )
-        }
-      />
-
-      <TextViewItem
-        label={i18n('entities.coupons.fields.type')}
-        value={
-          record.type &&
-          i18n(
-            `entities.coupons.enumerators.type.${record.type}`,
-          )
-        }
-      />
+      
     </ViewWrapper>
   );
 }

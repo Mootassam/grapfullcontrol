@@ -47,12 +47,11 @@ const schema = yup.object().shape({
 function ProductForm(props) {
   const [initialValues] = useState(() => {
     const record = props.record || {};
-
     return {
       title: record.title,
       amount: record.amount,
       commission: record.commission,
-      vip: record.vip,
+      vip: record.vip || [],
       photo: record.photo,
     };
   });

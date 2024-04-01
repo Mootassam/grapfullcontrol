@@ -9,18 +9,14 @@ function VipListItem(props) {
   const hasPermissionToRead = useSelector(
     selectors.selectPermissionToRead,
   );
-
   const valueAsArray = () => {
     const { value } = props;
-
     if (!value) {
       return [];
     }
-
     if (Array.isArray(value)) {
       return value;
     }
-
     return [value];
   };
 
@@ -37,7 +33,6 @@ function VipListItem(props) {
         </div>
       );
     }
-
     return <div key={record.id}>{record.id}</div>;
   };
 

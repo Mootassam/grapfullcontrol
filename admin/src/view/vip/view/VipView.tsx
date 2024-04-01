@@ -18,40 +18,19 @@ function CouponsView(props) {
         value={record.title}
       />
 
-      <TextViewItem
-        label={i18n('entities.coupons.fields.codeName')}
-        value={record.codeName}
-      />
+     
 
       <TextViewItem
         label={i18n('entities.coupons.fields.discount')}
-        value={record.discount}
+        value={record.amount}
       />
 
       <TextViewItem
         label={i18n('entities.coupons.fields.noOfTimes')}
-        value={record.noOfTimes}
+        value={record.commission}
       />
 
-      <TextViewItem
-        label={i18n('entities.coupons.fields.status')}
-        value={
-          record.status &&
-          i18n(
-            `entities.coupons.enumerators.status.${record.status}`,
-          )
-        }
-      />
-
-      <TextViewItem
-        label={i18n('entities.coupons.fields.type')}
-        value={
-          record.type &&
-          i18n(
-            `entities.coupons.enumerators.type.${record.type}`,
-          )
-        }
-      />
+      
     </ViewWrapper>
   );
 }
