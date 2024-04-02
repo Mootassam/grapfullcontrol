@@ -41,7 +41,7 @@ function CouponsFormModal(props) {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">
-              {i18n('entities.prodcut.new.title')}
+              {i18n('entities.product.new.title')}
             </h5>
             <button
               type="button"

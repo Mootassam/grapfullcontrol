@@ -44,6 +44,11 @@ const en = {
   },
 
   entities: {
+
+
+
+
+
     company:{
       title:"Company Section", 
       menu:"company"
@@ -1660,6 +1665,10 @@ const en = {
         title: 'Edit Product',
       },
       fields: {
+        vip: "vip",
+        title:"Product Name",
+        amount:"Product Price",
+        commission:"Product Commission",
         id: 'Id',
         name: 'Name',
         slug: 'Slug',
@@ -1719,6 +1728,7 @@ const en = {
       },
       placeholders: {},
       hints: {},
+    
       new: {
         title: 'New Product',
       },
@@ -1957,6 +1967,8 @@ const en = {
         id: 'Id',
         title: 'Title',
         codeName: 'Code Name',
+        commission:"Commission",
+        price:"Price of Product ",
         discountRange: 'Discount',
         discount: 'Amount',
         noOfTimesRange: 'Number Of Times ',

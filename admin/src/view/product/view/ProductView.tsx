@@ -21,17 +21,17 @@ function CouponsView(props) {
 
     
       <TextViewItem
-        label={i18n('entities.prodcut.fields.title')}
+        label={i18n('entities.product.fields.title')}
         value={record.title}
       />
 
       <TextViewItem
-        label={i18n('entities.prodcut.fields.codeName')}
+        label={i18n('entities.product.fields.price')}
         value={record.amount}
       />
 
       <TextViewItem
-        label={i18n('entities.prodcut.fields.discount')}
+        label={i18n('entities.product.fields.commission')}
         value={record.commission}
       />
 

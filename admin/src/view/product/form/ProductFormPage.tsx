@@ -26,8 +26,8 @@ function CouponsFormPage(props) {
 
   const isEditing = Boolean(match.params.id);
   const title = isEditing
-    ? i18n('entities.prodcut.edit.title')
-    : i18n('entities.prodcut.new.title');
+    ? i18n('entities.product.edit.title')
+    : i18n('entities.product.new.title');
 
   useEffect(() => {
     dispatch(actions.doInit(match.params.id));
@@ -47,7 +47,7 @@ function CouponsFormPage(props) {
       <Breadcrumb
         items={[
           [i18n('dashboard.menu'), '/'],
-          [i18n('entities.prodcut.menu'), '/prodcut'],
+          [i18n('entities.product.menu'), '/product'],
           [title],
         ]}
       />
