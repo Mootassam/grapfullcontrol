@@ -49,6 +49,8 @@ const en = {
       menu:"company"
     },
 
+  
+
     vip:{
       menu:"Vip",
       list:{
@@ -1990,6 +1992,9 @@ const en = {
         title: 'Edit Transaction',
       },
       fields: {
+        user:"user",
+        type:"type",
+        status:"status",
         id: 'Id',
         amountRange: 'Amount',
         amount: 'Amount',
@@ -2002,7 +2007,16 @@ const en = {
         updatedAt: 'Updated at',
         createdAtRange: 'Created at',
       },
-      enumerators: {},
+      enumerators: {
+        status:{
+          enable:"enable",
+          disable:"disable"
+        },
+        type:{
+          withdraw:"withdraw",
+          deposit:"deposit"
+        }
+      },
       placeholders: {},
       hints: {},
       new: {
