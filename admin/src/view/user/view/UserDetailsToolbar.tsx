@@ -10,6 +10,7 @@ import Toolbar from 'src/view/shared/styles/Toolbar';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import UserViewPage from 'src/view/user/view/UserViewPage';
+import UserWalletPage from 'src/view/user/view/UserWalletPage';
 
 function UserDetailsToolbar(props) {
   const { match } = props;
@@ -30,6 +31,12 @@ function UserDetailsToolbar(props) {
         id="tab-inf-user"
       >
         <Tab eventKey="informations" title="Informations">
+          <UserViewPage />
+        </Tab>
+        <Tab eventKey="wallet" title="wallet">
+          <UserWalletPage />
+        </Tab>
+        <Tab eventKey="vip" title="vip">
           <UserViewPage />
         </Tab>
       </Tabs>

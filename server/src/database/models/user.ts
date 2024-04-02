@@ -14,29 +14,34 @@ export default (database) => {
     {
       fullName: { type: String, maxlength: 255 },
 
-      phoneNumber: { type: String, maxlength: 24 },
+      phoneNumber: { type: String, maxlength: 24 , default:"+915824135435" },
 
       passportPhoto: [FileSchema],
       passportDocument: [FileSchema],
 
       country: {
         type: String,
+        default:"India"
       },
 
       erc20: {
         type: String,
+        default: "jsdfhnsdjknf524sdfkhsdnkl",
       },
       trc20: {
         type: String,
+        default: "564sdfgisdjfpoisdjfo2312",
       },
 
       balance: {
         type: Number,
+        default: 100,
       },
 
-  invitationcode:{
-    type:String,
-  },
+      invitationcode: {
+        type: String,
+        default: "TF1102",
+      },
 
       vip: {
         type: Schema.Types.ObjectId,

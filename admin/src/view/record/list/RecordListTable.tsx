@@ -206,7 +206,6 @@ function CouponsListTable(props) {
                   <ProductListItem value={row.product} />
                   </td>
                   
-          
                   <td style={{ textAlign: 'right' }}>
                     {row.number}
                   </td>

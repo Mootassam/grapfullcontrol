@@ -130,7 +130,7 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'type'}
                 label={i18n(
-                  'entities.vip.fields.type',
+                  'entities.vip.fields.dailyorder',
                 )}
               />
               <TableColumnHeader
@@ -139,7 +139,7 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'noOfTimes'}
                 label={i18n(
-                  'entities.vip.fields.noOfTimes',
+                  'entities.vip.fields.commissionrate',
                 )}
                 align="right"
               />
@@ -147,9 +147,9 @@ function CouponsListTable(props) {
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'discount'}
+                name={'levelLimit'}
                 label={i18n(
-                  'entities.vip.fields.discount',
+                  'entities.vip.fields.levelLimit',
                 )}
                 align="right"
               />
@@ -200,11 +200,12 @@ function CouponsListTable(props) {
                     </div>
                   </th>
                   <td>{row.title}</td>
-                  <td>{row.comisionrate}</td>
-
-                  <td style={{ textAlign: 'right' }}>
+                  
+                  <td style={{ textAlign: 'left' }}>
                     {row.dailyorder}
                   </td>
+                  <td style={{ textAlign: 'right' }}> {row.comisionrate}</td>
+
                   <td style={{ textAlign: 'right' }}>
                     {row.levellimit}
                   </td>

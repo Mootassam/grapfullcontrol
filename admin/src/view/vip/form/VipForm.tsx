@@ -122,7 +122,7 @@ function VipForm(props) {
               <InputNumberFormItem
                 name="comisionrate"
                 label={i18n(
-                  'entities.vip.fields.comisionrate',
+                  'entities.vip.fields.commissionrate',
                 )}
                 required={true}
               />
@@ -132,7 +132,7 @@ function VipForm(props) {
               <InputFormItem
                 name="levellimit"
                 label={i18n(
-                  'entities.vip.fields.levellimit',
+                  'entities.vip.fields.levelLimit',
                 )}
                 required={true}
                 autoFocus

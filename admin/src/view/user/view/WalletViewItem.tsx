@@ -12,7 +12,7 @@ import moment from 'moment';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function UserView(props) {
+function WalletViewItem(props) {
   const { user, loading } = props;
 
   if (loading || !user) {
@@ -26,49 +26,33 @@ function UserView(props) {
           paddingBottom: '10px',
         }}
       >
+      
         <Col sm={4}>
           <TextViewItem
-            label={i18n('user.fields.email')}
-            value={user.email}
-          />
-        </Col>
-        <Col sm={4}>
-          <CustomViewItem
-            label={i18n('user.fields.roles')}
-            value={user.roles}
-            render={(value) =>
-              value.map((roleId) => (
-                <div key={roleId}>
-                  <span>{Roles.labelOf(roleId)}</span>
-                </div>
-              ))
-            }
+            label={i18n('ERC20')}
+            value={user.erc20}
           />
         </Col>
         <Col sm={4}>
           <TextViewItem
-            label={i18n('Phone Number')}
-            value={user.phoneNumber}
+            label={i18n('TRC20')}
+            value={user.trc20}
+          />
+        </Col>
+        <Col sm={4}>
+          <TextViewItem
+            label={i18n('Balance')}
+            value={user.balance}
           />
         </Col>
       </Row>
       <Row>
+     
+       
         <Col sm={4}>
           <TextViewItem
-            label={i18n('Date Create account')}
-            value={user.createdAt}
-          />
-        </Col>
-        <Col sm={4}>
-          <TextViewItem
-            label={i18n('Invitation Code')}
-            value={user.invitationcode}
-          />
-        </Col>
-        <Col sm={4}>
-          <TextViewItem
-            label={i18n('country')}
-            value={user.country}
+            label={i18n('Profession')}
+            value={user.profession}
           />
         </Col>
       </Row>
@@ -151,4 +135,4 @@ function UserView(props) {
   );
 }
 
-export default UserView;
+export default WalletViewItem;

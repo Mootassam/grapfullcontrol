@@ -44,6 +44,34 @@ const en = {
   },
 
   entities: {
+    company:{
+      title:"Company Section", 
+      menu:"company"
+    },
+
+    vip:{
+      menu:"Vip",
+      list:{
+        title:"List of vip"
+      }, 
+      fields:{
+        title:"Vip Name", 
+        dailyorder:"Daily Order", 
+        commissionrate:" commission rate", 
+        levelLimit:"Level Limit"
+      },
+      new: {
+        title:"Add New Vip"
+      },
+      edit:{
+        title:"Edit Vip"
+      },
+      view:{
+        title :"Detail Vip"
+      }
+      
+    },
+
     typeProjet: {
       name: 'typeProjet',
       label: 'TypeProjets',
