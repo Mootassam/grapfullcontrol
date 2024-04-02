@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import { i18n } from 'src/i18n';
-import actions from 'src/modules/coupons/view/couponsViewActions';
-import selectors from 'src/modules/coupons/view/couponsViewSelectors';
+import actions from 'src/modules/vip/view/vipViewActions';
+import selectors from 'src/modules/vip/view/vipViewSelectors';
 import CouponsView from 'src/view/coupons/view/CouponsView';
 import CouponsViewToolbar from 'src/view/coupons/view/CouponsViewToolbar';
 import ContentWrapper from 'src/view/layout/styles/ContentWrapper';
@@ -26,14 +26,14 @@ function CouponsPage() {
       <Breadcrumb
         items={[
           [i18n('dashboard.menu'), '/'],
-          [i18n('entities.product.menu'), '/product'],
-          [i18n('entities.product.view.title')],
+          [i18n('entities.vip.menu'), '/product'],
+          [i18n('entities.vip.view.title')],
         ]}
       />
 
       <ContentWrapper>
         <PageTitle>
-          {i18n('entities.coupons.view.title')}
+          {i18n('entities.vip.view.title')}
         </PageTitle>
 
         <CouponsViewToolbar match={match} />

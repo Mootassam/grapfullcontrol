@@ -19,19 +19,19 @@ import couponsEnumerators from 'src/modules/record/recordEnumerators';
 
 const schema = yup.object().shape({
   title: yupFilterSchemas.string(
-    i18n('entities.coupons.fields.title'),
+    i18n('entities.record.fields.title'),
   ),
   codeName: yupFilterSchemas.string(
-    i18n('entities.coupons.fields.codeName'),
+    i18n('entities.record.fields.codeName'),
   ),
   discountRange: yupFilterSchemas.decimalRange(
-    i18n('entities.coupons.fields.discountRange'),
+    i18n('entities.record.fields.discountRange'),
   ),
   noOfTimesRange: yupFilterSchemas.integerRange(
-    i18n('entities.coupons.fields.noOfTimesRange'),
+    i18n('entities.record.fields.noOfTimesRange'),
   ),
   status: yupFilterSchemas.enumerator(
-    i18n('entities.coupons.fields.status'),
+    i18n('entities.record.fields.status'),
   ),
 });
 
@@ -45,25 +45,25 @@ const emptyValues = {
 
 const previewRenders = {
   title: {
-    label: i18n('entities.coupons.fields.title'),
+    label: i18n('entities.record.fields.title'),
     render: filterRenders.generic(),
   },
   codeName: {
-    label: i18n('entities.coupons.fields.codeName'),
+    label: i18n('entities.record.fields.codeName'),
     render: filterRenders.generic(),
   },
   discountRange: {
-    label: i18n('entities.coupons.fields.discountRange'),
+    label: i18n('entities.record.fields.discountRange'),
     render: filterRenders.decimalRange(),
   },
   noOfTimesRange: {
-    label: i18n('entities.coupons.fields.noOfTimesRange'),
+    label: i18n('entities.record.fields.noOfTimesRange'),
     render: filterRenders.range(),
   },
   status: {
-    label: i18n('entities.coupons.fields.status'),
+    label: i18n('entities.record.fields.status'),
     render: filterRenders.enumerator(
-      'entities.coupons.enumerators.status',
+      'entities.record.enumerators.status',
     ),
   },
 };
@@ -137,7 +137,7 @@ function CouponsListFilter(props) {
                   <InputFormItem
                     name="title"
                     label={i18n(
-                      'entities.coupons.fields.title',
+                      'entities.record.fields.title',
                     )}
                   />
                 </div>
@@ -145,7 +145,7 @@ function CouponsListFilter(props) {
                   <InputFormItem
                     name="codeName"
                     label={i18n(
-                      'entities.coupons.fields.codeName',
+                      'entities.record.fields.codeName',
                     )}
                   />
                 </div>
@@ -153,7 +153,7 @@ function CouponsListFilter(props) {
                   <InputRangeFormItem
                     name="discountRange"
                     label={i18n(
-                      'entities.coupons.fields.discountRange',
+                      'entities.record.fields.discountRange',
                     )}
                   />
                 </div>
@@ -161,7 +161,7 @@ function CouponsListFilter(props) {
                   <InputNumberRangeFormItem
                     name="noOfTimesRange"
                     label={i18n(
-                      'entities.coupons.fields.noOfTimesRange',
+                      'entities.record.fields.noOfTimesRange',
                     )}
                   />
                 </div>
@@ -169,13 +169,13 @@ function CouponsListFilter(props) {
                   <SelectFormItem
                     name="status"
                     label={i18n(
-                      'entities.coupons.fields.status',
+                      'entities.record.fields.status',
                     )}
                     options={couponsEnumerators.status.map(
                       (value) => ({
                         value,
                         label: i18n(
-                          `entities.coupons.enumerators.status.${value}`,
+                          `entities.record.enumerators.status.${value}`,
                         ),
                       }),
                     )}

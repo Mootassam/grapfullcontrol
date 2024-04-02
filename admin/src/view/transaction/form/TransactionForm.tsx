@@ -13,7 +13,7 @@ import UserAutocompleteFormItem from 'src/view/user/autocomplete/UserAutocomplet
 
 const schema = yup.object().shape({
   status: yupFormSchemas.enumerator(
-    i18n('entities.coupons.fields.status'),
+    i18n('entities.transaction.fields.status'),
     {
       options: couponsEnumerators.status,
     },
@@ -76,12 +76,12 @@ function TransactionForm(props) {
           <div className="col-lg-7 col-md-8 col-12">
               <SelectFormItem
                 name="type"
-                label={i18n('entities.coupons.fields.status')}
+                label={i18n('entities.transaction.fields.status')}
                 options={couponsEnumerators.status.map(
                   (value) => ({
                     value,
                     label: i18n(
-                      `entities.coupons.enumerators.status.${value}`,
+                      `entities.transaction.enumerators.status.${value}`,
                     ),
                   }),
                 )}
@@ -92,7 +92,7 @@ function TransactionForm(props) {
               <InputFormItem
                 name="title"
                 label={i18n(
-                  'entities.coupons.fields.title',
+                  'entities.transaction.fields.title',
                 )}
                 required={true}
                 autoFocus
@@ -113,12 +113,12 @@ function TransactionForm(props) {
             <div className="col-lg-7 col-md-8 col-12">
               <SelectFormItem
                 name="type"
-                label={i18n('entities.coupons.fields.type')}
+                label={i18n('entities.transaction.fields.type')}
                 options={couponsEnumerators.type.map(
                   (value) => ({
                     value,
                     label: i18n(
-                      `entities.coupons.enumerators.type.${value}`,
+                      `entities.transaction.enumerators.type.${value}`,
                     ),
                   }),
                 )}
@@ -130,7 +130,7 @@ function TransactionForm(props) {
               <InputFormItem
                 name="discount"
                 label={i18n(
-                  'entities.coupons.fields.discount',
+                  'entities.transaction.fields.discount',
                 )}
                 required={true}
               />

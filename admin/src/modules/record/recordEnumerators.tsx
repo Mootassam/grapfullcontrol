@@ -1,5 +1,5 @@
 const recordEnumerators = {
-  status: ['enable', 'disable'],
+  status: ['pending', 'completed','canceled'],
   type: ['multiple', 'single'],
 };
 

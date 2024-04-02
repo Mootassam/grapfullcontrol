@@ -16,12 +16,12 @@ function company() {
       <Breadcrumb
         items={[
           [i18n('dashboard.menu'), '/'],
-          [i18n('entities.coupons.menu'), '/company'],
+          [i18n('entities.vip.menu'), '/company'],
         ]}
       />
       <ContentWrapper>
         <PageTitle>
-          {i18n('entities.coupons.importer.title')}
+          {i18n('entities.vip.importer.title')}
         </PageTitle>
 
 

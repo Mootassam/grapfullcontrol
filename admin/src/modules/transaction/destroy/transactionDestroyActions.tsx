@@ -29,7 +29,7 @@ const transactionDestroyActions = {
       });
 
       Message.success(
-        i18n('entities.coupons.destroy.success'),
+        i18n('entities.transaction.destroy.success'),
       );
 
       dispatch(listActions.doFetchCurrentFilter());
@@ -64,7 +64,7 @@ const transactionDestroyActions = {
       }
 
       Message.success(
-        i18n('entities.coupons.destroyAll.success'),
+        i18n('entities.transaction.destroyAll.success'),
       );
 
       getHistory().push('/transaction');

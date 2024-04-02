@@ -71,7 +71,7 @@ const transactionListActions = {
 
       new Exporter(
         exporterFields,
-        i18n('entities.coupons.exporterFileName'),
+        i18n('entities.transaction.exporterFileName'),
       ).transformAndExportAsExcelFile(response.rows);
 
       dispatch({

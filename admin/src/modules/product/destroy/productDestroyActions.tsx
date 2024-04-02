@@ -29,7 +29,7 @@ const productDestroyActions = {
       });
 
       Message.success(
-        i18n('entities.coupons.destroy.success'),
+        i18n('entities.product.destroy.success'),
       );
 
       dispatch(listActions.doFetchCurrentFilter());
@@ -64,7 +64,7 @@ const productDestroyActions = {
       }
 
       Message.success(
-        i18n('entities.coupons.destroyAll.success'),
+        i18n('entities.product.destroyAll.success'),
       );
 
       getHistory().push('/product');

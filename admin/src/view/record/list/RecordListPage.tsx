@@ -14,7 +14,7 @@ function CouponsListPage(props) {
       <Breadcrumb
         items={[
           [i18n('dashboard.menu'), '/'],
-          [i18n('entities.coupons.menu')],
+          [i18n('entities.record.menu')],
         ]}
       />
 
@@ -24,7 +24,7 @@ function CouponsListPage(props) {
           <Row>
             <Col xs={9}>
         <PageTitle>
-          {i18n('entities.coupons.list.title')}
+          {i18n('entities.record.list.title')}
         </PageTitle>
         </Col>
             <Col md="auto">

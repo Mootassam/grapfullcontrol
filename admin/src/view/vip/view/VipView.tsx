@@ -14,19 +14,19 @@ function CouponsView(props) {
   return (
     <ViewWrapper>
       <TextViewItem
-        label={i18n('entities.coupons.fields.title')}
+        label={i18n('entities.vip.fields.title')}
         value={record.title}
       />
 
      
 
       <TextViewItem
-        label={i18n('entities.coupons.fields.discount')}
+        label={i18n('entities.vip.fields.discount')}
         value={record.amount}
       />
 
       <TextViewItem
-        label={i18n('entities.coupons.fields.noOfTimes')}
+        label={i18n('entities.vip.fields.noOfTimes')}
         value={record.commission}
       />
 

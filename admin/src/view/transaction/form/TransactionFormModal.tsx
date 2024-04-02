@@ -41,7 +41,7 @@ function TransactionForm(props) {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">
-              {i18n('entities.coupons.new.title')}
+              {i18n('entities.transaction.new.title')}
             </h5>
             <button
               type="button"

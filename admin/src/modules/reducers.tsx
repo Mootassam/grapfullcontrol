@@ -11,6 +11,7 @@ import category from 'src/modules/category/categoryReducers';
 import vip from 'src/modules/vip/vipReducers'
 import transaction from 'src/modules/transaction/transactionReducers'
 import product from 'src/modules/product/productReducers'
+import record from 'src/modules/record/recordReducers'
 import { combineReducers } from 'redux';
 export default (history) =>
   combineReducers({
@@ -20,6 +21,7 @@ export default (history) =>
     auth,
     coupons,
     vip,
+    record,
     transaction,
     product,
     tenant,

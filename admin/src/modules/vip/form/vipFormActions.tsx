@@ -61,7 +61,7 @@ const vipFormActions = {
       });
 
       Message.success(
-        i18n('entities.coupons.create.success'),
+        i18n('entities.vip.create.success'),
       );
 
       getHistory().push('/vip');
@@ -87,7 +87,7 @@ const vipFormActions = {
       });
 
       Message.success(
-        i18n('entities.coupons.update.success'),
+        i18n('entities.vip.update.success'),
       );
 
       getHistory().push('/vip');

@@ -72,7 +72,7 @@ const vipListActions = {
 
       new Exporter(
         exporterFields,
-        i18n('entities.coupons.exporterFileName'),
+        i18n('entities.vip.exporterFileName'),
       ).transformAndExportAsExcelFile(response.rows);
 
       dispatch({

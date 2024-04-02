@@ -29,7 +29,7 @@ const recordDestroyActions = {
       });
 
       Message.success(
-        i18n('entities.coupons.destroy.success'),
+        i18n('entities.record.destroy.success'),
       );
 
       dispatch(listActions.doFetchCurrentFilter());
@@ -64,7 +64,7 @@ const recordDestroyActions = {
       }
 
       Message.success(
-        i18n('entities.coupons.destroyAll.success'),
+        i18n('entities.record.destroyAll.success'),
       );
 
       getHistory().push('/record');

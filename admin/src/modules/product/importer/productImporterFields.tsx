@@ -4,9 +4,9 @@ import { i18n } from 'src/i18n';import couponsEnumerators from 'src/modules/prod
 export default [
   {
     name: 'title',
-    label: i18n('entities.coupons.fields.title'),
+    label: i18n('entities.product.fields.title'),
     schema: schemas.string(
-      i18n('entities.coupons.fields.title'),
+      i18n('entities.product.fields.title'),
       {
         "required": true
       },
@@ -14,9 +14,9 @@ export default [
   },
   {
     name: 'codeName',
-    label: i18n('entities.coupons.fields.codeName'),
+    label: i18n('entities.product.fields.codeName'),
     schema: schemas.string(
-      i18n('entities.coupons.fields.codeName'),
+      i18n('entities.product.fields.codeName'),
       {
         "required": true
       },
@@ -24,9 +24,9 @@ export default [
   },
   {
     name: 'discount',
-    label: i18n('entities.coupons.fields.discount'),
+    label: i18n('entities.product.fields.discount'),
     schema: schemas.decimal(
-      i18n('entities.coupons.fields.discount'),
+      i18n('entities.product.fields.discount'),
       {
         "required": true
       },
@@ -34,9 +34,9 @@ export default [
   },
   {
     name: 'noOfTimes',
-    label: i18n('entities.coupons.fields.noOfTimes'),
+    label: i18n('entities.product.fields.noOfTimes'),
     schema: schemas.integer(
-      i18n('entities.coupons.fields.noOfTimes'),
+      i18n('entities.product.fields.noOfTimes'),
       {
         "required": true
       },
@@ -44,9 +44,9 @@ export default [
   },
   {
     name: 'status',
-    label: i18n('entities.coupons.fields.status'),
+    label: i18n('entities.product.fields.status'),
     schema: schemas.enumerator(
-      i18n('entities.coupons.fields.status'),
+      i18n('entities.product.fields.status'),
       {
         "options": couponsEnumerators.status
       },
@@ -54,9 +54,9 @@ export default [
   },
   {
     name: 'type',
-    label: i18n('entities.coupons.fields.type'),
+    label: i18n('entities.product.fields.type'),
     schema: schemas.enumerator(
-      i18n('entities.coupons.fields.type'),
+      i18n('entities.product.fields.type'),
       {
         "required": true,
         "options": couponsEnumerators.type

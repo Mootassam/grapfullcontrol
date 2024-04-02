@@ -80,7 +80,7 @@ function ProductForm(props) {
             <div className="col-lg-7 col-md-8 col-12">
               <VipAutocompleteFormItem
                 name="vip"
-                label={i18n('entities.vip.fields.vip')}
+                label={i18n('entities.product.fields.vip')}
                 required={true}
                 showCreate={!props.modal}
               />
@@ -99,7 +99,7 @@ function ProductForm(props) {
             <div className="col-lg-7 col-md-8 col-12">
               <InputNumberFormItem
                 name="amount"
-                label={i18n('entities.vip.fields.amount')}
+                label={i18n('entities.product.fields.amount')}
                 required={true}
               />
             </div>
@@ -108,7 +108,7 @@ function ProductForm(props) {
               <InputNumberFormItem
                 name="commission"
                 label={i18n(
-                  'entities.vip.fields.commission',
+                  'entities.product.fields.commission',
                 )}
                 required={true}
               />

@@ -316,7 +316,7 @@ class ProductRepository {
 
     return records.map((record) => ({
       id: record.id,
-      label: record.titre,
+      label: record.title,
     }));
   }
 

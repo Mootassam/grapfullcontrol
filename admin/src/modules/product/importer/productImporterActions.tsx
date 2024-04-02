@@ -9,7 +9,7 @@ const productImporterActions = importerActions(
   selectors,
   ProductService.import,
   fields,
-  i18n('entities.coupons.importer.fileName'),
+  i18n('entities.product.importer.fileName'),
 );
 
 export default productImporterActions;

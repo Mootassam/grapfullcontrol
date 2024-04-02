@@ -120,7 +120,7 @@ function TransactionListTable(props) {
                 sorter={sorter}
                 name={'title'}
                 label={i18n(
-                  'entities.coupons.fields.title',
+                  'entities.transaction.fields.title',
                 )}
               />
               <TableColumnHeader
@@ -129,7 +129,7 @@ function TransactionListTable(props) {
                 sorter={sorter}
                 name={'type'}
                 label={i18n(
-                  'entities.coupons.fields.type',
+                  'entities.transaction.fields.type',
                 )}
               />
               <TableColumnHeader
@@ -138,7 +138,7 @@ function TransactionListTable(props) {
                 sorter={sorter}
                 name={'noOfTimes'}
                 label={i18n(
-                  'entities.coupons.fields.noOfTimes',
+                  'entities.transaction.fields.noOfTimes',
                 )}
                 align="right"
               />
@@ -148,7 +148,7 @@ function TransactionListTable(props) {
                 sorter={sorter}
                 name={'discount'}
                 label={i18n(
-                  'entities.coupons.fields.discount',
+                  'entities.transaction.fields.discount',
                 )}
                 align="right"
               />
@@ -159,7 +159,7 @@ function TransactionListTable(props) {
                 sorter={sorter}
                 name={'status'}
                 label={i18n(
-                  'entities.coupons.fields.status',
+                  'entities.transaction.fields.status',
                 )}
               />
               <TableColumnHeader className="th-actions" />

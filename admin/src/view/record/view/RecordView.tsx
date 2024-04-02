@@ -14,41 +14,41 @@ function CouponsView(props) {
   return (
     <ViewWrapper>
       <TextViewItem
-        label={i18n('entities.coupons.fields.title')}
+        label={i18n('entities.record.fields.title')}
         value={record.title}
       />
 
       <TextViewItem
-        label={i18n('entities.coupons.fields.codeName')}
+        label={i18n('entities.record.fields.codeName')}
         value={record.codeName}
       />
 
       <TextViewItem
-        label={i18n('entities.coupons.fields.discount')}
+        label={i18n('entities.record.fields.discount')}
         value={record.discount}
       />
 
       <TextViewItem
-        label={i18n('entities.coupons.fields.noOfTimes')}
+        label={i18n('entities.record.fields.noOfTimes')}
         value={record.noOfTimes}
       />
 
       <TextViewItem
-        label={i18n('entities.coupons.fields.status')}
+        label={i18n('entities.record.fields.status')}
         value={
           record.status &&
           i18n(
-            `entities.coupons.enumerators.status.${record.status}`,
+            `entities.record.enumerators.status.${record.status}`,
           )
         }
       />
 
       <TextViewItem
-        label={i18n('entities.coupons.fields.type')}
+        label={i18n('entities.record.fields.type')}
         value={
           record.type &&
           i18n(
-            `entities.coupons.enumerators.type.${record.type}`,
+            `entities.record.enumerators.type.${record.type}`,
           )
         }
       />

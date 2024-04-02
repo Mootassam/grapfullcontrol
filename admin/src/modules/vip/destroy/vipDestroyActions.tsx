@@ -29,7 +29,7 @@ const vipDestroyActions = {
       });
 
       Message.success(
-        i18n('entities.coupons.destroy.success'),
+        i18n('entities.vip.destroy.success'),
       );
 
       dispatch(listActions.doFetchCurrentFilter());
@@ -64,7 +64,7 @@ const vipDestroyActions = {
       }
 
       Message.success(
-        i18n('entities.coupons.destroyAll.success'),
+        i18n('entities.vip.destroyAll.success'),
       );
 
       getHistory().push('/vip');

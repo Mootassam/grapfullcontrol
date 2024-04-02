@@ -1,5 +1,5 @@
 import Permissions from 'src/security/permissions';
-import config from 'src/config';
+// import config from 'src/config';
 
 const permissions = Permissions.values;
 

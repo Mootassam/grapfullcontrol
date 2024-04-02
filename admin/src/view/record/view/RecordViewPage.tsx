@@ -26,14 +26,14 @@ function CouponsPage() {
       <Breadcrumb
         items={[
           [i18n('dashboard.menu'), '/'],
-          [i18n('entities.coupons.menu'), '/coupons'],
-          [i18n('entities.coupons.view.title')],
+          [i18n('entities.record.menu'), '/record'],
+          [i18n('entities.record.view.title')],
         ]}
       />
 
       <ContentWrapper>
         <PageTitle>
-          {i18n('entities.coupons.view.title')}
+          {i18n('entities.record.view.title')}
         </PageTitle>
 
         <CouponsViewToolbar match={match} />

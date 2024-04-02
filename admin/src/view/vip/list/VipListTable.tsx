@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { i18n } from 'src/i18n';
@@ -12,7 +12,7 @@ import ConfirmModal from 'src/view/shared/modals/ConfirmModal';
 import Spinner from 'src/view/shared/Spinner';
 import TableWrapper from 'src/view/shared/styles/TableWrapper';
 import Pagination from 'src/view/shared/table/Pagination';
-import actionsForm from 'src/modules/vip/form/vipFormActions';
+// import actionsForm from 'src/modules/vip/form/vipFormActions';
 
 function CouponsListTable(props) {
   const [recordIdToDestroy, setRecordIdToDestroy] =
@@ -86,10 +86,10 @@ function CouponsListTable(props) {
   const doToggleOneSelected = (id) => {
     dispatch(actions.doToggleOneSelected(id));
   };
-  const formSubmit = (id, e) => {
-    let data = { status: e.target.value };
-    dispatch(actionsForm.doUpdate(id, data));
-  };
+  // const formSubmit = (id, e) => {
+  //   let data = { status: e.target.value };
+  //   dispatch(actionsForm.doUpdate(id, data));
+  // };
   return (
     <TableWrapper>
       <div className="table-responsive">
@@ -121,7 +121,7 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'title'}
                 label={i18n(
-                  'entities.coupons.fields.title',
+                  'entities.vip.fields.title',
                 )}
               />
               <TableColumnHeader
@@ -130,7 +130,7 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'type'}
                 label={i18n(
-                  'entities.coupons.fields.type',
+                  'entities.vip.fields.type',
                 )}
               />
               <TableColumnHeader
@@ -139,7 +139,7 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'noOfTimes'}
                 label={i18n(
-                  'entities.coupons.fields.noOfTimes',
+                  'entities.vip.fields.noOfTimes',
                 )}
                 align="right"
               />
@@ -149,7 +149,7 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'discount'}
                 label={i18n(
-                  'entities.coupons.fields.discount',
+                  'entities.vip.fields.discount',
                 )}
                 align="right"
               />

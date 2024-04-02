@@ -8,20 +8,19 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import couponsEnumerators from 'src/modules/vip/vipEnumerators';
+
 import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
 import Storage from 'src/security/storage';
 
 const schema = yup.object().shape({
   title: yupFormSchemas.string(
-    i18n('entities.coupons.fields.title'),
+    i18n('entities.vip.fields.title'),
     {
       required: true,
     },
   ),
   photo: yupFormSchemas.images(
-    i18n('entities.coupons.fields.photo'),
+    i18n('entities.vip.fields.photo'),
     {},
   ),
   entrylimit: yupFormSchemas.string(
@@ -31,19 +30,19 @@ const schema = yup.object().shape({
     },
   ),
   levellimit: yupFormSchemas.decimal(
-    i18n('entities.coupons.fields.levellimit'),
+    i18n('entities.vip.fields.levellimit'),
     {
       required: true,
     },
   ),
   dailyorder: yupFormSchemas.integer(
-    i18n('entities.coupons.fields.dailyorder'),
+    i18n('entities.vip.fields.dailyorder'),
     {
       required: true,
     },
   ),
   comisionrate: yupFormSchemas.integer(
-    i18n('entities.coupons.fields.comisionrate'),
+    i18n('entities.vip.fields.comisionrate'),
     {
       required: true,
     },
@@ -115,7 +114,7 @@ function CouponsForm(props) {
               <InputNumberFormItem
                 name="dailyorder"
                 label={i18n(
-                  'entities.coupons.fields.dailyorder',
+                  'entities.vip.fields.dailyorder',
                 )}
                 required={true}
               />
@@ -124,7 +123,7 @@ function CouponsForm(props) {
               <InputNumberFormItem
                 name="comisionrate"
                 label={i18n(
-                  'entities.coupons.fields.comisionrate',
+                  'entities.vip.fields.comisionrate',
                 )}
                 required={true}
               />
@@ -144,13 +143,13 @@ function CouponsForm(props) {
               <SelectFormItem
                 name="status"
                 label={i18n(
-                  'entities.coupons.fields.status',
+                  'entities.vip.fields.status',
                 )}
                 options={couponsEnumerators.status.map(
                   (value) => ({
                     value,
                     label: i18n(
-                      `entities.coupons.enumerators.status.${value}`,
+                      `entities.vip.enumerators.status.${value}`,
                     ),
                   }),
                 )}

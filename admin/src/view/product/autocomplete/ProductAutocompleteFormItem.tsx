@@ -6,7 +6,7 @@ import { useFormContext } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import selectors from 'src/modules/product/productSelectors';
 
-function CouponsAutocompleteFormItem(props) {
+function ProductAutocompleteFormItem(props) {
   const { setValue, getValues } = useFormContext();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -71,6 +71,7 @@ function CouponsAutocompleteFormItem(props) {
         return null;
       }
 
+
       return {
         id: originalValue.value,
         label: originalValue.label,
@@ -98,4 +99,4 @@ function CouponsAutocompleteFormItem(props) {
   );
 }
 
-export default CouponsAutocompleteFormItem;
+export default ProductAutocompleteFormItem;

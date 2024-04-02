@@ -7,9 +7,10 @@ import FormWrapper from 'src/view/shared/styles/FormWrapper';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import couponsEnumerators from 'src/modules/record/recordEnumerators';
+import UserAutocompleteFormItem from 'src/view/user/autocomplete/UserAutocompleteFormItem';
+import ProductAutocompleteFormItem from 'src/view/product/autocomplete/ProductAutocompleteFormItem';
 
 const schema = yup.object().shape({
   user: yupFormSchemas.relationToOne(
@@ -18,9 +19,10 @@ const schema = yup.object().shape({
       required: true,
     },
   ),
-  product: yupFormSchemas.string(
+  product: yupFormSchemas.relationToOne(
     i18n('entities.record.fields.product'),
     {
+      required: true,
     },
   ),
   status: yupFormSchemas.enumerator(
@@ -52,12 +54,11 @@ function CouponsForm(props) {
     const record = props.record || {};
 
     return {
-      title: record.title,
-      codeName: record.codeName,
-      discount: record.discount,
-      noOfTimes: record.noOfTimes,
-      // status: record.status,
-      type: record.type,
+      user: record.user,
+      product: record.product,
+      status: record.status,
+      date: record.date,
+      number: record.number,
     };
   });
 
@@ -83,10 +84,10 @@ function CouponsForm(props) {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="row">
             <div className="col-lg-7 col-md-8 col-12">
-              <InputFormItem
-                name="title"
+              <UserAutocompleteFormItem
+                name="user"
                 label={i18n(
-                  'entities.coupons.fields.title',
+                  'entities.record.fields.user',
                 )}
                 required={true}
                 autoFocus
@@ -95,41 +96,26 @@ function CouponsForm(props) {
            
 
             <div className="col-lg-7 col-md-8 col-12">
-              <InputNumberFormItem
-                name="noOfTimes"
+              <ProductAutocompleteFormItem
+                name="product"
                 label={i18n(
-                  'entities.coupons.fields.noOfTimes',
+                  'entities.record.fields.product',
                 )}
                 required={true}
+                autoFocus
               />
             </div>
-            {/* <div className="col-lg-7 col-md-8 col-12">
+           
+
+            <div className="col-lg-7 col-md-8 col-12">
               <SelectFormItem
                 name="status"
-                label={i18n(
-                  'entities.coupons.fields.status',
-                )}
+                label={i18n('entities.record.fields.status')}
                 options={couponsEnumerators.status.map(
                   (value) => ({
                     value,
                     label: i18n(
-                      `entities.coupons.enumerators.status.${value}`,
-                    ),
-                  }),
-                )}
-                required={false}
-              />
-            </div> */}
-
-            <div className="col-lg-7 col-md-8 col-12">
-              <SelectFormItem
-                name="type"
-                label={i18n('entities.coupons.fields.type')}
-                options={couponsEnumerators.type.map(
-                  (value) => ({
-                    value,
-                    label: i18n(
-                      `entities.coupons.enumerators.type.${value}`,
+                      `entities.record.enumerators.status.${value}`,
                     ),
                   }),
                 )}
@@ -138,9 +124,9 @@ function CouponsForm(props) {
             </div>
             <div className="col-lg-7 col-md-8 col-12">
               <InputFormItem
-                name="discount"
+                name="number"
                 label={i18n(
-                  'entities.coupons.fields.discount',
+                  'entities.record.fields.number',
                 )}
                 required={true}
               />

@@ -19,19 +19,19 @@ import couponsEnumerators from 'src/modules/transaction/transactionEnumerators';
 
 const schema = yup.object().shape({
   title: yupFilterSchemas.string(
-    i18n('entities.coupons.fields.title'),
+    i18n('entities.transaction.fields.title'),
   ),
   codeName: yupFilterSchemas.string(
-    i18n('entities.coupons.fields.codeName'),
+    i18n('entities.transaction.fields.codeName'),
   ),
   discountRange: yupFilterSchemas.decimalRange(
-    i18n('entities.coupons.fields.discountRange'),
+    i18n('entities.transaction.fields.discountRange'),
   ),
   noOfTimesRange: yupFilterSchemas.integerRange(
-    i18n('entities.coupons.fields.noOfTimesRange'),
+    i18n('entities.transaction.fields.noOfTimesRange'),
   ),
   status: yupFilterSchemas.enumerator(
-    i18n('entities.coupons.fields.status'),
+    i18n('entities.transaction.fields.status'),
   ),
 });
 
@@ -45,25 +45,25 @@ const emptyValues = {
 
 const previewRenders = {
   title: {
-    label: i18n('entities.coupons.fields.title'),
+    label: i18n('entities.transaction.fields.title'),
     render: filterRenders.generic(),
   },
   codeName: {
-    label: i18n('entities.coupons.fields.codeName'),
+    label: i18n('entities.transaction.fields.codeName'),
     render: filterRenders.generic(),
   },
   discountRange: {
-    label: i18n('entities.coupons.fields.discountRange'),
+    label: i18n('entities.transaction.fields.discountRange'),
     render: filterRenders.decimalRange(),
   },
   noOfTimesRange: {
-    label: i18n('entities.coupons.fields.noOfTimesRange'),
+    label: i18n('entities.transaction.fields.noOfTimesRange'),
     render: filterRenders.range(),
   },
   status: {
-    label: i18n('entities.coupons.fields.status'),
+    label: i18n('entities.transaction.fields.status'),
     render: filterRenders.enumerator(
-      'entities.coupons.enumerators.status',
+      'entities.transaction.enumerators.status',
     ),
   },
 };
@@ -137,7 +137,7 @@ function TransactionListFilter(props) {
                   <InputFormItem
                     name="title"
                     label={i18n(
-                      'entities.coupons.fields.title',
+                      'entities.transaction.fields.title',
                     )}
                   />
                 </div>
@@ -145,7 +145,7 @@ function TransactionListFilter(props) {
                   <InputFormItem
                     name="codeName"
                     label={i18n(
-                      'entities.coupons.fields.codeName',
+                      'entities.transaction.fields.codeName',
                     )}
                   />
                 </div>
@@ -153,7 +153,7 @@ function TransactionListFilter(props) {
                   <InputRangeFormItem
                     name="discountRange"
                     label={i18n(
-                      'entities.coupons.fields.discountRange',
+                      'entities.transaction.fields.discountRange',
                     )}
                   />
                 </div>
@@ -161,7 +161,7 @@ function TransactionListFilter(props) {
                   <InputNumberRangeFormItem
                     name="noOfTimesRange"
                     label={i18n(
-                      'entities.coupons.fields.noOfTimesRange',
+                      'entities.transaction.fields.noOfTimesRange',
                     )}
                   />
                 </div>
@@ -169,13 +169,13 @@ function TransactionListFilter(props) {
                   <SelectFormItem
                     name="status"
                     label={i18n(
-                      'entities.coupons.fields.status',
+                      'entities.transaction.fields.status',
                     )}
                     options={couponsEnumerators.status.map(
                       (value) => ({
                         value,
                         label: i18n(
-                          `entities.coupons.enumerators.status.${value}`,
+                          `entities.transaction.enumerators.status.${value}`,
                         ),
                       }),
                     )}

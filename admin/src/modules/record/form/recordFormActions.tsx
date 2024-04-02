@@ -61,7 +61,7 @@ const recordFormActions = {
       });
 
       Message.success(
-        i18n('entities.coupons.create.success'),
+        i18n('entities.record.create.success'),
       );
 
       getHistory().push('/record');
@@ -87,7 +87,7 @@ const recordFormActions = {
       });
 
       Message.success(
-        i18n('entities.coupons.update.success'),
+        i18n('entities.record.update.success'),
       );
 
       getHistory().push('/record');

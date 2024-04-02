@@ -61,7 +61,7 @@ const productFormActions = {
       });
 
       Message.success(
-        i18n('entities.coupons.create.success'),
+        i18n('entities.product.create.success'),
       );
 
       getHistory().push('/product');
@@ -87,7 +87,7 @@ const productFormActions = {
       });
 
       Message.success(
-        i18n('entities.coupons.update.success'),
+        i18n('entities.product.update.success'),
       );
 
       getHistory().push('/product');

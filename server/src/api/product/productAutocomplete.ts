@@ -1,17 +1,18 @@
-import PermissionChecker from '../../services/user/permissionChecker';
-import ApiResponseHandler from '../apiResponseHandler';
-import Permissions from '../../security/permissions';
-import ProductServices from '../../services/productService';
+import PermissionChecker from "../../services/user/permissionChecker";
+import ApiResponseHandler from "../apiResponseHandler";
+import Permissions from "../../security/permissions";
+import ProductServices from "../../services/productService";
 
 export default async (req, res, next) => {
   try {
     new PermissionChecker(req).validateHas(
-      Permissions.values.mandatAutocomplete,
+      Permissions.values.mandatAutocomplete
     );
 
-    const payload = await new ProductServices(
-      req,
-    ).findAllAutocomplete(req.query.query, req.query.limit);
+    const payload = await new ProductServices(req).findAllAutocomplete(
+      req.query.query,
+      req.query.limit
+    );
 
     await ApiResponseHandler.success(req, res, payload);
   } catch (error) {

@@ -13,6 +13,7 @@ import Spinner from 'src/view/shared/Spinner';
 import TableWrapper from 'src/view/shared/styles/TableWrapper';
 import Pagination from 'src/view/shared/table/Pagination';
 import actionsForm from 'src/modules/record/form/recordFormActions';
+import UserListItem from 'src/view/user/list/UserListItem';
 
 function CouponsListTable(props) {
   const [recordIdToDestroy, setRecordIdToDestroy] =
@@ -120,7 +121,7 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'title'}
                 label={i18n(
-                  'entities.coupons.fields.title',
+                  'entities.record.fields.user',
                 )}
               />
               <TableColumnHeader
@@ -129,7 +130,7 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'type'}
                 label={i18n(
-                  'entities.coupons.fields.type',
+                  'entities.record.fields.product',
                 )}
               />
               <TableColumnHeader
@@ -138,7 +139,7 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'noOfTimes'}
                 label={i18n(
-                  'entities.coupons.fields.noOfTimes',
+                  'entities.record.fields.number',
                 )}
                 align="right"
               />
@@ -148,20 +149,11 @@ function CouponsListTable(props) {
                 sorter={sorter}
                 name={'discount'}
                 label={i18n(
-                  'entities.coupons.fields.discount',
+                  'entities.record.fields.status',
                 )}
                 align="right"
               />
 
-              <TableColumnHeader
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'status'}
-                label={i18n(
-                  'entities.coupons.fields.status',
-                )}
-              />
               <TableColumnHeader className="th-actions" />
             </tr>
           </thead>
@@ -206,44 +198,17 @@ function CouponsListTable(props) {
                       </label>
                     </div>
                   </th>
-                  <td>{row.title}</td>
+                  <td>
+                  <UserListItem  value={row.user}/>
+                  </td>
                   <td>{row.type}</td>
 
+                
                   <td style={{ textAlign: 'right' }}>
-                    {row.noOfTimes}
-                  </td>
-                  <td style={{ textAlign: 'right' }}>
-                    {row.discount}
+                    {row.number}
                   </td>
                   <td>
-                    <select
-                      className="form-control"
-                      name="status"
-                      onChange={(e) =>
-                        formSubmit(row.id, e)
-                      }
-                    >
-                      {row.status === 'enable' && (
-                        <>
-                          <option value="enable">
-                            Enable
-                          </option>
-                          <option value="disable">
-                            Disable
-                          </option>
-                        </>
-                      )}
-                      {row.status === 'disable' && (
-                        <>
-                          <option value="disable">
-                            Disable
-                          </option>
-                          <option value="enable">
-                            Enable
-                          </option>
-                        </>
-                      )}
-                    </select>
+                  {row.status}
                   </td>
                   <td className="td-actions">
                     <Link

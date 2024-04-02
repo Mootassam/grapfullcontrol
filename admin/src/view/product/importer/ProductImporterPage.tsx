@@ -13,7 +13,7 @@ function CouponsImportPage() {
     selectors,
     actions,
     fields,
-    i18n('entities.coupons.importer.hint'),
+    i18n('entities.product.importer.hint'),
   );
 
   return (
@@ -21,14 +21,14 @@ function CouponsImportPage() {
       <Breadcrumb
         items={[
           [i18n('dashboard.menu'), '/'],
-          [i18n('entities.coupons.menu'), '/coupons'],
-          [i18n('entities.coupons.importer.title')],
+          [i18n('entities.product.menu'), '/coupons'],
+          [i18n('entities.product.importer.title')],
         ]}
       />
 
       <ContentWrapper>
         <PageTitle>
-          {i18n('entities.coupons.importer.title')}
+          {i18n('entities.product.importer.title')}
         </PageTitle>
 
         <Importer />

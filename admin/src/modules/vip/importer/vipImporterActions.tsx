@@ -9,7 +9,7 @@ const couponsImporterActions = importerActions(
   selectors,
   CouponsService.import,
   fields,
-  i18n('entities.coupons.importer.fileName'),
+  i18n('entities.vip.importer.fileName'),
 );
 
 export default couponsImporterActions;
