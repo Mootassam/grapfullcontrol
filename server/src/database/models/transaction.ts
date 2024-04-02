@@ -29,7 +29,6 @@ export default (database) => {
         ref: "user",
         required: true,
       },
-
       datetransaction: {
         type: Date,
       },

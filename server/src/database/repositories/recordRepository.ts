@@ -136,7 +136,8 @@ class RecordRepository {
     let record = await MongooseRepository.wrapWithSessionIfExists(
       Records(options.database)
         .findById(id)
-      .populate('members'),
+      .populate('user')
+      .populate('product'),
       options,
     );
 
@@ -266,7 +267,8 @@ class RecordRepository {
       .skip(skip)
       .limit(limitEscaped)
       .sort(sort)
-      .populate('members');
+      .populate('user')
+      .populate('product');
 
     const count = await Records(
       options.database,

@@ -14,6 +14,7 @@ import TableWrapper from 'src/view/shared/styles/TableWrapper';
 import Pagination from 'src/view/shared/table/Pagination';
 import actionsForm from 'src/modules/record/form/recordFormActions';
 import UserListItem from 'src/view/user/list/UserListItem';
+import ProductListItem from 'src/view/product/list/ProductListItem';
 
 function CouponsListTable(props) {
   const [recordIdToDestroy, setRecordIdToDestroy] =
@@ -201,9 +202,11 @@ function CouponsListTable(props) {
                   <td>
                   <UserListItem  value={row.user}/>
                   </td>
-                  <td>{row.type}</td>
-
-                
+                  <td>
+                  <ProductListItem value={row.product} />
+                  </td>
+                  
+          
                   <td style={{ textAlign: 'right' }}>
                     {row.number}
                   </td>

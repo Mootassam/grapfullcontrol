@@ -5367,14 +5367,14 @@
         }
       }
     },
-    "/tenant/{tenantId}/produit-categorie/{id}": {
+    "/tenant/{tenantId}/Product-categorie/{id}": {
       "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCategorie"],
+        "tags": ["ProductCategorie"],
         "parameters": [
           {
             "in": "path",
@@ -5399,7 +5399,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProduitCategorie"
+                  "$ref": "#/components/schemas/ProductCategorie"
                 }
               }
             }
@@ -5418,7 +5418,7 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCategorie"],
+        "tags": ["ProductCategorie"],
         "parameters": [
           {
             "in": "path",
@@ -5446,7 +5446,7 @@
                 "required": ["data"],
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/ProduitCategorieInput"                
+                    "$ref": "#/components/schemas/ProductCategorieInput"                
                   }
                 }
               }
@@ -5459,7 +5459,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProduitCategorie"
+                  "$ref": "#/components/schemas/ProductCategorie"
                 }
               }
             }
@@ -5473,14 +5473,14 @@
         }
       }
     },
-    "/tenant/{tenantId}/produit-categorie": {
+    "/tenant/{tenantId}/Product-categorie": {
       "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCategorie"],
+        "tags": ["ProductCategorie"],
         "parameters": [
           {
             "in": "path",
@@ -5552,7 +5552,7 @@
                     "rows": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/ProduitCategorie"
+                        "$ref": "#/components/schemas/ProductCategorie"
                       }
                     },
                     "count": {
@@ -5580,7 +5580,7 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCategorie"],
+        "tags": ["ProductCategorie"],
         "parameters": [
           {
             "in": "path",
@@ -5600,7 +5600,7 @@
                 "required": ["data"],
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/ProduitCategorieInput"                
+                    "$ref": "#/components/schemas/ProductCategorieInput"                
                   }
                 }
               }
@@ -5613,7 +5613,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProduitCategorie"
+                  "$ref": "#/components/schemas/ProductCategorie"
                 }
               }
             }
@@ -5632,7 +5632,7 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCategorie"],
+        "tags": ["ProductCategorie"],
         "parameters": [
           {
             "in": "path",
@@ -5667,14 +5667,14 @@
         }
       }
     },
-    "/tenant/{tenantId}/produit-categorie/autocomplete": {
+    "/tenant/{tenantId}/Product-categorie/autocomplete": {
       "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCategorie"],
+        "tags": ["ProductCategorie"],
         "parameters": [
           {
             "in": "path",
@@ -5734,14 +5734,14 @@
         }
       }
     },
-    "/tenant/{tenantId}/produit-categorie/import": {
+    "/tenant/{tenantId}/Product-categorie/import": {
       "post": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCategorie"],
+        "tags": ["ProductCategorie"],
         "parameters": [
           {
             "in": "path",
@@ -5761,7 +5761,7 @@
                 "required": ["data", "importHash"],
                 "properties": {
                   "data": {                      
-                    "$ref": "#/components/schemas/ProduitCategorieInput"
+                    "$ref": "#/components/schemas/ProductCategorieInput"
                   },
                   "importHash": {
                     "type": "string"
@@ -5777,7 +5777,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProduitCategorie"
+                  "$ref": "#/components/schemas/ProductCategorie"
                 }
               }
             }
@@ -5791,14 +5791,14 @@
         }
       }
     },
-    "/tenant/{tenantId}/produit/{id}": {
+    "/tenant/{tenantId}/Product/{id}": {
       "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "tags": ["Produit"],
+        "tags": ["Product"],
         "parameters": [
           {
             "in": "path",
@@ -5823,7 +5823,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Produit"
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -5842,7 +5842,7 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["Produit"],
+        "tags": ["Product"],
         "parameters": [
           {
             "in": "path",
@@ -5870,7 +5870,7 @@
                 "required": ["data"],
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/ProduitInput"                
+                    "$ref": "#/components/schemas/ProductInput"                
                   }
                 }
               }
@@ -5883,7 +5883,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Produit"
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -5897,14 +5897,14 @@
         }
       }
     },
-    "/tenant/{tenantId}/produit": {
+    "/tenant/{tenantId}/Product": {
       "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "tags": ["Produit"],
+        "tags": ["Product"],
         "parameters": [
           {
             "in": "path",
@@ -6010,7 +6010,7 @@
                     "rows": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Produit"
+                        "$ref": "#/components/schemas/Product"
                       }
                     },
                     "count": {
@@ -6038,7 +6038,7 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["Produit"],
+        "tags": ["Product"],
         "parameters": [
           {
             "in": "path",
@@ -6058,7 +6058,7 @@
                 "required": ["data"],
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/ProduitInput"                
+                    "$ref": "#/components/schemas/ProductInput"                
                   }
                 }
               }
@@ -6071,7 +6071,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Produit"
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -6090,7 +6090,7 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["Produit"],
+        "tags": ["Product"],
         "parameters": [
           {
             "in": "path",
@@ -6125,14 +6125,14 @@
         }
       }
     },
-    "/tenant/{tenantId}/produit/autocomplete": {
+    "/tenant/{tenantId}/Product/autocomplete": {
       "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "tags": ["Produit"],
+        "tags": ["Product"],
         "parameters": [
           {
             "in": "path",
@@ -6192,14 +6192,14 @@
         }
       }
     },
-    "/tenant/{tenantId}/produit/import": {
+    "/tenant/{tenantId}/Product/import": {
       "post": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "tags": ["Produit"],
+        "tags": ["Product"],
         "parameters": [
           {
             "in": "path",
@@ -6219,7 +6219,7 @@
                 "required": ["data", "importHash"],
                 "properties": {
                   "data": {                      
-                    "$ref": "#/components/schemas/ProduitInput"
+                    "$ref": "#/components/schemas/ProductInput"
                   },
                   "importHash": {
                     "type": "string"
@@ -6235,7 +6235,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Produit"
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -6249,14 +6249,14 @@
         }
       }
     },
-    "/tenant/{tenantId}/produit-commande/{id}": {
+    "/tenant/{tenantId}/Product-commande/{id}": {
       "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCommande"],
+        "tags": ["ProductCommande"],
         "parameters": [
           {
             "in": "path",
@@ -6281,7 +6281,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProduitCommande"
+                  "$ref": "#/components/schemas/ProductCommande"
                 }
               }
             }
@@ -6300,7 +6300,7 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCommande"],
+        "tags": ["ProductCommande"],
         "parameters": [
           {
             "in": "path",
@@ -6328,7 +6328,7 @@
                 "required": ["data"],
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/ProduitCommandeInput"                
+                    "$ref": "#/components/schemas/ProductCommandeInput"                
                   }
                 }
               }
@@ -6341,7 +6341,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProduitCommande"
+                  "$ref": "#/components/schemas/ProductCommande"
                 }
               }
             }
@@ -6355,14 +6355,14 @@
         }
       }
     },
-    "/tenant/{tenantId}/produit-commande": {
+    "/tenant/{tenantId}/Product-commande": {
       "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCommande"],
+        "tags": ["ProductCommande"],
         "parameters": [
           {
             "in": "path",
@@ -6452,7 +6452,7 @@
                     "rows": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/ProduitCommande"
+                        "$ref": "#/components/schemas/ProductCommande"
                       }
                     },
                     "count": {
@@ -6480,7 +6480,7 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCommande"],
+        "tags": ["ProductCommande"],
         "parameters": [
           {
             "in": "path",
@@ -6500,7 +6500,7 @@
                 "required": ["data"],
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/ProduitCommandeInput"                
+                    "$ref": "#/components/schemas/ProductCommandeInput"                
                   }
                 }
               }
@@ -6513,7 +6513,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProduitCommande"
+                  "$ref": "#/components/schemas/ProductCommande"
                 }
               }
             }
@@ -6532,7 +6532,7 @@
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCommande"],
+        "tags": ["ProductCommande"],
         "parameters": [
           {
             "in": "path",
@@ -6567,14 +6567,14 @@
         }
       }
     },
-    "/tenant/{tenantId}/produit-commande/autocomplete": {
+    "/tenant/{tenantId}/Product-commande/autocomplete": {
       "get": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCommande"],
+        "tags": ["ProductCommande"],
         "parameters": [
           {
             "in": "path",
@@ -6634,14 +6634,14 @@
         }
       }
     },
-    "/tenant/{tenantId}/produit-commande/import": {
+    "/tenant/{tenantId}/Product-commande/import": {
       "post": {
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "tags": ["ProduitCommande"],
+        "tags": ["ProductCommande"],
         "parameters": [
           {
             "in": "path",
@@ -6661,7 +6661,7 @@
                 "required": ["data", "importHash"],
                 "properties": {
                   "data": {                      
-                    "$ref": "#/components/schemas/ProduitCommandeInput"
+                    "$ref": "#/components/schemas/ProductCommandeInput"
                   },
                   "importHash": {
                     "type": "string"
@@ -6677,7 +6677,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProduitCommande"
+                  "$ref": "#/components/schemas/ProductCommande"
                 }
               }
             }
@@ -8697,7 +8697,7 @@
           }    
         }
       },
-      "ProduitCategorie": {
+      "ProductCategorie": {
         "allOf": [
           {
             "$ref": "#/components/schemas/GenericEntity"
@@ -8710,7 +8710,7 @@
           }    
         }
       },
-      "ProduitCategorieInput": {
+      "ProductCategorieInput": {
         "type": "object",
         "properties": {
           "titre": {
@@ -8718,7 +8718,7 @@
           }    
         }
       },
-      "Produit": {
+      "Product": {
         "allOf": [
           {
             "$ref": "#/components/schemas/GenericEntity"
@@ -8749,7 +8749,7 @@
           }    
         }
       },
-      "ProduitInput": {
+      "ProductInput": {
         "type": "object",
         "properties": {
           "titre": {
@@ -8775,7 +8775,7 @@
           }    
         }
       },
-      "ProduitCommande": {
+      "ProductCommande": {
         "allOf": [
           {
             "$ref": "#/components/schemas/GenericEntity"
@@ -8786,10 +8786,10 @@
           "adherent": {
             "$ref": "#/components/schemas/UserRelated"
           },
-          "produits": {
+          "Products": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Produit"
+              "$ref": "#/components/schemas/Product"
             }
           },
           "quantite": {
@@ -8806,14 +8806,14 @@
           }    
         }
       },
-      "ProduitCommandeInput": {
+      "ProductCommandeInput": {
         "type": "object",
         "properties": {
           "adherent": {
             "type": "string",
             "format": "uuid"
           },
-          "produits": {
+          "Products": {
             "type": "array",
             "items": {
               "type": "string",

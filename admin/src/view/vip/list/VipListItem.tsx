@@ -28,12 +28,12 @@ function VipListItem(props) {
             className="btn btn-link"
             to={`/vip/${record.id}`}
           >
-            {record.id}
+            {record.title}
           </Link>
         </div>
       );
     }
-    return <div key={record.id}>{record.id}</div>;
+    return <div key={record.id}>{record.title}</div>;
   };
 
   if (!valueAsArray().length) {

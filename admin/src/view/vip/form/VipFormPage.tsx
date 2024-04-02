@@ -5,7 +5,7 @@ import { i18n } from 'src/i18n';
 import actions from 'src/modules/vip/form/vipFormActions';
 import selectors from 'src/modules/vip/form/vipFormSelectors';
 import { getHistory } from 'src/modules/store';
-import CouponsForm from 'src/view/vip/form/VipForm';
+import VipForm from 'src/view/vip/form/VipForm';
 import ContentWrapper from 'src/view/layout/styles/ContentWrapper';
 import Breadcrumb from 'src/view/shared/Breadcrumb';
 import Spinner from 'src/view/shared/Spinner';
@@ -58,7 +58,7 @@ function CouponsFormPage(props) {
         {initLoading && <Spinner />}
 
         {dispatched && !initLoading && (
-          <CouponsForm
+          <VipForm
             saveLoading={saveLoading}
             initLoading={initLoading}
             record={record}

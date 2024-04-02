@@ -95,7 +95,7 @@ class TransactionRepository {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
     let record = await MongooseRepository.wrapWithSessionIfExists(
-      Transaction(options.database).findById(id).populate("members"),
+      Transaction(options.database).findById(id).populate("user"),
       options
     );
 
@@ -206,7 +206,7 @@ class TransactionRepository {
       .skip(skip)
       .limit(limitEscaped)
       .sort(sort)
-      .populate("members");
+      .populate("user");
 
     const count = await Transaction(options.database).countDocuments(criteria);
 

@@ -47,8 +47,5 @@ export default (app) => {
     `/tenant/:tenantId/userHistoriquesPointsList`,
     require('./userHistoriquePointsList').default,
   );
-  app.get(
-    `/tenant/:tenantId/userProduitsCommandesList`,
-    require('./userProduitsCommandesList').default,
-  );
+
 };

@@ -13,6 +13,7 @@ import Spinner from 'src/view/shared/Spinner';
 import TableWrapper from 'src/view/shared/styles/TableWrapper';
 import Pagination from 'src/view/shared/table/Pagination';
 import actionsForm from 'src/modules/transaction/form/transactionFormActions';
+import UserListItem from 'src/view/user/list/UserListItem';
 
 function TransactionListTable(props) {
   const [recordIdToDestroy, setRecordIdToDestroy] =
@@ -120,7 +121,7 @@ function TransactionListTable(props) {
                 sorter={sorter}
                 name={'title'}
                 label={i18n(
-                  'entities.transaction.fields.title',
+                  'entities.transaction.fields.user',
                 )}
               />
               <TableColumnHeader
@@ -132,23 +133,14 @@ function TransactionListTable(props) {
                   'entities.transaction.fields.type',
                 )}
               />
+             
               <TableColumnHeader
                 onSort={doChangeSort}
                 hasRows={hasRows}
                 sorter={sorter}
-                name={'noOfTimes'}
+                name={'amount'}
                 label={i18n(
-                  'entities.transaction.fields.noOfTimes',
-                )}
-                align="right"
-              />
-              <TableColumnHeader
-                onSort={doChangeSort}
-                hasRows={hasRows}
-                sorter={sorter}
-                name={'discount'}
-                label={i18n(
-                  'entities.transaction.fields.discount',
+                  'entities.transaction.fields.amount',
                 )}
                 align="right"
               />
@@ -206,14 +198,12 @@ function TransactionListTable(props) {
                       </label>
                     </div>
                   </th>
-                  <td>{row.title}</td>
+                  <td><UserListItem value={row.user} /></td>
                   <td>{row.type}</td>
 
+              
                   <td style={{ textAlign: 'right' }}>
-                    {row.noOfTimes}
-                  </td>
-                  <td style={{ textAlign: 'right' }}>
-                    {row.discount}
+                    {row.amount}
                   </td>
                   <td>
                     <select

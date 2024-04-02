@@ -24,7 +24,7 @@ const schema = yup.object().shape({
     {},
   ),
   entrylimit: yupFormSchemas.string(
-    i18n('entities.level.fields.entrylimit'),
+    i18n('entities.vip.fields.entrylimit'),
     {
 
     },
@@ -51,13 +51,12 @@ const schema = yup.object().shape({
 
 });
 
-function CouponsForm(props) {
+function VipForm(props) {
   const [initialValues] = useState(() => {
     const record = props.record || {};
-
     return {
       title : record.title, 
-      photo: record.photo,
+      photo: record.photo || [],
       entrylimit : record.entrylimit, 
       levellimit : record.levellimit, 
       dailyorder : record.dailyorder, 
@@ -139,26 +138,6 @@ function CouponsForm(props) {
                 autoFocus
               />
             </div>
-            {/* <div className="col-lg-7 col-md-8 col-12">
-              <SelectFormItem
-                name="status"
-                label={i18n(
-                  'entities.vip.fields.status',
-                )}
-                options={couponsEnumerators.status.map(
-                  (value) => ({
-                    value,
-                    label: i18n(
-                      `entities.vip.enumerators.status.${value}`,
-                    ),
-                  }),
-                )}
-                required={false}
-              />
-            </div> */}
-
-    
-         
           </div>
 
           <div className="form-buttons">
@@ -205,4 +184,4 @@ function CouponsForm(props) {
   );
 }
 
-export default CouponsForm;
+export default VipForm;

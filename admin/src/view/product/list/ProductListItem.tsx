@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import selectors from 'src/modules/product/productSelectors';
 
-function CouponsListItem(props) {
+function ProductListItem(props) {
   const hasPermissionToRead = useSelector(
     selectors.selectPermissionToRead,
   );
@@ -30,15 +30,15 @@ function CouponsListItem(props) {
         <div key={record.id}>
           <Link
             className="btn btn-link"
-            to={`/transaction/${record.id}`}
+            to={`/product/${record.id}`}
           >
-            {record.id}
+            {record.title}
           </Link>
         </div>
       );
     }
 
-    return <div key={record.id}>{record.id}</div>;
+    return <div key={record.id}>{record.title}</div>;
   };
 
   if (!valueAsArray().length) {
@@ -54,8 +54,8 @@ function CouponsListItem(props) {
   );
 }
 
-CouponsListItem.propTypes = {
+ProductListItem.propTypes = {
   value: PropTypes.any,
 };
 
-export default CouponsListItem;
+export default ProductListItem;

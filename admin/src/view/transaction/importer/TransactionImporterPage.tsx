@@ -21,7 +21,7 @@ function TransactionImporterPage() {
       <Breadcrumb
         items={[
           [i18n('dashboard.menu'), '/'],
-          [i18n('entities.transaction.menu'), '/coupons'],
+          [i18n('entities.transaction.menu'), '/transaction'],
           [i18n('entities.transaction.importer.title')],
         ]}
       />

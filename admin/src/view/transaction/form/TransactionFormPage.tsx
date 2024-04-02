@@ -47,7 +47,7 @@ function TransactionFormPage(props) {
       <Breadcrumb
         items={[
           [i18n('dashboard.menu'), '/'],
-          [i18n('entities.transaction.menu'), '/coupons'],
+          [i18n('entities.transaction.menu'), '/transaction'],
           [title],
         ]}
       />

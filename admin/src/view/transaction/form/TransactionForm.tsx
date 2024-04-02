@@ -8,23 +8,17 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import couponsEnumerators from 'src/modules/transaction/transactionEnumerators';
+import transactionEnumerators from 'src/modules/transaction/transactionEnumerators';
 import UserAutocompleteFormItem from 'src/view/user/autocomplete/UserAutocompleteFormItem';
 
 const schema = yup.object().shape({
   status: yupFormSchemas.enumerator(
     i18n('entities.transaction.fields.status'),
     {
-      options: couponsEnumerators.status,
+      options: transactionEnumerators.status,
     },
   ),
 
-  type: yupFormSchemas.enumerator(
-    i18n('entities.transaction.fields.type'),
-    {
-      options: couponsEnumerators.status,
-    },
-  ),
   user: yupFormSchemas.relationToOne(
     i18n('entities.transaction.fields.user'),
     {
@@ -32,6 +26,12 @@ const schema = yup.object().shape({
     },
   ),
 
+  type: yupFormSchemas.enumerator(
+    i18n('entities.transaction.fields.type'),
+    {
+      options: transactionEnumerators.type,
+    },
+  ),
   amount: yupFormSchemas.decimal(
     i18n('entities.transaction.fields.amount'),
     {
@@ -46,9 +46,11 @@ function TransactionForm(props) {
     const record = props.record || {};
     return {
       status: record.status || [],
-      type: record.type || [],
-      user: record.user ||[],
-      amount: record.amount,
+      date  : record.date  || new Date(),
+      user  : record.user  || [],
+      type  : record.type  || 'in',
+      amount: record.amount || 0,
+    
     };
   });
 
@@ -75,9 +77,9 @@ function TransactionForm(props) {
           <div className="row">
           <div className="col-lg-7 col-md-8 col-12">
               <SelectFormItem
-                name="type"
+                name="status"
                 label={i18n('entities.transaction.fields.status')}
-                options={couponsEnumerators.status.map(
+                options={transactionEnumerators.status.map(
                   (value) => ({
                     value,
                     label: i18n(
@@ -89,18 +91,6 @@ function TransactionForm(props) {
               />
             </div>
             <div className="col-lg-7 col-md-8 col-12">
-              <InputFormItem
-                name="title"
-                label={i18n(
-                  'entities.transaction.fields.title',
-                )}
-                required={true}
-                autoFocus
-              />
-            </div>
-           
-
-            <div className="col-lg-7 col-md-8 col-12">
               <UserAutocompleteFormItem
                 name="user"
                 label={i18n(
@@ -109,12 +99,12 @@ function TransactionForm(props) {
                 required={true}
               />
             </div>
-
+            
             <div className="col-lg-7 col-md-8 col-12">
               <SelectFormItem
                 name="type"
                 label={i18n('entities.transaction.fields.type')}
-                options={couponsEnumerators.type.map(
+                options={transactionEnumerators.type.map(
                   (value) => ({
                     value,
                     label: i18n(
@@ -128,9 +118,9 @@ function TransactionForm(props) {
 
             <div className="col-lg-7 col-md-8 col-12">
               <InputFormItem
-                name="discount"
+                name="amount"
                 label={i18n(
-                  'entities.transaction.fields.discount',
+                  'entities.transaction.fields.amount',
                 )}
                 required={true}
               />

@@ -3,21 +3,13 @@ const models = [
   require('./auditLog').default,
   require('./settings').default,
   require('./user').default,
-  require('./association').default,
-  require('./mandat').default,
-  require('./categorieMouv').default,
-  require('./mouvements').default,
-  require('./campagne').default,
-  require('./detailsCampagne').default,
-  require('./palier').default,
-  require('./historiquePoints').default,
-  require('./projet').default,
-  require('./votes').default,
-  require('./dons').default,
-  require('./produitCategorie').default,
-  require('./produit').default,
-  require('./produitCommande').default,
-  require('./commandLine').default,
+  require('./category').default,
+  require('./transaction').default,
+  require('./social').default,
+  require('./vip').default,
+  require('./product').default,
+  require('./records').default,
+
 ];
 
 export default function init(database) {

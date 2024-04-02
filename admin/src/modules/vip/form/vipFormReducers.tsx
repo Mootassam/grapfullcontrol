@@ -1,4 +1,4 @@
-import actions from 'src/modules/transaction/form/transactionFormActions';
+import actions from 'src/modules/vip/form/vipFormActions';
 
 const initialData = {
   initLoading: false,

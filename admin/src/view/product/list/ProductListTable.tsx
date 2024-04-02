@@ -201,10 +201,11 @@ function CouponsListTable(props) {
                     </div>
                   </th>
                   
-             
+             <td>
                   <VipListItem
                       value={row.vip}
                     />
+                    </td>
                   <td>{row.title}</td>
           
 
