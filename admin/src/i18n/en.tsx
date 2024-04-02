@@ -49,6 +49,31 @@ const en = {
       menu:"company"
     },
 
+    record:{
+      menu:"Records",
+      fields:{
+        user:"user",
+        product:"product",
+        number:"record Number",
+        status:"status"
+      },
+      list:{
+        title:"List of records"
+      },
+      view:{ 
+        title:"Record Detail"
+      },
+      edit:{
+        title: "Edit Record"
+      },
+      enumerators :{ 
+        status :{ 
+          pending:"Pending", 
+          completed:"Completed",
+          canceled:"Canceled"
+        }
+      }
+    },
   
 
     vip:{
