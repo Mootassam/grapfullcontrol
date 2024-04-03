@@ -108,7 +108,8 @@ company:{
         title:"Vip Name", 
         dailyorder:"Daily Order", 
         commissionrate:" commission rate", 
-        levelLimit:"Level Limit"
+        levelLimit:"Level Limit",
+        levellimit:""
       },
       new: {
         title:"Add New Vip"

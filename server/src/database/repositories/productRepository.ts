@@ -125,73 +125,27 @@ class ProductRepository {
         });
       }
 
-      if (filter.titre) {
+      if (filter.title) {
         criteriaAnd.push({
-          titre: {
-            $regex: MongooseQueryUtils.escapeRegExp(filter.titre),
+          title: {
+            $regex: MongooseQueryUtils.escapeRegExp(filter.title),
             $options: "i",
           },
         });
       }
 
-      if (filter.startdateRange) {
-        const [start, end] = filter.startdateRange;
-
-        if (start !== undefined && start !== null && start !== "") {
-          criteriaAnd.push({
-            startdate: {
-              $gte: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== "") {
-          criteriaAnd.push({
-            startdate: {
-              $lte: end,
-            },
-          });
-        }
+      if (filter.amount) {
+        criteriaAnd.push({
+          amount: {
+            $regex: MongooseQueryUtils.escapeRegExp(filter.amount),
+            $options: "i",
+          },
+        });
       }
-
-      if (filter.enddateRange) {
-        const [start, end] = filter.enddateRange;
-
-        if (start !== undefined && start !== null && start !== "") {
-          criteriaAnd.push({
-            enddate: {
-              $gte: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== "") {
-          criteriaAnd.push({
-            enddate: {
-              $lte: end,
-            },
-          });
-        }
-      }
-
-      if (filter.createdAtRange) {
-        const [start, end] = filter.createdAtRange;
-
-        if (start !== undefined && start !== null && start !== "") {
-          criteriaAnd.push({
-            ["createdAt"]: {
-              $gte: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== "") {
-          criteriaAnd.push({
-            ["createdAt"]: {
-              $lte: end,
-            },
-          });
-        }
+      if (filter.vip) {
+        criteriaAnd.push({
+          vip: filter.vip,
+        });
       }
     }
 

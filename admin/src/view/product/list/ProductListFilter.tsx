@@ -12,35 +12,25 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import filterRenders from 'src/modules/shared/filter/filterRenders';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
-import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import couponsEnumerators from 'src/modules/product/productEnumerators';
+import VipAutocompleteFormItem from 'src/view/vip/autocomplete/VipAutocompleteFormItem';
 
 const schema = yup.object().shape({
   title: yupFilterSchemas.string(
     i18n('entities.product.fields.title'),
   ),
-  codeName: yupFilterSchemas.string(
-    i18n('entities.product.fields.codeName'),
+  amount: yupFilterSchemas.decimal(
+    i18n('entities.product.fields.amount'),
   ),
-  discountRange: yupFilterSchemas.decimalRange(
-    i18n('entities.product.fields.discountRange'),
+  vip: yupFilterSchemas.relationToOne(
+    i18n('entities.product.fields.vip'),
   ),
-  noOfTimesRange: yupFilterSchemas.integerRange(
-    i18n('entities.product.fields.noOfTimesRange'),
-  ),
-  status: yupFilterSchemas.enumerator(
-    i18n('entities.product.fields.status'),
-  ),
+
 });
 
 const emptyValues = {
   title: null,
-  codeName: null,
-  discountRange: [],
-  noOfTimesRange: [],
-  status: null,
+  amount: null,
+  vip: null,
 };
 
 const previewRenders = {
@@ -48,24 +38,15 @@ const previewRenders = {
     label: i18n('entities.product.fields.title'),
     render: filterRenders.generic(),
   },
-  codeName: {
-    label: i18n('entities.product.fields.codeName'),
-    render: filterRenders.generic(),
+  amount: {
+    label: i18n('entities.product.fields.amount'),
+    render: filterRenders.decimal(),
   },
-  discountRange: {
-    label: i18n('entities.product.fields.discountRange'),
-    render: filterRenders.decimalRange(),
+  vip: {
+    label: i18n('entities.product.fields.vip'),
+    render: filterRenders.relationToOne(),
   },
-  noOfTimesRange: {
-    label: i18n('entities.product.fields.noOfTimesRange'),
-    render: filterRenders.range(),
-  },
-  status: {
-    label: i18n('entities.product.fields.status'),
-    render: filterRenders.enumerator(
-      'entities.product.enumerators.status',
-    ),
-  },
+
 };
 
 function CouponsListFilter(props) {
@@ -143,44 +124,21 @@ function CouponsListFilter(props) {
                 </div>
                 <div className="col-lg-6 col-12">
                   <InputFormItem
-                    name="codeName"
+                    name="amount"
                     label={i18n(
-                      'entities.product.fields.codeName',
+                      'entities.product.fields.amount',
                     )}
                   />
                 </div>
                 <div className="col-lg-6 col-12">
-                  <InputRangeFormItem
-                    name="discountRange"
+                  <VipAutocompleteFormItem
+                    name="vip"
                     label={i18n(
-                      'entities.product.fields.discountRange',
+                      'entities.product.fields.vip',
                     )}
                   />
                 </div>
-                <div className="col-lg-6 col-12">
-                  <InputNumberRangeFormItem
-                    name="noOfTimesRange"
-                    label={i18n(
-                      'entities.product.fields.noOfTimesRange',
-                    )}
-                  />
-                </div>
-                <div className="col-lg-6 col-12">
-                  <SelectFormItem
-                    name="status"
-                    label={i18n(
-                      'entities.product.fields.status',
-                    )}
-                    options={couponsEnumerators.status.map(
-                      (value) => ({
-                        value,
-                        label: i18n(
-                          `entities.product.enumerators.status.${value}`,
-                        ),
-                      }),
-                    )}
-                  />
-                </div>
+          
               </div>
 
               <div className="row">
