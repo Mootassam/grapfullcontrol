@@ -5,10 +5,9 @@ import { i18n } from 'src/i18n';
 import actions from 'src/modules/user/view/userViewActions';
 import selectors from 'src/modules/user/view/userViewSelectors';
 import ContentWrapper from 'src/view/layout/styles/ContentWrapper';
-import Breadcrumb from 'src/view/shared/Breadcrumb';
-import PageTitle from 'src/view/shared/styles/PageTitle';
+
 import UserView from 'src/view/user/view/UserView';
-import UserViewToolbar from 'src/view/user/view/UserViewToolbar';
+
 
 function UserViewPage(props) {
   const dispatch = useDispatch();

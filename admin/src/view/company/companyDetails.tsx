@@ -15,8 +15,15 @@ function CompanyDetails() {
   );
  
 const onEditorStateChange =(editorState) =>{ 
+
   setEditorState(editorState)
 }
+
+React.useEffect(()=>{ 
+
+  console.log("Log here ",editorState);
+  
+},[editorState])
   return (
     <>
     

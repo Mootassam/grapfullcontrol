@@ -36,9 +36,7 @@ function UserDetailsToolbar(props) {
         <Tab eventKey="wallet" title="wallet">
           <UserWalletPage />
         </Tab>
-        <Tab eventKey="vip" title="vip">
-          <UserViewPage />
-        </Tab>
+       
       </Tabs>
     </Toolbar>
   );

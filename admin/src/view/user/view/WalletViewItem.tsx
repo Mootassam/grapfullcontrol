@@ -11,6 +11,7 @@ import moment from 'moment';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import VipViewItem from 'src/view/vip/view/VipViewItem';
 
 function WalletViewItem(props) {
   const { user, loading } = props;
@@ -46,91 +47,26 @@ function WalletViewItem(props) {
           />
         </Col>
       </Row>
-      <Row>
-     
+      <Row
+        style={{
+          paddingBottom: '10px',
+        }}
+      >
+      
+        <Col sm={4}>
+          <VipViewItem
+            label={i18n('VIP')}
+            value={user.vip}
+          />
+        </Col>
        
-        <Col sm={4}>
-          <TextViewItem
-            label={i18n('Profession')}
-            value={user.profession}
-          />
-        </Col>
       </Row>
+   
 
-      <Row
-        style={{
-          paddingBottom: '10px',
-        }}
-      >
-        <Col sm={4}>
-          {user.date_naissance && (
-            <TextViewItem
-              label={i18n('date naissance')}
-              value={moment(user.date_naissance).format(
-                'DD-MM-YYYY',
-              )}
-            />
-          )}
-        </Col>
-        <Col sm={4}>
-          <TextViewItem
-            label={i18n('Adresse')}
-            value={user.adresse}
-          />
-        </Col>
-        <Col sm={4}>
-          <TextViewItem
-            label={i18n('C.I.N')}
-            value={user.cin}
-          />
-        </Col>
-      </Row>
 
-      <Row>
-        <Col sm={4}>
-          <TextViewItem
-            label={i18n('Etat Civil')}
-            value={
-              user.etat_civil && i18n(`${user.etat_civil}`)
-            }
-          />
-        </Col>
-        <Col sm={4}>
-          <TextViewItem
-            label={i18n('Lien Facebook')}
-            value={user.lien_facebook}
-          />
-        </Col>
-        <Col sm={4}>
-          <ImagesViewItem
-            label={i18n('user.fields.avatars')}
-            value={user.avatars}
-          />
-        </Col>
-      </Row>
+ 
 
-      <Row
-        style={{
-          paddingBottom: '10px',
-        }}
-      >
-        <Col sm={4}>
-          {user.parrain ? (
-            <TextViewItem
-              label={i18n('Parrain')}
-              value={user.parrain.email}
-            />
-          ) : null}
-        </Col>
-        <Col sm={4}>
-          <CustomViewItem
-            label={i18n('Statut')}
-            value={user.stat}
-            render={(value) => <UserStatut value={value} />}
-          />
-        </Col>
-        <Col sm={4}></Col>
-      </Row>
+   
     </ViewWrapper>
   );
 }
