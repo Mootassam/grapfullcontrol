@@ -11,24 +11,21 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import filterRenders from 'src/modules/shared/filter/filterRenders';
-import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
-import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import couponsEnumerators from 'src/modules/record/recordEnumerators';
+import UserAutocompleteFormItem from 'src/view/user/autocomplete/UserAutocompleteFormItem';
+import ProductAutocompleteFormItem from 'src/view/product/autocomplete/ProductAutocompleteFormItem';
+import InputNumberFormItem from 'src/view/shared/form/items/InputNumberFormItem';
 
 const schema = yup.object().shape({
-  title: yupFilterSchemas.string(
-    i18n('entities.record.fields.title'),
+  user: yupFilterSchemas.relationToOne(
+    i18n('entities.record.fields.user'),
   ),
-  codeName: yupFilterSchemas.string(
-    i18n('entities.record.fields.codeName'),
+  product: yupFilterSchemas.relationToOne(
+    i18n('entities.record.fields.product'),
   ),
-  discountRange: yupFilterSchemas.decimalRange(
-    i18n('entities.record.fields.discountRange'),
-  ),
-  noOfTimesRange: yupFilterSchemas.integerRange(
-    i18n('entities.record.fields.noOfTimesRange'),
+  number: yupFilterSchemas.decimal(
+    i18n('entities.record.fields.number'),
   ),
   status: yupFilterSchemas.enumerator(
     i18n('entities.record.fields.status'),
@@ -36,29 +33,24 @@ const schema = yup.object().shape({
 });
 
 const emptyValues = {
-  title: null,
-  codeName: null,
-  discountRange: [],
-  noOfTimesRange: [],
+  user: null,
+  product: null,
+  number: null,
   status: null,
 };
 
 const previewRenders = {
-  title: {
-    label: i18n('entities.record.fields.title'),
-    render: filterRenders.generic(),
+  user: {
+    label: i18n('entities.record.fields.user'),
+    render: filterRenders.relationToOne(),
   },
-  codeName: {
-    label: i18n('entities.record.fields.codeName'),
-    render: filterRenders.generic(),
+  product: {
+    label: i18n('entities.record.fields.product'),
+    render: filterRenders.relationToOne(),
   },
-  discountRange: {
-    label: i18n('entities.record.fields.discountRange'),
-    render: filterRenders.decimalRange(),
-  },
-  noOfTimesRange: {
-    label: i18n('entities.record.fields.noOfTimesRange'),
-    render: filterRenders.range(),
+  number: {
+    label: i18n('entities.record.fields.number'),
+    render: filterRenders.decimal(),
   },
   status: {
     label: i18n('entities.record.fields.status'),
@@ -134,37 +126,30 @@ function CouponsListFilter(props) {
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="row">
                 <div className="col-lg-6 col-12">
-                  <InputFormItem
-                    name="title"
+                  <UserAutocompleteFormItem
+                    name="user"
                     label={i18n(
-                      'entities.record.fields.title',
+                      'entities.record.fields.user',
                     )}
                   />
                 </div>
                 <div className="col-lg-6 col-12">
-                  <InputFormItem
-                    name="codeName"
+                  <ProductAutocompleteFormItem
+                    name="product"
                     label={i18n(
-                      'entities.record.fields.codeName',
+                      'entities.record.fields.product',
                     )}
                   />
                 </div>
                 <div className="col-lg-6 col-12">
-                  <InputRangeFormItem
-                    name="discountRange"
+                  <InputNumberFormItem
+                    name="number"
                     label={i18n(
-                      'entities.record.fields.discountRange',
+                      'entities.record.fields.number',
                     )}
                   />
                 </div>
-                <div className="col-lg-6 col-12">
-                  <InputNumberRangeFormItem
-                    name="noOfTimesRange"
-                    label={i18n(
-                      'entities.record.fields.noOfTimesRange',
-                    )}
-                  />
-                </div>
+             
                 <div className="col-lg-6 col-12">
                   <SelectFormItem
                     name="status"

@@ -16,7 +16,6 @@ export default (database) => {
         ref: "user",
         required: true,
       },
-
       product: {
         type: Schema.Types.ObjectId,
         ref: "product",
