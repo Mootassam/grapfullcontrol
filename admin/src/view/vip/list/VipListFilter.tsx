@@ -12,35 +12,20 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import filterRenders from 'src/modules/shared/filter/filterRenders';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
-import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import couponsEnumerators from 'src/modules/vip/vipEnumerators';
+
 
 const schema = yup.object().shape({
   title: yupFilterSchemas.string(
     i18n('entities.vip.fields.title'),
   ),
-  codeName: yupFilterSchemas.string(
-    i18n('entities.vip.fields.codeName'),
+  levellimit: yupFilterSchemas.decimal(
+    i18n('entities.vip.fields.levelLimit'),
   ),
-  discountRange: yupFilterSchemas.decimalRange(
-    i18n('entities.vip.fields.discountRange'),
-  ),
-  noOfTimesRange: yupFilterSchemas.integerRange(
-    i18n('entities.vip.fields.noOfTimesRange'),
-  ),
-  status: yupFilterSchemas.enumerator(
-    i18n('entities.vip.fields.status'),
-  ),
-});
+ });
 
 const emptyValues = {
   title: null,
-  codeName: null,
-  discountRange: [],
-  noOfTimesRange: [],
-  status: null,
+  levellimit: null,
 };
 
 const previewRenders = {
@@ -48,24 +33,11 @@ const previewRenders = {
     label: i18n('entities.vip.fields.title'),
     render: filterRenders.generic(),
   },
-  codeName: {
-    label: i18n('entities.vip.fields.codeName'),
-    render: filterRenders.generic(),
+  levellimit: {
+    label: i18n('entities.vip.fields.levelLimit'),
+    render: filterRenders.decimal(),
   },
-  discountRange: {
-    label: i18n('entities.vip.fields.discountRange'),
-    render: filterRenders.decimalRange(),
-  },
-  noOfTimesRange: {
-    label: i18n('entities.vip.fields.noOfTimesRange'),
-    render: filterRenders.range(),
-  },
-  status: {
-    label: i18n('entities.vip.fields.status'),
-    render: filterRenders.enumerator(
-      'entities.vip.enumerators.status',
-    ),
-  },
+
 };
 
 function CouponsListFilter(props) {
@@ -141,46 +113,17 @@ function CouponsListFilter(props) {
                     )}
                   />
                 </div>
+           
                 <div className="col-lg-6 col-12">
                   <InputFormItem
-                    name="codeName"
+                    name="levellimit"
                     label={i18n(
-                      'entities.vip.fields.codeName',
+                      'entities.vip.fields.levelLimit',
                     )}
                   />
                 </div>
-                <div className="col-lg-6 col-12">
-                  <InputRangeFormItem
-                    name="discountRange"
-                    label={i18n(
-                      'entities.vip.fields.discountRange',
-                    )}
-                  />
-                </div>
-                <div className="col-lg-6 col-12">
-                  <InputNumberRangeFormItem
-                    name="noOfTimesRange"
-                    label={i18n(
-                      'entities.vip.fields.noOfTimesRange',
-                    )}
-                  />
-                </div>
-                <div className="col-lg-6 col-12">
-                  <SelectFormItem
-                    name="status"
-                    label={i18n(
-                      'entities.vip.fields.status',
-                    )}
-                    options={couponsEnumerators.status.map(
-                      (value) => ({
-                        value,
-                        label: i18n(
-                          `entities.vip.enumerators.status.${value}`,
-                        ),
-                      }),
-                    )}
-                  />
-                </div>
+             
+            
               </div>
 
               <div className="row">

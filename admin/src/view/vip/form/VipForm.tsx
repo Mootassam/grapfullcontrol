@@ -30,7 +30,7 @@ const schema = yup.object().shape({
     },
   ),
   levellimit: yupFormSchemas.decimal(
-    i18n('entities.vip.fields.levellimit'),
+    i18n('entities.vip.fields.levelLimit'),
     {
       required: true,
     },
