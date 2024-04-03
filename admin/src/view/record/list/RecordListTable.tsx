@@ -91,6 +91,18 @@ function CouponsListTable(props) {
     let data = { status: e.target.value };
     dispatch(actionsForm.doUpdate(id, data));
   };
+
+  const changeFunction = (status) => {
+    let data 
+    switch(status) {
+      case "pending":
+        return "pending";
+      case "canceled":
+        return "canceled";
+      default:
+        return "completed";
+    }
+  };
   return (
     <TableWrapper>
       <div className="table-responsive">
@@ -178,7 +190,7 @@ function CouponsListTable(props) {
             {!loading &&
               rows.map((row) => (
                 <tr key={row.id}>
-                  <th className="th-checkbox" scope="row">
+                  <th className="th-checkbox" scope="row" >
                     <div className="adherent-control adherent-checkbox">
                       <input
                         type="checkbox"
@@ -199,19 +211,20 @@ function CouponsListTable(props) {
                       </label>
                     </div>
                   </th>
-                  <td>
+                  <td  style={{ textAlign: 'center' }}>
                   <UserListItem  value={row.user}/>
                   </td>
-                  <td>
+                  <td style={{ textAlign: 'center' }}>
                   <ProductListItem value={row.product} />
                   </td>
                   
-                  <td style={{ textAlign: 'right' }}>
+                  <td style={{ textAlign: 'center' }}>
                     {row.number}
                   </td>
-                  <td>
-                  {row.status}
-                  </td>
+                  <td style={{ textAlign: 'center' }}>
+  <span className={changeFunction(row.status)}>  {row.status}</span>
+
+</td>
                   <td className="td-actions">
                     <Link
                       className="btn btn-link"

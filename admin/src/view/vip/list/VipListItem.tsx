@@ -28,7 +28,7 @@ function VipListItem(props) {
             className="btn btn-link"
             to={`/vip/${record.id}`}
           >
-            {record.title}
+          <span className='vip'>  {record.title} </span>
           </Link>
         </div>
       );

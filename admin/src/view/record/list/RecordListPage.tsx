@@ -7,7 +7,6 @@ import ContentWrapper from 'src/view/layout/styles/ContentWrapper';
 import Breadcrumb from 'src/view/shared/Breadcrumb';
 import PageTitle from 'src/view/shared/styles/PageTitle';
 import { Col, Container, Row } from 'react-bootstrap';
-
 function CouponsListPage(props) {
   return (
     <>

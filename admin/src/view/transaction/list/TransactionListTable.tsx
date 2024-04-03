@@ -199,11 +199,11 @@ function TransactionListTable(props) {
                     </div>
                   </th>
                   <td><UserListItem value={row.user} /></td>
-                  <td>{row.type}</td>
+                  <td > <span className={row.type=== 'deposit' ? "deposit":"withdraw"}>{row.type}</span> </td>
 
               
                   <td style={{ textAlign: 'right' }}>
-                    {row.amount}
+                   <span className={row.type=== 'deposit' ? "deposit":"withdraw"}>{row.amount}</span> 
                   </td>
                   <td>
                     <select

@@ -48,15 +48,7 @@ const TableColumnHeader = (props) => {
       scope="col"
     >
       <div
-        className="d-flex"
-        style={{
-          justifyContent:
-            align === 'right'
-              ? 'flex-end'
-              : align === 'center'
-              ? 'center'
-              : 'flex-start',
-        }}
+       className='table__th'
       >
         {children || label || ''}
 

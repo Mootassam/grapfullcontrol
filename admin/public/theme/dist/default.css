@@ -2810,7 +2810,8 @@ fieldset:disabled a.btn {
 .btn-link {
   font-weight: 400;
   color: var(--primary);
-  text-decoration: none;
+  text-decoration: none !important;
+ 
 }
 .btn-link:hover {
   color: #000;
@@ -9067,4 +9068,57 @@ a.text-dark:focus {
   background-color: #fff;
   padding: 25px;
   display: grid;
+}
+.deposit {
+  background-color: green;
+  display: flex;
+  justify-content: center;
+  color: whitesmoke;
+  font-weight: 500;
+  border-radius: 30px;
+  padding: 8px 5px;
+}
+.withdraw {
+  background-color: var(--red);
+  display: flex;
+  justify-content: center;
+  color: whitesmoke;
+  font-weight: 500;
+  border-radius: 30px;
+  padding: 8px 5px;
+}
+
+.vip {
+  background-color: #197cd3;
+  padding: 8px 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 500;
+}
+.pending {
+  background-color: var(--orange) !important;
+  padding: 15px 8px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 500;
+  
+}
+.canceled {
+  background-color: var(--red);
+  padding: 15px 8px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 500;
+}
+.completed {
+  background-color: var(--green);
+  padding: 15px 8px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 500;
+}
+.table__th,
+td {
+  text-align: center !important;
+  vertical-align: middle !important
 }
