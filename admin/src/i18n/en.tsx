@@ -34,7 +34,12 @@ const en = {
     accounting: 'Accounting',
     configurations: 'Configurations',
   },
-
+company:{
+  menu:"Company",
+  title:"Company Description",
+  faqs:"Frequently asked questions ",
+  TC :"Terms & Conditions"
+},
   app: {
     title: 'Admin Panel',
   },
@@ -51,7 +56,8 @@ const en = {
 
     company:{
       title:"Company Section", 
-      menu:"company"
+      menu:"company",
+    
     },
 
     record:{
@@ -70,6 +76,18 @@ const en = {
       },
       edit:{
         title: "Edit Record"
+      },
+      create: {
+        success: 'Record successfully saved',
+      },
+      update: {
+        success: 'Record successfully saved',
+      },
+      destroy: {
+        success: 'Record successfully deleted',
+      },
+      destroyAll: {
+        success: 'Record successfully deleted',
       },
       enumerators :{ 
         status :{ 
@@ -100,7 +118,19 @@ const en = {
       },
       view:{
         title :"Detail Vip"
-      }
+      },
+      create: {
+        success: 'Vip successfully saved',
+      },
+      update: {
+        success: 'Vip successfully saved',
+      },
+      destroy: {
+        success: 'Vip successfully deleted',
+      },
+      destroyAll: {
+        success: 'Vip successfully deleted',
+      },
       
     },
 

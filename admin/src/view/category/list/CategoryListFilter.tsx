@@ -157,15 +157,15 @@ function CategoryListFilter(props) {
                     )}
                   />
                 </div>
-                <div className="col-lg-6 col-12">
+                {/* <div className="col-lg-6 col-12">
                   <InputFormItem
                     name="metaKeywords"
                     label={i18n(
                       'entities.category.fields.metaKeywords',
                     )}
                   />
-                </div>
-                <div className="col-lg-6 col-12">
+                </div> */}
+                {/* <div className="col-lg-6 col-12">
                   <InputFormItem
                     name="metaDescriptions"
                     label={i18n(
@@ -188,8 +188,8 @@ function CategoryListFilter(props) {
                       }),
                     )}
                   />
-                </div>
-                <div className="col-lg-6 col-12">
+                </div> */}
+                {/* <div className="col-lg-6 col-12">
                   <SelectFormItem
                     name="isFeature"
                     label={i18n(
@@ -206,7 +206,7 @@ function CategoryListFilter(props) {
                       },
                     ]}
                   />
-                </div>
+                </div> */}
               </div>
 
               <div className="row">

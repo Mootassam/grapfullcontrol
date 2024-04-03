@@ -22,18 +22,18 @@ const schema = yup.object().shape({
   title: yupFormSchemas.string(
     i18n('entities.product.fields.title'),
     {
-
+      required: true,
     },
   ),
   amount: yupFormSchemas.integer(
     i18n('entities.product.fields.amount'),
     {
-
+      required: true,
     },
   ),
   commission: yupFormSchemas.string(
     i18n('entities.product.fields.commission'),
-    {},
+    {required: true,},
   ),
   photo: yupFormSchemas.images(
     i18n('entities.product.fields.photo'),

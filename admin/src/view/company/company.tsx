@@ -44,10 +44,6 @@ function company() {
             <span className='company__text'> FAQs </span>
           </div>
           </Link>
-          <div className="company__item" >
-          <i className="fa-solid fa-mobile item__company"></i>
-            <span className='company__text'> Logo </span>
-          </div>
         </div>
       </ContentWrapper>
     </div>

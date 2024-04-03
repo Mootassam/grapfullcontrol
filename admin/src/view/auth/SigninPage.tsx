@@ -173,8 +173,8 @@ function SigninPage() {
                 {i18n('auth.createAnAccount')}
               </Link>
             </OtherActions>
-
-            <I18nFlags style={{ marginTop: '24px' }} />
+{/* 
+            <I18nFlags style={{ marginTop: '24px' }} /> */}
           </form>
         </FormProvider>
       </Content>

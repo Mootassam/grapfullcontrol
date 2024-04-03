@@ -34,53 +34,20 @@ const schema = yup.object().shape({
     max: 24,
   }),
 
-  secteur: yupFormSchemas.enumerator(i18n('secteur'), {
-    options: userSecteur.secteur,
-  }),
-
-  employeur: yupFormSchemas.string(i18n('Employeur'), {
-    required: false,
-  }),
-  profession: yupFormSchemas.string(i18n('Profession'), {
-    required: false,
-  }),
   adresse: yupFormSchemas.string(i18n('adresse'), {
     required: false,
   }),
   fullName: yupFormSchemas.string(i18n('fullName'), {
     required: false,
   }),
-  coupons: yupFormSchemas.relationToOne(
-    i18n('entities.user.fields.coupons'),
-    {},
-  ),
-  bearthday: yupFormSchemas.date(i18n('Date Naissance'), {
-    required: false,
-  }),
-  etat_civil: yupFormSchemas.enumerator(
-    i18n('user.fields.Etat_Civil'),
-    {
-      options: userEtat.Etat,
-    },
-  ),
+
   status: yupFormSchemas.enumerator(
     i18n('user.fields.status'),
     {
       options: userEnumerators.status,
     },
   ),
-  lien_facebook: yupFormSchemas.string(
-    i18n('Lien Facebook'),
-    {
-      required: false,
-    },
-  ),
-  parrain: yupFormSchemas.relationToOne(
-    i18n('user.fields.parrain'),
-    {
-      required: false,
-    },
-  ),
+  
 });
 
 function UserEditForm(props) {
@@ -100,20 +67,9 @@ function UserEditForm(props) {
       state: record.state,
       passportPhoto: record.passportPhoto || [],
       passportDocument: record.passportDocument || [],
-      visastart: record.visastart
-        ? moment(record.visastart).toDate()
-        : null,
-      visaend: record.visaend
-        ? moment(record.visaend).toDate()
-        : null,
-      payee: record.payee,
-      bearthday: record.bearthday
-        ? moment(record.bearthday).toDate()
-        : null,
+  
       status: record.status,
-      coupons: record.couponId || [],
-      parrain: record.parrain,
-      nationality: record.nationality,
+      
     };
   });
 
@@ -148,7 +104,7 @@ function UserEditForm(props) {
               display: 'grid',
             }}
           >
-            <Row>
+            {/* <Row>
               <Col sm={4}>
                 <div className="col-lg-7 col-md-8 col-12">
                   <SwitchFormItem
@@ -159,7 +115,7 @@ function UserEditForm(props) {
                   />
                 </div>
               </Col>
-            </Row>
+            </Row> */}
 
             <Col sm={4}>
               <div className="form-group">
@@ -215,14 +171,14 @@ function UserEditForm(props) {
             />
           </Row>
 
-          <Row>
+          {/* <Row>
             <FilesFormItem
               name="passportDocument"
               label={i18n('user.fields.visadocument')}
               storage={Storage.values.donsAttachements}
               max={1}
             />
-          </Row>
+          </Row> */}
           <Row>
             <Col sm={4}>
               <InputFormItem
@@ -232,33 +188,9 @@ function UserEditForm(props) {
               />
             </Col>
           </Row>
-          <Row>
-            <Col sm={4}>
-              <InputFormItem
-                name="firstName"
-                label={i18n('user.fields.firstName')}
-                required={true}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={4}>
-              <InputFormItem
-                name="lastName"
-                label={i18n('user.fields.lastName')}
-                required={true}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={4}>
-              <InputFormItem
-                name="nationality"
-                label={i18n('user.fields.nationality')}
-                required={true}
-              />
-            </Col>
-          </Row>
+       
+      
+  
           <Row>
             <Col sm={4}>
               <InputFormItem
@@ -268,24 +200,8 @@ function UserEditForm(props) {
               />
             </Col>
           </Row>
-          <Row>
-            <Col sm={4}>
-              <DatePickerFormItem
-                name="visastart"
-                label={i18n('user.fields.visastart')}
-                required={true}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={4}>
-              <DatePickerFormItem
-                name="visaend"
-                label={i18n('user.fields.visaend')}
-                required={true}
-              />
-            </Col>
-          </Row>
+      
+       
           <Row>
             <Col sm={4}>
               <InputFormItem
@@ -295,47 +211,10 @@ function UserEditForm(props) {
               />
             </Col>
           </Row>
-          <Row>
-            <Col sm={4}>
-              <InputFormItem
-                name="state"
-                label={i18n('user.fields.state')}
-                required={true}
-              />
-            </Col>
-          </Row>
 
-          <Row>
-            <Col sm={4}>
-              <DatePickerFormItem
-                name="bearthday"
-                label={i18n('user.fields.bearthday')}
-                required={true}
-              />
-            </Col>
-          </Row>
+       
 
-          <Row>
-            <Col sm={4}>
-              <InputFormItem
-                name="passportNumber"
-                label={i18n('user.fields.passportNumber')}
-                required={true}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={4}>
-              <CouponsAutocompleteFormItem
-                name="coupons"
-                label={i18n(
-                  'entities.subcategories.fields.categoryId',
-                )}
-                required={true}
-                showCreate={!props.modal}
-              />
-            </Col>
-          </Row>
+      
 
           <div className="form-buttons">
             <button

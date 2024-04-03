@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 export default (database) => {
   try {
-    return database.model('social');
+    return database.model("social");
   } catch (error) {
     // continue, because model doesnt exist
   }
@@ -26,20 +26,20 @@ export default (database) => {
       },
       tenant: {
         type: Schema.Types.ObjectId,
-        ref: 'tenant',
+        ref: "tenant",
         required: true,
       },
       createdBy: {
         type: Schema.Types.ObjectId,
-        ref: 'user',
+        ref: "user",
       },
       updatedBy: {
         type: Schema.Types.ObjectId,
-        ref: 'user',
+        ref: "user",
       },
       importHash: { type: String },
     },
-    { timestamps: true },
+    { timestamps: true }
   );
 
   SocialSchema.index(
@@ -47,23 +47,23 @@ export default (database) => {
     {
       unique: true,
       partialFilterExpression: {
-        importHash: { $type: 'string' },
+        importHash: { $type: "string" },
       },
-    },
+    }
   );
 
-  SocialSchema.virtual('id').get(function () {
+  SocialSchema.virtual("id").get(function () {
     // @ts-ignore
     return this._id.toHexString();
   });
 
-  SocialSchema.set('toJSON', {
+  SocialSchema.set("toJSON", {
     getters: true,
   });
 
-  SocialSchema.set('toObject', {
+  SocialSchema.set("toObject", {
     getters: true,
   });
 
-  return database.model('social', SocialSchema);
+  return database.model("social", SocialSchema);
 };
