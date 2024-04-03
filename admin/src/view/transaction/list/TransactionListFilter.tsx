@@ -12,58 +12,63 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import filterRenders from 'src/modules/shared/filter/filterRenders';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import InputRangeFormItem from 'src/view/shared/form/items/InputRangeFormItem';
-import InputNumberRangeFormItem from 'src/view/shared/form/items/InputNumberRangeFormItem';
+
 import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
 import couponsEnumerators from 'src/modules/transaction/transactionEnumerators';
+import UserAutocompleteFormItem from './../../user/autocomplete/UserAutocompleteFormItem';
+import DatePickerRangeFormItem from './../../shared/form/items/DatePickerRangeFormItem';
 
 const schema = yup.object().shape({
-  title: yupFilterSchemas.string(
-    i18n('entities.transaction.fields.title'),
+  user: yupFilterSchemas.relationToOne(
+    i18n('entities.transaction.fields.user'),
   ),
-  codeName: yupFilterSchemas.string(
-    i18n('entities.transaction.fields.codeName'),
+  datetransaction: yupFilterSchemas.dateRange(
+    i18n('entities.transaction.fields.datetransaction'),
   ),
-  discountRange: yupFilterSchemas.decimalRange(
-    i18n('entities.transaction.fields.discountRange'),
-  ),
-  noOfTimesRange: yupFilterSchemas.integerRange(
-    i18n('entities.transaction.fields.noOfTimesRange'),
+  amount: yupFilterSchemas.integer(
+    i18n('entities.transaction.fields.amount'),
   ),
   status: yupFilterSchemas.enumerator(
     i18n('entities.transaction.fields.status'),
   ),
+  type: yupFilterSchemas.enumerator(
+    i18n('entities.transaction.fields.type'),
+  ),
 });
 
 const emptyValues = {
-  title: null,
-  codeName: null,
-  discountRange: [],
-  noOfTimesRange: [],
+  user: null,
+  datetransaction: [],
+  amount: null,
+  type: null,
   status: null,
 };
 
 const previewRenders = {
-  title: {
-    label: i18n('entities.transaction.fields.title'),
-    render: filterRenders.generic(),
+  user: {
+    label: i18n('entities.transaction.fields.user'),
+    render: filterRenders.relationToOne(),
   },
-  codeName: {
-    label: i18n('entities.transaction.fields.codeName'),
-    render: filterRenders.generic(),
+  amount: {
+    label: i18n('entities.transaction.fields.amount'),
+    render: filterRenders.decimal(),
   },
-  discountRange: {
-    label: i18n('entities.transaction.fields.discountRange'),
-    render: filterRenders.decimalRange(),
+  datetransaction: {
+    label: i18n('entities.transaction.fields.datetransaction'),
+    render: filterRenders.dateRange(),
   },
-  noOfTimesRange: {
-    label: i18n('entities.transaction.fields.noOfTimesRange'),
-    render: filterRenders.range(),
-  },
+
   status: {
     label: i18n('entities.transaction.fields.status'),
     render: filterRenders.enumerator(
       'entities.transaction.enumerators.status',
+    ),
+  },
+
+  type: {
+    label: i18n('entities.transaction.fields.type'),
+    render: filterRenders.enumerator(
+      'entities.transaction.enumerators.type',
     ),
   },
 };
@@ -134,37 +139,31 @@ function TransactionListFilter(props) {
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="row">
                 <div className="col-lg-6 col-12">
-                  <InputFormItem
-                    name="title"
+                  <UserAutocompleteFormItem
+                    name="user"
                     label={i18n(
-                      'entities.transaction.fields.title',
+                      'entities.transaction.fields.user',
                     )}
                   />
                 </div>
                 <div className="col-lg-6 col-12">
                   <InputFormItem
-                    name="codeName"
+                    name="amount"
                     label={i18n(
-                      'entities.transaction.fields.codeName',
+                      'entities.transaction.fields.amount',
                     )}
                   />
                 </div>
+
                 <div className="col-lg-6 col-12">
-                  <InputRangeFormItem
-                    name="discountRange"
+                  <DatePickerRangeFormItem
+                    name="datetransaction"
                     label={i18n(
-                      'entities.transaction.fields.discountRange',
+                      'entities.transaction.fields.datetransaction',
                     )}
                   />
                 </div>
-                <div className="col-lg-6 col-12">
-                  <InputNumberRangeFormItem
-                    name="noOfTimesRange"
-                    label={i18n(
-                      'entities.transaction.fields.noOfTimesRange',
-                    )}
-                  />
-                </div>
+
                 <div className="col-lg-6 col-12">
                   <SelectFormItem
                     name="status"
@@ -176,6 +175,23 @@ function TransactionListFilter(props) {
                         value,
                         label: i18n(
                           `entities.transaction.enumerators.status.${value}`,
+                        ),
+                      }),
+                    )}
+                  />
+                </div>
+
+                <div className="col-lg-6 col-12">
+                  <SelectFormItem
+                    name="type"
+                    label={i18n(
+                      'entities.transaction.fields.type',
+                    )}
+                    options={couponsEnumerators.type.map(
+                      (value) => ({
+                        value,
+                        label: i18n(
+                          `entities.transaction.enumerators.type.${value}`,
                         ),
                       }),
                     )}

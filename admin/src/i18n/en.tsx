@@ -2073,7 +2073,8 @@ company:{
         orderId: 'OrderId',
         createdAt: 'Created at',
         updatedAt: 'Updated at',
-        createdAtRange: 'Created at',
+        createdAtRange: 'Created at', 
+        datetransaction: "Date transaction"
       },
       enumerators: {
         status:{

@@ -124,58 +124,43 @@ class TransactionRepository {
           ["_id"]: MongooseQueryUtils.uuid(filter.id),
         });
       }
-
-      if (filter.titre) {
+      if (filter.user) {
         criteriaAnd.push({
-          titre: {
-            $regex: MongooseQueryUtils.escapeRegExp(filter.titre),
+          user: filter.user,
+        });
+      }
+
+      if (filter.amount) {
+        criteriaAnd.push({
+          amount: {
+            $regex: MongooseQueryUtils.escapeRegExp(filter.amount),
             $options: "i",
           },
         });
       }
 
-      if (filter.startdateRange) {
-        const [start, end] = filter.startdateRange;
-
-        if (start !== undefined && start !== null && start !== "") {
-          criteriaAnd.push({
-            startdate: {
-              $gte: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== "") {
-          criteriaAnd.push({
-            startdate: {
-              $lte: end,
-            },
-          });
-        }
+      if (filter.status) {
+        criteriaAnd.push({
+          status: {
+            $regex: MongooseQueryUtils.escapeRegExp(filter.status),
+            $options: "i",
+          },
+        });
       }
 
-      if (filter.enddateRange) {
-        const [start, end] = filter.enddateRange;
-
-        if (start !== undefined && start !== null && start !== "") {
-          criteriaAnd.push({
-            enddate: {
-              $gte: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== "") {
-          criteriaAnd.push({
-            enddate: {
-              $lte: end,
-            },
-          });
-        }
+      if (filter.type) {
+        criteriaAnd.push({
+          type: {
+            $regex: MongooseQueryUtils.escapeRegExp(filter.type),
+            $options: "i",
+          },
+        });
       }
+   
+    
 
-      if (filter.createdAtRange) {
-        const [start, end] = filter.createdAtRange;
+      if (filter.datetransaction) {
+        const [start, end] = filter.datetransaction;
 
         if (start !== undefined && start !== null && start !== "") {
           criteriaAnd.push({
