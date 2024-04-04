@@ -9,10 +9,22 @@ import 'draft-js/dist/Draft.css';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import ButtonIcon from 'src/view/shared/ButtonIcon';
+import { useDispatch } from 'react-redux';
+import actions from 'src/modules/company/form/companyFormActions'
+
 function Faqs() {
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
   );
+  const dispatch = useDispatch();
+
+  const doSubmit = ( ) => {
+const values ={ 
+  faqs: editorState.getCurrentContent().getPlainText()
+}
+dispatch(actions.doCreate(values));
+  };
+
  
 const onEditorStateChange =(editorState) =>{ 
   setEditorState(editorState)
@@ -40,7 +52,7 @@ const onEditorStateChange =(editorState) =>{
               disabled={false}
               type="button"
               style={{width:250}}
-              // onClick={form.handleSubmit(onSubmit)}
+              onClick={() => doSubmit()}
             >
               <ButtonIcon
                 loading={false}

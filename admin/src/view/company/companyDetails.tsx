@@ -70,7 +70,7 @@ React.useEffect(()=>{
         </Col>
           </Row>
 
-   
+
           <Editor
   editorState={editorState}
   toolbarClassName="toolbarClassName"

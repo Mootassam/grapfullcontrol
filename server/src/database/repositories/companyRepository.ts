@@ -13,26 +13,32 @@ class CompanyRepository {
 
     const currentUser = MongooseRepository.getCurrentUser(options);
 
-    const [record] = await Company(options.database).create(
-      [
-        {
-          ...data,
-          tenant: currentTenant.id,
-          createdBy: currentUser.id,
-          updatedBy: currentUser.id,
-        },
-      ],
-      options
-    );
+    const list = await Company(options.database).find();
+    let record;
+    if (list && list.length > 0) {
+      this.update(list[0]._id, data, options);
+    } else {
+      [record] = await Company(options.database).create(
+        [
+          {
+            ...data,
+            tenant: currentTenant.id,
+            createdBy: currentUser.id,
+            updatedBy: currentUser.id,
+          },
+        ],
+        options
+      );
 
-    await this._createAuditLog(
-      AuditLogRepository.CREATE,
-      record.id,
-      data,
-      options
-    );
+      await this._createAuditLog(
+        AuditLogRepository.CREATE,
+        record.id,
+        data,
+        options
+      );
+    }
 
-    return this.findById(record.id, options);
+    return record
   }
 
   static async findContact(options) {

@@ -27,7 +27,6 @@ const categoryViewActions = {
       dispatch({
         type: categoryViewActions.FIND_ERROR,
       });
-
       getHistory().push('/category');
     }
   },
