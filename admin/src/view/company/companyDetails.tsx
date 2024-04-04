@@ -1,20 +1,30 @@
-import React from 'react'
+import React, { useState ,useEffect} from 'react'
 import { Col, Container, Row } from 'react-bootstrap';
 import { i18n } from 'src/i18n'
 import ContentWrapper from 'src/view/layout/styles/ContentWrapper'
 import Breadcrumb from 'src/view/shared/Breadcrumb'
 import PageTitle from 'src/view/shared/styles/PageTitle';
-import { EditorState} from 'draft-js';
+import { EditorState,ContentState} from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import ButtonIcon from 'src/view/shared/ButtonIcon';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import actions from 'src/modules/company/form/companyFormActions'
+import listactions from 'src/modules/company/list/companyListActions'
+import selectors from 'src/modules/company/list/companyListSelectors'
+import LoadingComponent from 'src/view/shared/LoadingComponent';
+import Spinner from 'src/view/shared/Spinner';
 function CompanyDetails() {
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
   );
+
+const record = useSelector(selectors.selectRows); 
+const loading = useSelector(selectors.selectLoading)
+const [recordContent, setRecordContent] = useState('');
+
+
   const dispatch = useDispatch();
 
   const doSubmit = ( ) => {
@@ -25,15 +35,40 @@ dispatch(actions.doCreate(values));
   };
 
 
-const onEditorStateChange =(editorState) => { 
-  setEditorState(editorState);
+// const onEditorStateChange =(editorState) => { 
+//   setEditorState(editorState);
+// }
+
+const doFetch =() =>{ 
+dispatch(listactions.doFetch())
+
 }
 
 React.useEffect(()=>{ 
+  doFetch()
 
-  console.log("Log here ",);
-  
+
 },[editorState])
+
+useEffect(() => {
+  // Assuming record is an object with a property 'companydetails'
+  if (record && record[0]?.companydetails) {
+    setRecordContent(record[0].companydetails);
+  }
+}, [record]);
+
+useEffect(() => {
+  // Set the editorState with the content from the record
+  const contentState = ContentState.createFromText(recordContent);
+  const newEditorState = EditorState.createWithContent(contentState);
+  setEditorState(newEditorState);
+}, [recordContent]);
+
+const onEditorStateChange = (newEditorState) => {
+  // You can handle editor state changes here if needed
+  setEditorState(newEditorState);
+};
+
   return (
     <>
     
@@ -46,7 +81,8 @@ React.useEffect(()=>{
       />
 
       <ContentWrapper>
-      <Container fluid={true}>
+{loading && <Spinner />}
+        {!loading && record &&    <Container fluid={true}>
           <Row>
             <Col xs={9}>
         <PageTitle>{i18n('company.title')}</PageTitle>
@@ -79,7 +115,8 @@ React.useEffect(()=>{
   onEditorStateChange={onEditorStateChange}
 />
  
-          </Container>
+          </Container> }
+    
       </ContentWrapper>
     
     

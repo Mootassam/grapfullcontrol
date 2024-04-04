@@ -5,7 +5,6 @@ export default (app) => {
       require("./CompanyCreate").default
     );
     app.get(`/tenant/:tenantId/company`, require("./CompanyList").default);
-    app.get(`/tenant/company/all`, require("./CompanyList").default);
     app.get(`/tenant/:tenantId/company/:id`, require("./CompanyFind").default);
   };
   

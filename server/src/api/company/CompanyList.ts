@@ -1,13 +1,12 @@
 import PermissionChecker from '../../services/user/permissionChecker';
 import ApiResponseHandler from '../apiResponseHandler';
 import Permissions from '../../security/permissions';
-import CategoryService from '../../services/categoryService';
+import CompanyService from '../../services/companyService';
 
 export default async (req, res, next) => {
   try {
 
-
-    const payload = await new CategoryService(
+    const payload = await new CompanyService(
       req,
     ).findAndCountAll(req.query);
 

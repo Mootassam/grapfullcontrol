@@ -1,4 +1,4 @@
-import actions from 'src/modules/category/list/categoryListActions';
+import actions from 'src/modules/company/list/companyListActions';
 
 const INITIAL_PAGE_SIZE = 10;
 

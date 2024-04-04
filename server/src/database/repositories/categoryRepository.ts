@@ -147,6 +147,7 @@ class CategoryRepository {
     { filter, limit = 0, offset = 0, orderBy = "" },
     options: IRepositoryOptions
   ) {
+    
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
     let criteriaAnd: any = [];

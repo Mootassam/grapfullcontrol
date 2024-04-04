@@ -38,7 +38,7 @@ class CompanyRepository {
       );
     }
 
-    return record
+    return record;
   }
 
   static async findContact(options) {
@@ -167,79 +167,6 @@ class CompanyRepository {
           ["_id"]: MongooseQueryUtils.uuid(filter.id),
         });
       }
-
-      if (filter.name) {
-        criteriaAnd.push({
-          name: {
-            $regex: MongooseQueryUtils.escapeRegExp(filter.name),
-            $options: "i",
-          },
-        });
-      }
-
-      if (filter.slug) {
-        criteriaAnd.push({
-          slug: {
-            $regex: MongooseQueryUtils.escapeRegExp(filter.slug),
-            $options: "i",
-          },
-        });
-      }
-
-      if (filter.metaKeywords) {
-        criteriaAnd.push({
-          metaKeywords: {
-            $regex: MongooseQueryUtils.escapeRegExp(filter.metaKeywords),
-            $options: "i",
-          },
-        });
-      }
-
-      if (filter.metaDescriptions) {
-        criteriaAnd.push({
-          metaDescriptions: {
-            $regex: MongooseQueryUtils.escapeRegExp(filter.metaDescriptions),
-            $options: "i",
-          },
-        });
-      }
-
-      if (filter.status) {
-        criteriaAnd.push({
-          status: filter.status,
-        });
-      }
-
-      if (
-        filter.isFeature === true ||
-        filter.isFeature === "true" ||
-        filter.isFeature === false ||
-        filter.isFeature === "false"
-      ) {
-        criteriaAnd.push({
-          isFeature: filter.isFeature === true || filter.isFeature === "true",
-        });
-      }
-
-      if (filter.createdAtRange) {
-        const [start, end] = filter.createdAtRange;
-
-        if (start !== undefined && start !== null && start !== "") {
-          criteriaAnd.push({
-            ["createdAt"]: {
-              $gte: start,
-            },
-          });
-        }
-
-        if (end !== undefined && end !== null && end !== "") {
-          criteriaAnd.push({
-            ["createdAt"]: {
-              $lte: end,
-            },
-          });
-        }
-      }
     }
 
     const sort = MongooseQueryUtils.sort(orderBy || "createdAt_DESC");
@@ -253,6 +180,7 @@ class CompanyRepository {
       .skip(skip)
       .limit(limitEscaped)
       .sort(sort);
+
 
     const count = await Company(options.database).countDocuments(criteria);
 

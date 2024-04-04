@@ -1,11 +1,11 @@
 import CompanyService from 'src/modules/company/companyService';
-import selectors from 'src/modules/category/list/categoryListSelectors';
+import selectors from 'src/modules/company/list/companyListSelectors';
 import { i18n } from 'src/i18n';
-import exporterFields from 'src/modules/category/list/categoryListExporterFields';
+import exporterFields from 'src/modules/company/list/companyListExporterFields';
 import Errors from 'src/modules/shared/error/errors';
 import Exporter from 'src/modules/shared/exporter/exporter';
 
-const prefix = 'CATEGORY_LIST';
+const prefix = 'COMPANY_LIST';
 
 const CompanyListActions = {
   FETCH_STARTED: `${prefix}_FETCH_STARTED`,

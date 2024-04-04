@@ -7,10 +7,6 @@ import { Link } from 'react-router-dom';
 import './app.css';
 function company() {
 
-
-
-
-
   return (
     <div>
       <Breadcrumb
@@ -23,8 +19,7 @@ function company() {
         <PageTitle>
           {i18n('entities.company.title')}
         </PageTitle>
-
-
+        
         <div className="app__company">
           <Link to="/companydetail">
           <div className="company__item">

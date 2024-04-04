@@ -12,6 +12,7 @@ import vip from 'src/modules/vip/vipReducers'
 import transaction from 'src/modules/transaction/transactionReducers'
 import product from 'src/modules/product/productReducers'
 import record from 'src/modules/record/recordReducers'
+import company from 'src/modules/company/companyReducers';
 import { combineReducers } from 'redux';
 export default (history) =>
   combineReducers({
@@ -26,7 +27,9 @@ export default (history) =>
     product,
     tenant,
     user,
+    company,
     auditLog,
     settings,
     numbers,
+    
   });
