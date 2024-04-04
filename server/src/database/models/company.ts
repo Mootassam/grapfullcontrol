@@ -13,19 +13,15 @@ export default (database) => {
     {
       title: {
         type: String,
-        required: true,
       },
       companydetails: {
         type: String,
-        required: true,
       },
       tc: {
         type: String,
-        required: true,
       },
       faqs: {
         type: String,
-        required: true,
       },
       photo: [FileSchema],
       tenant: {

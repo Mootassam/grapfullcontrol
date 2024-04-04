@@ -1,7 +1,7 @@
 import authAxios from 'src/modules/shared/axios/authAxios';
 import AuthCurrentTenant from 'src/modules/auth/authCurrentTenant';
 
-export default class categoryService {
+export default class CompanyService {
   static async update(id, data) {
     const body = {
       id,
@@ -11,7 +11,7 @@ export default class categoryService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.put(
-      `/tenant/${tenantId}/category/${id}`,
+      `/tenant/${tenantId}/company/${id}`,
       body,
     );
 
@@ -26,7 +26,7 @@ export default class categoryService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.delete(
-      `/tenant/${tenantId}/category`,
+      `/tenant/${tenantId}/company`,
       {
         params,
       },
@@ -43,7 +43,7 @@ export default class categoryService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/category`,
+      `/tenant/${tenantId}/company`,
       body,
     );
 
@@ -59,7 +59,7 @@ export default class categoryService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.post(
-      `/tenant/${tenantId}/category/import`,
+      `/tenant/${tenantId}/company/import`,
       body,
     );
 
@@ -70,7 +70,7 @@ export default class categoryService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/category/${id}`,
+      `/tenant/${tenantId}/company/${id}`,
     );
 
     return response.data;
@@ -87,7 +87,7 @@ export default class categoryService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/category`,
+      `/tenant/${tenantId}/company`,
       {
         params,
       },
@@ -105,7 +105,7 @@ export default class categoryService {
     const tenantId = AuthCurrentTenant.get();
 
     const response = await authAxios.get(
-      `/tenant/${tenantId}/category/autocomplete`,
+      `/tenant/${tenantId}/company/autocomplete`,
       {
         params,
       },

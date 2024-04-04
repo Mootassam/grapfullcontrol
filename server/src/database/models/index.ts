@@ -9,7 +9,7 @@ const models = [
   require('./vip').default,
   require('./product').default,
   require('./records').default,
-
+  require("./company").default,
 ];
 
 export default function init(database) {

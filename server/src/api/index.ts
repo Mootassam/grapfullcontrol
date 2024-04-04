@@ -73,6 +73,7 @@ require("./record").default(routes);
 require("./transaction").default(routes);
 require("./vip").default(routes);
 require("./product").default(routes);
+require("./company").default(routes);
 // Loads the Tenant if the :tenantId param is passed
 routes.param("tenantId", tenantMiddleware);
 

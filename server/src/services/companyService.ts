@@ -27,7 +27,7 @@ export default class CompanyService {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        "category"
+        "company"
       );
       throw error;
     }
