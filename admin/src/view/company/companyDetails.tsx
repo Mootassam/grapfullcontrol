@@ -15,6 +15,8 @@ import listactions from 'src/modules/company/list/companyListActions'
 import selectors from 'src/modules/company/list/companyListSelectors'
 import LoadingComponent from 'src/view/shared/LoadingComponent';
 import Spinner from 'src/view/shared/Spinner';
+import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
+import Storage from 'src/security/storage';
 function CompanyDetails() {
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
@@ -106,6 +108,8 @@ const onEditorStateChange = (newEditorState) => {
         </Col>
           </Row>
 
+
+       
 
           <Editor
   editorState={editorState}

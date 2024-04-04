@@ -76,7 +76,7 @@ const onEditorStateChange = (newEditorState) => {
         items={[
           [i18n('dashboard.menu'), '/'],
           [i18n('company.menu'),'/company'],
-          [i18n('company.title')],
+          [i18n('company.faqs')],
         ]}
       />
 
@@ -85,7 +85,7 @@ const onEditorStateChange = (newEditorState) => {
         {!loading && record &&    <Container fluid={true}>
           <Row>
             <Col xs={9}>
-        <PageTitle>{i18n('company.title')}</PageTitle>
+        <PageTitle>{i18n('company.faqs')}</PageTitle>
         </Col>
             <Col md="auto">
             <button
