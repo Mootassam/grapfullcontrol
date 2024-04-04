@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import actions from 'src/modules/company/form/companyFormActions'
 import listactions from 'src/modules/company/list/companyListActions'
 import selectors from 'src/modules/company/list/companyListSelectors'
-import LoadingComponent from 'src/view/shared/LoadingComponent';
 import Spinner from 'src/view/shared/Spinner';
 function TC() {
   const [editorState, setEditorState] = React.useState(
@@ -48,7 +47,7 @@ React.useEffect(()=>{
   doFetch()
 
 
-},[editorState])
+},[])
 
 useEffect(() => {
   // Assuming record is an object with a property 'companydetails'
