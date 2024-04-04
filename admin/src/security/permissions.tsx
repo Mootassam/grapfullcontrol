@@ -313,6 +313,7 @@ class Permissions {
           plans.growth,
           plans.enterprise,
         ],
+        allowedStorage: [storage.categoryPhoto],
       },
       categoryAutocomplete: {
         id: 'categoryAutocomplete',

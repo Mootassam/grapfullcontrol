@@ -103,7 +103,7 @@ function VipForm(props) {
                 )}
                 required={false}
                 storage={
-                  Storage.values.paymentsettingsPhoto
+                  Storage.values.categoryPhoto
                 }
                 max={undefined}
               />

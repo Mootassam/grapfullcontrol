@@ -18,8 +18,8 @@ export default class Storage {
         publicRead: true,
       },
       copyPassport: {
-        id: 'userPassportCopy',
-        folder: 'user/passport/copy/:userId',
+        id: "userPassportCopy",
+        folder: "user/passport/copy/:userId",
         maxSizeInBytes: 10 * 1024 * 1024,
         bypassWritingPermissions: true,
         publicRead: true,
@@ -70,7 +70,11 @@ export default class Storage {
         folder: "tenant/:tenantId/historiquePoints/attachements",
         maxSizeInBytes: 100 * 1024 * 1024,
       },
-
+      newsImage: {
+        id: 'newsImage',
+        folder: 'tenant/:tenantId/news/image',
+        maxSizeInBytes: 100 * 1024 * 1024,
+      },
       projetPhotoPrincipal: {
         id: "projetPhotoPrincipal",
         folder: "tenant/:tenantId/projet/photoPrincipal",

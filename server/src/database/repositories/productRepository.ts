@@ -228,8 +228,7 @@ class ProductRepository {
     }
 
     const output = record.toObject ? record.toObject() : record;
-
-    output.pv = await FileRepository.fillDownloadUrl(output.pv);
+    output.photo = await FileRepository.fillDownloadUrl(output.photo);
 
     return output;
   }

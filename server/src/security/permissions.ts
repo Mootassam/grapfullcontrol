@@ -119,11 +119,13 @@ class Permissions {
         id: "categoryRead",
         allowedRoles: [roles.admin, roles.membre],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [storage.categoryPhoto],
       },
       categoryAutocomplete: {
         id: "categoryAutocomplete",
         allowedRoles: [roles.admin, roles.membre],
         allowedPlans: [plans.free, plans.growth, plans.enterprise],
+        allowedStorage: [storage.categoryPhoto],
       },
       associationImport: {
         id: "associationImport",

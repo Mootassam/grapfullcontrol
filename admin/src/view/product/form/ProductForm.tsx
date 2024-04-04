@@ -121,14 +121,12 @@ function ProductForm(props) {
                 )}
                 required={false}
                 storage={
-                  Storage.values.paymentsettingsPhoto
+                  Storage.values.categoryPhoto
                 }
                 max={undefined}
               />
             </div>
 
-
-       
           </div>
 
           <div className="form-buttons">
