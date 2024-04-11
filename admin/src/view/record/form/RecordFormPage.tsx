@@ -54,9 +54,7 @@ function CouponsFormPage(props) {
 
       <ContentWrapper>
         <PageTitle>{title}</PageTitle>
-
         {initLoading && <Spinner />}
-
         {dispatched && !initLoading && (
           <CouponsForm
             saveLoading={saveLoading}

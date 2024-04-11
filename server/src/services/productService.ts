@@ -1,7 +1,7 @@
-import Error400 from '../errors/Error400';
-import MongooseRepository from '../database/repositories/mongooseRepository';
-import { IServiceOptions } from './IServiceOptions';
-import ProductRepository from '../database/repositories/productRepository';
+import Error400 from "../errors/Error400";
+import MongooseRepository from "../database/repositories/mongooseRepository";
+import { IServiceOptions } from "./IServiceOptions";
+import ProductRepository from "../database/repositories/productRepository";
 
 export default class ProductServices {
   options: IServiceOptions;
@@ -12,7 +12,7 @@ export default class ProductServices {
 
   async create(data) {
     const session = await MongooseRepository.createSession(
-      this.options.database,
+      this.options.database
     );
 
     try {
@@ -30,7 +30,7 @@ export default class ProductServices {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'product',
+        "product"
       );
 
       throw error;
@@ -39,18 +39,14 @@ export default class ProductServices {
 
   async update(id, data) {
     const session = await MongooseRepository.createSession(
-      this.options.database,
+      this.options.database
     );
 
     try {
-      const record = await ProductRepository.update(
-        id,
-        data,
-        {
-          ...this.options,
-          session,
-        },
-      );
+      const record = await ProductRepository.update(id, data, {
+        ...this.options,
+        session,
+      });
 
       await MongooseRepository.commitTransaction(session);
 
@@ -61,7 +57,7 @@ export default class ProductServices {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'product',
+        "product"
       );
 
       throw error;
@@ -70,7 +66,7 @@ export default class ProductServices {
 
   async destroyAll(ids) {
     const session = await MongooseRepository.createSession(
-      this.options.database,
+      this.options.database
     );
 
     try {
@@ -93,32 +89,29 @@ export default class ProductServices {
   }
 
   async findAllAutocomplete(search, limit) {
-    return ProductRepository.findAllAutocomplete(
-      search,
-      limit,
-      this.options,
-    );
+    return ProductRepository.findAllAutocomplete(search, limit, this.options);
   }
 
   async findAndCountAll(args) {
-    return ProductRepository.findAndCountAll(
-      args,
-      this.options,
-    );
+    return ProductRepository.findAndCountAll(args, this.options);
+  }
+
+  async grapOrders(args) {
+    return ProductRepository.grapOrders(this.options);
   }
 
   async import(data, importHash) {
     if (!importHash) {
       throw new Error400(
         this.options.language,
-        'importer.errors.importHashRequired',
+        "importer.errors.importHashRequired"
       );
     }
 
     if (await this._isImportHashExistent(importHash)) {
       throw new Error400(
         this.options.language,
-        'importer.errors.importHashExistent',
+        "importer.errors.importHashExistent"
       );
     }
 
@@ -135,7 +128,7 @@ export default class ProductServices {
       {
         importHash,
       },
-      this.options,
+      this.options
     );
 
     return count > 0;

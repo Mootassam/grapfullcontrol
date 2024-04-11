@@ -27,4 +27,8 @@ export default (app) => {
     `/tenant/:tenantId/product/:id`,
     require('./productFind').default,
   );
+  app.get(
+    `/tenant/:tenantId/grap`,
+    require('./grapOrders').default,
+  )
 };

@@ -57,16 +57,8 @@ export default class UserRepository {
     passportNumber,
     nationality,
     country,
-    state,
-    payee,
-    bearthday,
-    visastart,
-    visaend,
     passportPhoto,
-    passportDocument,
-    coupon,
-    lastName,
-    firstName,
+    balance,
     options,
     status
   ) {
@@ -85,8 +77,8 @@ export default class UserRepository {
           nationality: nationality,
           country: country,
           passportPhoto: passportPhoto,
-          passportDocument: passportDocument,
           options: options,
+          balance: balance,
           $tenant: { status },
         },
       },
@@ -171,9 +163,8 @@ export default class UserRepository {
 
     data = this._preSave(data);
 
-
     console.log(data);
-    
+
     await User(options.database).updateOne(
       { _id: id },
       {
@@ -184,7 +175,7 @@ export default class UserRepository {
         updatedBy: currentUser.id,
         avatars: data.avatars || [],
         vip: data.vip || null,
-    
+        balance: data.balance,
       },
       options
     );

@@ -312,11 +312,7 @@ const currentUser = MongooseRepository.getCurrentUser(options)
     if (!record) {
       return null;
     }
-
-    
     const output = record.toObject ? record.toObject() : record;
-    console.log(output.product.photo);
-
     output.product.photo = await FileRepository.fillDownloadUrl(output.product.photo);
 
     return output;

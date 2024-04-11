@@ -232,6 +232,16 @@ class ProductRepository {
 
     return output;
   }
+
+  static async grapOrders(options: IRepositoryOptions) {
+
+    const currentVip = MongooseRepository.getCurrentUser(options).vip.id
+    const totalOrder = MongooseRepository.getCurrentUser(options).vip
+    let record = await Product(options.database).find({vip:currentVip}).populate("vip")
+    const random = Math.floor(Math.random() * record.length)
+    record = await Promise.all(record.map(this._fillFileDownloadUrls));
+    return record[random];
+  }
 }
 
 export default ProductRepository;

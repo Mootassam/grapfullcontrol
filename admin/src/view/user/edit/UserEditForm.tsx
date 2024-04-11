@@ -41,6 +41,10 @@ const schema = yup.object().shape({
     required: false,
   }),
 
+  balance: yupFormSchemas.string(i18n('balance'), {
+    required: false,
+  }),
+
   status: yupFormSchemas.enumerator(
     i18n('user.fields.status'),
     {
@@ -64,10 +68,10 @@ function UserEditForm(props) {
       firstName: record.firstName,
       lastName: record.lastName,
       country: record.country,
+      balance : record.balance,
       state: record.state,
       passportPhoto: record.passportPhoto || [],
       passportDocument: record.passportDocument || [],
-  
       status: record.status,
       
     };
@@ -161,7 +165,15 @@ function UserEditForm(props) {
               />
             </Col>
           </Row>
-
+          <Row>
+            <Col sm={4}>
+              <InputFormItem
+                name="balance"
+                label={i18n('user.fields.balance')}
+                required={true}
+              />
+            </Col>
+          </Row>
           <Row>
             <ImagesFormItem
               name="passportPhoto"

@@ -69,16 +69,8 @@ export default class UserEditor {
       this.data.passportNumber,
       this.data.nationality,
       this.data.country,
-      this.data.state,
-      this.data.payee,
-      this.data.bearthday,
-      this.data.visastart,
-      this.data.visaend,
       this.data.passportPhoto,
-      this.data.passportDocument,
-      this.data.coupons,
-      this.data.lastName,
-      this.data.firstName,
+      this.data.balance,
       this.options,
       this.data.status
     );
