@@ -96,6 +96,10 @@ export default class RecordServices {
     return RecordRepository.findAndCountAll(args, this.options);
   }
 
+  async findAndCountAllMobile(args) {
+    return RecordRepository.findAndCountAllMobile(args, this.options);
+  }
+
   async import(data, importHash) {
     if (!importHash) {
       throw new Error400(

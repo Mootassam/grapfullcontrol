@@ -12,8 +12,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import FilterPreview from 'src/view/shared/filter/FilterPreview';
 import filterRenders from 'src/modules/shared/filter/filterRenders';
 import InputFormItem from 'src/view/shared/form/items/InputFormItem';
-import SelectFormItem from 'src/view/shared/form/items/SelectFormItem';
-import categoryEnumerators from 'src/modules/category/categoryEnumerators';
+
 
 const schema = yup.object().shape({
   name: yupFilterSchemas.string(

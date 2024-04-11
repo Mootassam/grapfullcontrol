@@ -23,6 +23,15 @@ export default (app) => {
     `/tenant/:tenantId/record`,
     require('./recordList').default,
   );
+
+
+  app.get(
+    `/tenant/:tenantId/records`,
+    require('./recordListMobile').default,
+  );
+
+
+  
   app.get(
     `/tenant/:tenantId/record/:id`,
     require('./recordFind').default,

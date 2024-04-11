@@ -16,9 +16,7 @@ function CouponsListPage(props) {
           [i18n('entities.record.menu')],
         ]}
       />
-
       <ContentWrapper>
-          
       <Container fluid={true}>
           <Row>
             <Col xs={9}>

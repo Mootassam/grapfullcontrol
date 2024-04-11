@@ -171,6 +171,9 @@ export default class UserRepository {
 
     data = this._preSave(data);
 
+
+    console.log(data);
+    
     await User(options.database).updateOne(
       { _id: id },
       {
@@ -180,15 +183,8 @@ export default class UserRepository {
         phoneNumber: data.phoneNumber || null,
         updatedBy: currentUser.id,
         avatars: data.avatars || [],
-        adresse: data.adresse || null,
-        cin: data.cin || null,
-        date_naissance: data.date_naissance || null,
-        employeur: data.employeur || null,
-        etat_civil: data.etat_civil || null,
-        lien_facebook: data.lien_facebook || null,
-        parrain: data.parrain || null,
-        profession: data.profession || null,
-        secteur: data.secteur || null,
+        vip: data.vip || null,
+    
       },
       options
     );
@@ -384,7 +380,8 @@ export default class UserRepository {
         .skip(skip)
         .limit(limitEscaped)
         .sort(sort)
-        .populate("tenants.tenant"),
+        .populate("tenants.tenant")
+        .populate("vip"),
       options
     );
 
@@ -517,7 +514,7 @@ export default class UserRepository {
       User(options.database)
         .findById(id)
         .populate("tenants.tenant")
-        .populate("couponId"),
+        .populate("vip"),
       options
     );
 

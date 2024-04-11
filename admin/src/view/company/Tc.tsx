@@ -47,7 +47,7 @@ React.useEffect(()=>{
   doFetch()
 
 
-},[])
+},[editorState])
 
 useEffect(() => {
   // Assuming record is an object with a property 'companydetails'
