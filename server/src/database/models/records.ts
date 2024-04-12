@@ -30,7 +30,7 @@ export default (database) => {
         type: Date,
       },
       number: {
-        type: Number,
+        type: String,
         required: true,
       },
 

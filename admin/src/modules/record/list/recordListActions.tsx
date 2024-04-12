@@ -125,6 +125,8 @@ const recordListActions = {
           payload: { filter, rawFilter, keepPagination },
         });
 
+
+
         const response = await RecordService.list(
           filter,
           selectors.selectOrderBy(getState()),

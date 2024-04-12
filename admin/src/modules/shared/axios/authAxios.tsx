@@ -7,7 +7,7 @@ import moment from 'moment';
 
 const authAxios = Axios.create({
   // baseURL: 'https://6584-83-110-151-155.ngrok-free.app/api',
-  baseURL: 'http://192.168.70.107:8080/api',
+  baseURL: 'http://192.168.3.9:8080/api',
   // baseURL: 'https://serverhongkong.onrender.com/api',
   paramsSerializer: function (params) {
     return Qs.stringify(params, {
@@ -28,13 +28,11 @@ const authAxios = Axios.create({
 authAxios.interceptors.request.use(
   async function (options) {
     const token = AuthToken.get();
-
     if (token) {
       options.headers['Authorization'] = `Bearer ${token}`;
     }
     options.headers['ngrok-skip-browser-warning'] = 'true';
     options.headers['Accept-Language'] = getLanguageCode();
-
     return options;
   },
   function (error) {
