@@ -114,7 +114,7 @@ class RecordRepository {
     options: IRepositoryOptions
   ) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
-const currentUser = MongooseRepository.getCurrentUser(options)
+    const currentUser = MongooseRepository.getCurrentUser(options);
     let criteriaAnd: any = [];
 
     criteriaAnd.push({
@@ -138,7 +138,6 @@ const currentUser = MongooseRepository.getCurrentUser(options)
           product: filter.product,
         });
       }
-    
 
       if (filter.number) {
         criteriaAnd.push({
@@ -157,7 +156,6 @@ const currentUser = MongooseRepository.getCurrentUser(options)
           },
         });
       }
-
     }
 
     const sort = MongooseQueryUtils.sort(orderBy || "createdAt_DESC");
@@ -181,18 +179,17 @@ const currentUser = MongooseRepository.getCurrentUser(options)
     return { rows, count };
   }
 
-
   static async findAndCountAllMobile(
     { filter, limit = 0, offset = 0, orderBy = "" },
     options: IRepositoryOptions
   ) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
-const currentUser = MongooseRepository.getCurrentUser(options)
+    const currentUser = MongooseRepository.getCurrentUser(options);
     let criteriaAnd: any = [];
 
     criteriaAnd.push({
       tenant: currentTenant.id,
-      user: currentUser.id
+      user: currentUser.id,
     });
 
     if (filter) {
@@ -212,7 +209,6 @@ const currentUser = MongooseRepository.getCurrentUser(options)
           product: filter.product,
         });
       }
-    
 
       if (filter.number) {
         criteriaAnd.push({
@@ -231,7 +227,6 @@ const currentUser = MongooseRepository.getCurrentUser(options)
           },
         });
       }
-
     }
 
     const sort = MongooseQueryUtils.sort(orderBy || "createdAt_DESC");
@@ -252,7 +247,17 @@ const currentUser = MongooseRepository.getCurrentUser(options)
 
     rows = await Promise.all(rows.map(this._fillFileDownloadUrls));
 
-    return { rows, count };
+    let total = 0;
+
+    rows.map((item) => {
+      let data = item.product;
+      let itemTotal =
+        parseFloat(data.amount) + ((parseFloat(data.commission) * parseFloat(data.amount) ) / 100 )
+
+        total += itemTotal;
+    });
+
+    return { rows, count ,total};
   }
 
   static async findAllAutocomplete(search, limit, options: IRepositoryOptions) {
@@ -313,7 +318,9 @@ const currentUser = MongooseRepository.getCurrentUser(options)
       return null;
     }
     const output = record.toObject ? record.toObject() : record;
-    output.product.photo = await FileRepository.fillDownloadUrl(output.product.photo);
+    output.product.photo = await FileRepository.fillDownloadUrl(
+      output.product.photo
+    );
 
     return output;
   }
