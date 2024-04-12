@@ -235,9 +235,15 @@ class RecordRepository {
     const limitEscaped = Number(limit || 0) || undefined;
     const criteria = criteriaAnd.length ? { $and: criteriaAnd } : null;
 
-    let rows = await Records(options.database)
+    let listitems = await Records(options.database)
       .find(criteria)
       .skip(skip)
+      .sort(sort)
+      .populate("user")
+      .populate("product");
+
+    let rows = await Records(options.database)
+      .find(criteria)
       .limit(limitEscaped)
       .sort(sort)
       .populate("user")
@@ -249,15 +255,17 @@ class RecordRepository {
 
     let total = 0;
 
-    rows.map((item) => {
+    listitems.map((item) => {
       let data = item.product;
       let itemTotal =
-        parseFloat(data.amount) + ((parseFloat(data.commission) * parseFloat(data.amount) ) / 100 )
+        parseFloat(data.amount) +
+        (parseFloat(data.commission) * parseFloat(data.amount)) / 100;
 
-        total += itemTotal;
+      total += itemTotal;
     });
+    total = parseFloat(total.toFixed(3));
 
-    return { rows, count ,total};
+    return { rows, count, total };
   }
 
   static async findAllAutocomplete(search, limit, options: IRepositoryOptions) {
