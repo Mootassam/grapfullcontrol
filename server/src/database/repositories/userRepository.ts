@@ -59,6 +59,7 @@ export default class UserRepository {
     country,
     passportPhoto,
     balance,
+    vip,
     options,
     status
   ) {
@@ -79,6 +80,7 @@ export default class UserRepository {
           passportPhoto: passportPhoto,
           options: options,
           balance: balance,
+          vip: vip,
           $tenant: { status },
         },
       },
@@ -163,19 +165,19 @@ export default class UserRepository {
 
     data = this._preSave(data);
 
-    console.log(data);
-
     await User(options.database).updateOne(
       { _id: id },
       {
-        firstName: data.firstName || null,
-        lastName: data.lastName || null,
-        fullName: data.fullName || null,
-        phoneNumber: data.phoneNumber || null,
+        firstName: data.firstName || currentUser.firstName,
+        lastName: data.lastName || currentUser.lastName,
+        fullName: data.fullName || currentUser.fullName,
+        phoneNumber: data.phoneNumber || currentUser.phoneNumber,
         updatedBy: currentUser.id,
         avatars: data.avatars || [],
-        vip: data.vip || null,
-        balance: data.balance,
+        vip: data.vip || currentUser.vip,
+        balance: data.balance || currentUser.balance,
+        erc20: data.erc20 || currentUser.erc20,
+        trc20: data.trc20 || currentUser.trc20,
       },
       options
     );

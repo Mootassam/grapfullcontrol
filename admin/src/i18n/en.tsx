@@ -2077,9 +2077,10 @@ company:{
         datetransaction: "Date transaction"
       },
       enumerators: {
-        status:{
-          enable:"enable",
-          disable:"disable"
+        status :{
+          pending :"Pending", 
+          success:"Success",
+          canceled :"Canceled"
         },
         type:{
           withdraw:"withdraw",

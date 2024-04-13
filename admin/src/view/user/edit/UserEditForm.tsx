@@ -22,6 +22,7 @@ import SwitchFormItem from 'src/view/shared/form/items/SwitchFormItem';
 import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
 import Storage from 'src/security/storage';
 import FilesFormItem from 'src/view/shared/form/items/FilesFormItem';
+import VipAutocompleteFormItem from 'src/view/vip/autocomplete/VipAutocompleteFormItem';
 
 const schema = yup.object().shape({
   roles: yupFormSchemas.stringArray(
@@ -51,7 +52,6 @@ const schema = yup.object().shape({
       options: userEnumerators.status,
     },
   ),
-  
 });
 
 function UserEditForm(props) {
@@ -68,12 +68,11 @@ function UserEditForm(props) {
       firstName: record.firstName,
       lastName: record.lastName,
       country: record.country,
-      balance : record.balance,
+      balance: record.balance,
       state: record.state,
       passportPhoto: record.passportPhoto || [],
-      passportDocument: record.passportDocument || [],
+      vip: record.vip || [],
       status: record.status,
-      
     };
   });
 
@@ -89,6 +88,8 @@ function UserEditForm(props) {
       ...values,
     };
     delete data.email;
+
+
     dispatch(actions.doUpdate(data));
   };
 
@@ -121,6 +122,7 @@ function UserEditForm(props) {
               </Col>
             </Row> */}
 
+           
             <Col sm={4}>
               <div className="form-group">
                 <label
@@ -164,6 +166,8 @@ function UserEditForm(props) {
                 )}
               />
             </Col>
+
+       
           </Row>
           <Row>
             <Col sm={4}>
@@ -171,6 +175,16 @@ function UserEditForm(props) {
                 name="balance"
                 label={i18n('user.fields.balance')}
                 required={true}
+              />
+            </Col>
+          </Row>
+          <Row>
+          <Col sm={4}>
+              <VipAutocompleteFormItem
+                name="vip"
+                label={i18n('entities.product.fields.vip')}
+                required={true}
+                showCreate={!props.modal}
               />
             </Col>
           </Row>
@@ -200,9 +214,7 @@ function UserEditForm(props) {
               />
             </Col>
           </Row>
-       
-      
-  
+
           <Row>
             <Col sm={4}>
               <InputFormItem
@@ -212,8 +224,7 @@ function UserEditForm(props) {
               />
             </Col>
           </Row>
-      
-       
+
           <Row>
             <Col sm={4}>
               <InputFormItem
@@ -223,10 +234,6 @@ function UserEditForm(props) {
               />
             </Col>
           </Row>
-
-       
-
-      
 
           <div className="form-buttons">
             <button

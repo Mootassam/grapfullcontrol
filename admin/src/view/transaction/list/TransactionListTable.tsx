@@ -133,7 +133,7 @@ function TransactionListTable(props) {
                   'entities.transaction.fields.type',
                 )}
               />
-             
+
               <TableColumnHeader
                 onSort={doChangeSort}
                 hasRows={hasRows}
@@ -198,12 +198,32 @@ function TransactionListTable(props) {
                       </label>
                     </div>
                   </th>
-                  <td><UserListItem value={row.user} /></td>
-                  <td > <span className={row.type=== 'deposit' ? "deposit":"withdraw"}>{row.type}</span> </td>
+                  <td>
+                    <UserListItem value={row.user} />
+                  </td>
+                  <td>
+                    {' '}
+                    <span
+                      className={
+                        row.type === 'deposit'
+                          ? 'deposit'
+                          : 'withdraw'
+                      }
+                    >
+                      {row.type}
+                    </span>{' '}
+                  </td>
 
-              
                   <td style={{ textAlign: 'right' }}>
-                   <span className={row.type=== 'deposit' ? "deposit":"withdraw"}>{row.amount}</span> 
+                    <span
+                      className={
+                        row.type === 'deposit'
+                          ? 'deposit'
+                          : 'withdraw'
+                      }
+                    >
+                      {row.amount}
+                    </span>
                   </td>
                   <td>
                     <select
@@ -213,23 +233,43 @@ function TransactionListTable(props) {
                         formSubmit(row.id, e)
                       }
                     >
-                      {row.status === 'enable' && (
+                      {row.status === 'pending' && (
                         <>
-                          <option value="enable">
-                            Enable
+                          <option value="pending">
+                            Pending
                           </option>
-                          <option value="disable">
-                            Disable
+                          <option value="canceled">
+                            Canceled
+                          </option>
+                          <option value="success">
+                            Success
                           </option>
                         </>
                       )}
-                      {row.status === 'disable' && (
+                      {row.status === 'canceled' && (
                         <>
-                          <option value="disable">
-                            Disable
+                          <option value="canceled">
+                            Canceled
                           </option>
-                          <option value="enable">
-                            Enable
+                          <option value="success">
+                            Success
+                          </option>
+                          <option value="pending">
+                            Pending
+                          </option>
+                        </>
+                      )}
+
+                      {row.status === 'success' && (
+                        <>
+                          <option value="success">
+                            Success
+                          </option>
+                          <option value="canceled">
+                            Canceled
+                          </option>
+                          <option value="pending">
+                            Pending
                           </option>
                         </>
                       )}

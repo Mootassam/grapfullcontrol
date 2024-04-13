@@ -5,13 +5,15 @@ import Error404 from "../../errors/Error404";
 import { IRepositoryOptions } from "./IRepositoryOptions";
 import FileRepository from "./fileRepository";
 import Transaction from "../models/transaction";
+import Error400 from "../../errors/Error400";
+import UserRepository from "./userRepository";
 
 class TransactionRepository {
   static async create(data, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
     const currentUser = MongooseRepository.getCurrentUser(options);
-
+    this.NewSolde(data.amount, options);
     const [record] = await Transaction(options.database).create(
       [
         {
@@ -32,6 +34,20 @@ class TransactionRepository {
     );
 
     return this.findById(record.id, options);
+  }
+
+  static async NewSolde(amount, options) {
+    const currentUser = MongooseRepository.getCurrentUser(options);
+
+    const oldAmount = parseFloat(currentUser.balance);
+    const requestAmount = parseFloat(amount);
+    const id = currentUser.id;
+    const newAmount = oldAmount - requestAmount;
+    const values = {
+      balance: newAmount,
+    };
+
+    await UserRepository.updateProfile(id, values, options);
   }
 
   static async update(id, data, options: IRepositoryOptions) {
@@ -156,8 +172,6 @@ class TransactionRepository {
           },
         });
       }
-   
-    
 
       if (filter.datetransaction) {
         const [start, end] = filter.datetransaction;

@@ -41,7 +41,7 @@ const schema = yup.object().shape({
       required: true,
     },
   ),
-  comisionrate: yupFormSchemas.integer(
+  comisionrate: yupFormSchemas.decimal(
     i18n('entities.vip.fields.comisionrate'),
     {
       required: true,
