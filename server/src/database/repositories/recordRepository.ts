@@ -12,6 +12,8 @@ class RecordRepository {
 
     const currentUser = MongooseRepository.getCurrentUser(options);
 
+    this.checkOrder(data,options)
+
     const [record] = await Records(options.database).create(
       [
         {
@@ -32,6 +34,15 @@ class RecordRepository {
     );
 
     return this.findById(record.id, options);
+  }
+
+
+  static async checkOrder(data, options) { 
+    const record = await Records(options.database).findOne({
+      order: data.order,
+      tenant: currentTenant.id,
+    });
+
   }
 
   static async update(id, data, options: IRepositoryOptions) {
@@ -267,6 +278,9 @@ class RecordRepository {
 
     return { rows, count, total };
   }
+
+
+
 
   static async findAllAutocomplete(search, limit, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
