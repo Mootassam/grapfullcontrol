@@ -9,6 +9,7 @@ import SettingsRepository from "./settingsRepository";
 import { isUserInTenant } from "../utils/userTenantUtils";
 import { IRepositoryOptions } from "./IRepositoryOptions";
 import lodash from "lodash";
+import Error405 from "../../errors/Error405";
 export default class UserRepository {
   static async create(data, options: IRepositoryOptions) {
     const currentUser = MongooseRepository.getCurrentUser(options);
@@ -162,9 +163,9 @@ export default class UserRepository {
 
   static async updateProfile(id, data, options: IRepositoryOptions) {
     const currentUser = MongooseRepository.getCurrentUser(options);
+    await this.checkSolde(data, options);
 
     data = this._preSave(data);
-
     await User(options.database).updateOne(
       { _id: id },
       {
@@ -195,6 +196,21 @@ export default class UserRepository {
     );
 
     return user;
+  }
+  static async checkSolde(data, options) {
+    const currentUser = MongooseRepository.getCurrentUser(options);
+
+    const currentBalance = currentUser.balance;
+    const currentVip = currentUser.vip.id;
+
+    if (!data) return;
+
+    if (currentVip === data.vip.id) {
+      throw new Error405("You are ready subscribed to this vip");
+    }
+    if (currentBalance < data.vip.levellimit) {
+      throw new Error405("Your solde insufissant please recharge your account");
+    }
   }
 
   static async generateEmailVerificationToken(
