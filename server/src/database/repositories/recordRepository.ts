@@ -6,6 +6,7 @@ import { IRepositoryOptions } from "./IRepositoryOptions";
 import FileRepository from "./fileRepository";
 import Records from "../models/records";
 import Error405 from "../../errors/Error405";
+import Dates from "../utils/Dates";
 
 class RecordRepository {
   static async create(data, options: IRepositoryOptions) {
@@ -13,7 +14,7 @@ class RecordRepository {
 
     const currentUser = MongooseRepository.getCurrentUser(options);
 
-   await this.checkOrder(options);
+    await this.checkOrder(options);
 
     const [record] = await Records(options.database).create(
       [
@@ -22,6 +23,7 @@ class RecordRepository {
           tenant: currentTenant.id,
           createdBy: currentUser.id,
           updatedBy: currentUser.id,
+          date: Dates.getDate(),
         },
       ],
       options
@@ -42,26 +44,42 @@ class RecordRepository {
     const record = await Records(options.database)
       .find({
         user: currentUser.id,
+        createdAt: {
+          $gte: this.getTimeZoneDate(),
+        },
       })
       .countDocuments();
-
     const dailyOrder = currentUser.vip.dailyorder;
+    console.log("====================================");
+    console.log("date from database", currentUser.createdAt);
+    console.log("====================================");
 
+    console.log("====================================");
+    console.log("date from the dunction", this.getTimeZoneDate());
+    console.log("====================================");
 
-    if( record >= dailyOrder) { 
-      throw new Error405("this is your limit, please tommorrow come and do more tasks")
+    if (currentUser && currentUser.vip && currentUser.vip.id) {
+      if (record >= dailyOrder) {
+        throw new Error405(
+          "this is your limit, please tommorrow come and do more tasks"
+        );
+      }
+    } else {
+      throw new Error405("Please you need to subscribe in one vip at least");
     }
-
-    // console.log("Total order", record);
   }
 
   static getTimeZoneDate() {
-    
     const dubaiTimezone = "Asia/Dubai";
     const options = { timeZone: dubaiTimezone };
     const currentDateTime = new Date().toLocaleString("en-US", options);
-    return currentDateTime;
 
+    // Get the current date in UTC format
+    const utcDateTime = new Date(currentDateTime).toISOString();
+    console.log("====================================");
+    console.log(utcDateTime);
+    console.log("====================================");
+    return utcDateTime;
   }
 
   static async update(id, data, options: IRepositoryOptions) {
@@ -146,8 +164,6 @@ class RecordRepository {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
     const currentUser = MongooseRepository.getCurrentUser(options);
     let criteriaAnd: any = [];
-
-   
 
     criteriaAnd.push({
       tenant: currentTenant.id,

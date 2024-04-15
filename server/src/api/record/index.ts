@@ -24,12 +24,15 @@ export default (app) => {
     require('./recordList').default,
   );
 
+  app.get(
+    `/tenant/:tenantId/check`,
+    require('./check').default,
+  );
 
   app.get(
     `/tenant/:tenantId/records`,
     require('./recordListMobile').default,
   );
-
 
   
   app.get(

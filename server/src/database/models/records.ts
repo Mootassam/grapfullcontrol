@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import FileSchema from "./schemas/fileSchema";
+import Dates from "../utils/Dates";
 const Schema = mongoose.Schema;
 
 export default (database) => {
@@ -28,6 +29,7 @@ export default (database) => {
       },
       date: {
         type: Date,
+        default: Dates.getDate(),
       },
       number: {
         type: String,
@@ -38,6 +40,7 @@ export default (database) => {
         type: Schema.Types.ObjectId,
         ref: "tenant",
       },
+
       createdBy: {
         type: Schema.Types.ObjectId,
         ref: "user",
