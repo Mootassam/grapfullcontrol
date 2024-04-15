@@ -5,6 +5,7 @@ import Error404 from "../../errors/Error404";
 import { IRepositoryOptions } from "./IRepositoryOptions";
 import FileRepository from "./fileRepository";
 import Records from "../models/records";
+import Error405 from "../../errors/Error405";
 
 class RecordRepository {
   static async create(data, options: IRepositoryOptions) {
@@ -12,7 +13,7 @@ class RecordRepository {
 
     const currentUser = MongooseRepository.getCurrentUser(options);
 
-    this.checkOrder(data,options)
+   await this.checkOrder(options);
 
     const [record] = await Records(options.database).create(
       [
@@ -36,12 +37,30 @@ class RecordRepository {
     return this.findById(record.id, options);
   }
 
+  static async checkOrder(options) {
+    const currentUser = MongooseRepository.getCurrentUser(options);
+    const record = await Records(options.database)
+      .find({
+        user: currentUser.id,
+      })
+      .countDocuments();
 
-  static async checkOrder(data, options) { 
-    const record = await Records(options.database).findOne({
-      order: data.order,
-      tenant: currentTenant.id,
-    });
+    const dailyOrder = currentUser.vip.dailyorder;
+
+
+    if( record >= dailyOrder) { 
+      throw new Error405("this is your limit, please tommorrow come and do more tasks")
+    }
+
+    // console.log("Total order", record);
+  }
+
+  static getTimeZoneDate() {
+    
+    const dubaiTimezone = "Asia/Dubai";
+    const options = { timeZone: dubaiTimezone };
+    const currentDateTime = new Date().toLocaleString("en-US", options);
+    return currentDateTime;
 
   }
 
@@ -127,6 +146,8 @@ class RecordRepository {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
     const currentUser = MongooseRepository.getCurrentUser(options);
     let criteriaAnd: any = [];
+
+   
 
     criteriaAnd.push({
       tenant: currentTenant.id,
@@ -278,9 +299,6 @@ class RecordRepository {
 
     return { rows, count, total };
   }
-
-
-
 
   static async findAllAutocomplete(search, limit, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
