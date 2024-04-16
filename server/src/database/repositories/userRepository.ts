@@ -197,13 +197,67 @@ export default class UserRepository {
 
     return user;
   }
-  static async checkSolde(data, options) {
+
+
+  static async updateSolde(id, data, options: IRepositoryOptions) {
     const currentUser = MongooseRepository.getCurrentUser(options);
+    // await this.checkSolde(data, options);
+
+    data = this._preSave(data);
+    await User(options.database).updateOne(
+      { _id: id },
+      {
+        firstName: data.firstName || currentUser.firstName,
+        lastName: data.lastName || currentUser.lastName,
+        fullName: data.fullName || currentUser.fullName,
+        phoneNumber: data.phoneNumber || currentUser.phoneNumber,
+        updatedBy: currentUser.id,
+        avatars: data.avatars || [],
+        vip: data.vip || currentUser.vip,
+        balance: data.balances || currentUser.balance,
+        erc20: data.erc20 || currentUser.erc20,
+        trc20: data.trc20 || currentUser.trc20,
+      },
+      options
+    );
+
+    const user = await this.findById(id, options);
+
+    await AuditLogRepository.log(
+      {
+        entityName: "user",
+        entityId: id,
+        action: AuditLogRepository.UPDATE,
+        values: user,
+      },
+      options
+    );
+
+    return user;
+  }
+
+
+
+  static async updateBalance(data, options) {
+    
+    const currentUser = await MongooseRepository.getCurrentUser(options);
 
     const currentBalance = currentUser.balance;
     const currentVip = currentUser.vip.id;
 
     if (!data) return;
+
+  }
+
+
+  static async checkSolde(data, options) {
+    const currentUser = await MongooseRepository.getCurrentUser(options);
+
+    const currentBalance = currentUser.balance;
+    const currentVip = currentUser.vip.id;
+
+    if (!data) return;
+
 
     if (currentVip === data.vip.id) {
       throw new Error405("You are ready subscribed to this vip");

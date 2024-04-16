@@ -50,13 +50,8 @@ class RecordRepository {
       })
       .countDocuments();
     const dailyOrder = currentUser.vip.dailyorder;
-    console.log("====================================");
-    console.log("date from database", currentUser.createdAt);
-    console.log("====================================");
 
-    console.log("====================================");
-    console.log("date from the dunction", this.getTimeZoneDate());
-    console.log("====================================");
+
 
     if (currentUser && currentUser.vip && currentUser.vip.id) {
       if (record >= dailyOrder) {
@@ -76,9 +71,6 @@ class RecordRepository {
 
     // Get the current date in UTC format
     const utcDateTime = new Date(currentDateTime).toISOString();
-    console.log("====================================");
-    console.log(utcDateTime);
-    console.log("====================================");
     return utcDateTime;
   }
 

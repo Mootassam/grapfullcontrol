@@ -7,13 +7,15 @@ import FileRepository from "./fileRepository";
 import Transaction from "../models/transaction";
 import Error400 from "../../errors/Error400";
 import UserRepository from "./userRepository";
+import Error405 from "../../errors/Error405";
 
 class TransactionRepository {
   static async create(data, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
     const currentUser = MongooseRepository.getCurrentUser(options);
-    this.NewSolde(data.amount, options);
+
+    this.NewSolde(data, options);
     const [record] = await Transaction(options.database).create(
       [
         {
@@ -36,18 +38,37 @@ class TransactionRepository {
     return this.findById(record.id, options);
   }
 
-  static async NewSolde(amount, options) {
-    const currentUser = MongooseRepository.getCurrentUser(options);
+  static async NewSolde(data, options) {
+    try {
+      // Assuming MongooseRepository.getCurrentUser is a synchronous function
+      const currentUser = MongooseRepository.getCurrentUser(options);
 
-    const oldAmount = parseFloat(currentUser.balance);
-    const requestAmount = parseFloat(amount);
-    const id = currentUser.id;
-    const newAmount = oldAmount - requestAmount;
-    const values = {
-      balance: newAmount,
-    };
+      const oldAmount = parseFloat(currentUser.balance);
+      if (isNaN(oldAmount)) {
+        throw new Error405("Invalid balance for the current user");
+      }
 
-    await UserRepository.updateProfile(id, values, options);
+      const requestAmount = parseFloat(data.amount);
+      if (isNaN(requestAmount)) {
+        throw new Error405("Invalid request amount");
+      }
+
+      const id = currentUser.id;
+      const newBalance =  oldAmount - requestAmount;
+
+      const  values = {
+        balances: newBalance,
+        ...data.vip,
+      };
+
+ 
+
+      // Uncomment this line once you're ready to update the balance in the database
+      await UserRepository.updateSolde(id, values, options);
+    } catch (error) {
+      console.error("Error updating balance:", error);
+      throw error; // Rethrow the error to propagate it further if needed
+    }
   }
 
   static async update(id, data, options: IRepositoryOptions) {
@@ -70,11 +91,8 @@ class TransactionRepository {
       },
       options
     );
-
     await this._createAuditLog(AuditLogRepository.UPDATE, id, data, options);
-
     record = await this.findById(id, options);
-
     return record;
   }
 
@@ -118,7 +136,6 @@ class TransactionRepository {
     if (!record || String(record.tenant) !== String(currentTenant.id)) {
       throw new Error404();
     }
-
     return this._fillFileDownloadUrls(record);
   }
 

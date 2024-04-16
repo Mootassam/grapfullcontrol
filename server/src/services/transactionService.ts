@@ -1,9 +1,9 @@
-import Error400 from '../errors/Error400';
-import MongooseRepository from '../database/repositories/mongooseRepository';
-import { IServiceOptions } from './IServiceOptions';
-import TransactionRepository from '../database/repositories/TransactionRepository';
-import Error402 from '../errors/Error402';
-import Error405 from '../errors/Error405';
+import Error400 from "../errors/Error400";
+import MongooseRepository from "../database/repositories/mongooseRepository";
+import { IServiceOptions } from "./IServiceOptions";
+import TransactionRepository from "../database/repositories/TransactionRepository";
+import Error402 from "../errors/Error402";
+import Error405 from "../errors/Error405";
 
 export default class TransactionService {
   options: IServiceOptions;
@@ -14,13 +14,11 @@ export default class TransactionService {
 
   async create(data) {
     const session = await MongooseRepository.createSession(
-      this.options.database,
+      this.options.database
     );
 
     try {
-
-      await this.checkSolde(data, {...this.options})
-
+      // await this.checkSolde(data, { ...this.options });
 
       const record = await TransactionRepository.create(data, {
         ...this.options,
@@ -36,47 +34,41 @@ export default class TransactionService {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'mandat',
+        "mandat"
       );
 
       throw error;
     }
   }
 
-   async checkSolde(data, options) {
+  async checkSolde(data, options) {
     const currentUser = MongooseRepository.getCurrentUser(options);
 
-    if(!data) { 
-
+    if (!data) {
       throw new Error405("Please write amoutn");
     }
     const amount = data.amount;
-    const type = data.type
+    const type = data.type;
 
-
-    if(type === "withdraw") {
-      if(currentUser.balance < amount) {
-        throw new Error405("It looks like your withdrawal amount exceeds your balance");
-
+    if (type === "withdraw") {
+      if (currentUser.balance < amount) {
+        throw new Error405(
+          "It looks like your withdrawal amount exceeds your balance"
+        );
       }
     }
-
   }
 
   async update(id, data) {
     const session = await MongooseRepository.createSession(
-      this.options.database,
+      this.options.database
     );
 
     try {
-      const record = await TransactionRepository.update(
-        id,
-        data,
-        {
-          ...this.options,
-          session,
-        },
-      );
+      const record = await TransactionRepository.update(id, data, {
+        ...this.options,
+        session,
+      });
 
       await MongooseRepository.commitTransaction(session);
 
@@ -87,7 +79,7 @@ export default class TransactionService {
       MongooseRepository.handleUniqueFieldError(
         error,
         this.options.language,
-        'mandat',
+        "mandat"
       );
 
       throw error;
@@ -96,7 +88,7 @@ export default class TransactionService {
 
   async destroyAll(ids) {
     const session = await MongooseRepository.createSession(
-      this.options.database,
+      this.options.database
     );
 
     try {
@@ -122,29 +114,26 @@ export default class TransactionService {
     return TransactionRepository.findAllAutocomplete(
       search,
       limit,
-      this.options,
+      this.options
     );
   }
 
   async findAndCountAll(args) {
-    return TransactionRepository.findAndCountAll(
-      args,
-      this.options,
-    );
+    return TransactionRepository.findAndCountAll(args, this.options);
   }
 
   async import(data, importHash) {
     if (!importHash) {
       throw new Error400(
         this.options.language,
-        'importer.errors.importHashRequired',
+        "importer.errors.importHashRequired"
       );
     }
 
     if (await this._isImportHashExistent(importHash)) {
       throw new Error400(
         this.options.language,
-        'importer.errors.importHashExistent',
+        "importer.errors.importHashExistent"
       );
     }
 
@@ -161,7 +150,7 @@ export default class TransactionService {
       {
         importHash,
       },
-      this.options,
+      this.options
     );
 
     return count > 0;
