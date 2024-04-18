@@ -37,7 +37,9 @@ export default class RecordServices {
     }
   }
 
-  async check(data) {
+  async check() {
+
+  
     const session = await MongooseRepository.createSession(
       this.options.database
     );

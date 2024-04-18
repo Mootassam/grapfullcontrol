@@ -40,18 +40,20 @@ class RecordRepository {
   }
 
   static async checkOrder(options) {
+
     const currentUser = MongooseRepository.getCurrentUser(options);
     const record = await Records(options.database)
       .find({
         user: currentUser.id,
-      
       })
       .countDocuments();
+
     const dailyOrder = currentUser.vip.dailyorder;
 
-
     if (currentUser && currentUser.vip && currentUser.vip.id) {
-      if (record >= dailyOrder) {
+      if ( record >= dailyOrder ) {
+
+              const string = "en-US,en;q=0.9";
         throw new Error405(
           "this is your limit, please tommorrow come and do more tasks"
         );

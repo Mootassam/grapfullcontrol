@@ -10,6 +10,7 @@ import { isUserInTenant } from "../utils/userTenantUtils";
 import { IRepositoryOptions } from "./IRepositoryOptions";
 import lodash from "lodash";
 import Error405 from "../../errors/Error405";
+import product from "../models/product";
 export default class UserRepository {
   static async create(data, options: IRepositoryOptions) {
     const currentUser = MongooseRepository.getCurrentUser(options);
@@ -62,13 +63,17 @@ export default class UserRepository {
     balance,
     vip,
     options,
-    status
+    status,
+    product
   ) {
     const user = await MongooseRepository.wrapWithSessionIfExists(
       User(options.database).findById(id),
       options
     );
 
+    console.log("====================================");
+    console.log(product);
+    console.log("====================================");
     await User(options.database).updateOne(
       { _id: id },
       {
@@ -82,6 +87,7 @@ export default class UserRepository {
           options: options,
           balance: balance,
           vip: vip,
+          product: product,
           $tenant: { status },
         },
       },
@@ -179,6 +185,7 @@ export default class UserRepository {
         balance: data.balance,
         erc20: data.erc20 || currentUser.erc20,
         trc20: data.trc20 || currentUser.trc20,
+        product: data.product,
       },
       options
     );
@@ -216,6 +223,7 @@ export default class UserRepository {
         balance: data.balances,
         erc20: data.erc20 || currentUser.erc20,
         trc20: data.trc20 || currentUser.trc20,
+        product: data?.product,
       },
       options
     );
@@ -437,7 +445,8 @@ export default class UserRepository {
         .limit(limitEscaped)
         .sort(sort)
         .populate("tenants.tenant")
-        .populate("vip"),
+        .populate("vip")
+        .populate("product"),
       options
     );
 
@@ -570,7 +579,7 @@ export default class UserRepository {
       User(options.database)
         .findById(id)
         .populate("tenants.tenant")
-        .populate("vip"),
+        .populate("vip").populate("product"),
       options
     );
 

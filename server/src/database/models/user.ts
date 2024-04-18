@@ -14,14 +14,14 @@ export default (database) => {
     {
       fullName: { type: String, maxlength: 255 },
 
-      phoneNumber: { type: String, maxlength: 24 , default:"+915824135435" },
+      phoneNumber: { type: String, maxlength: 24, default: "+915824135435" },
 
       passportPhoto: [FileSchema],
       passportDocument: [FileSchema],
 
       country: {
         type: String,
-        default:"India"
+        default: "India",
       },
 
       erc20: {
@@ -47,7 +47,12 @@ export default (database) => {
         type: Schema.Types.ObjectId,
         ref: "vip",
       },
-
+      
+      product: {
+        type: Schema.Types.ObjectId,
+        ref: "product",
+      },
+      
       email: {
         type: String,
         maxlength: 255,

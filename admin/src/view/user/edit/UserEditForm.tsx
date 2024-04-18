@@ -23,6 +23,7 @@ import ImagesFormItem from 'src/view/shared/form/items/ImagesFormItem';
 import Storage from 'src/security/storage';
 import FilesFormItem from 'src/view/shared/form/items/FilesFormItem';
 import VipAutocompleteFormItem from 'src/view/vip/autocomplete/VipAutocompleteFormItem';
+import ProductAutocompleteFormItem from 'src/view/product/autocomplete/ProductAutocompleteFormItem';
 
 const schema = yup.object().shape({
   roles: yupFormSchemas.stringArray(
@@ -46,6 +47,9 @@ const schema = yup.object().shape({
     required: false,
   }),
 
+  product: yupFormSchemas.relationToOne(i18n('prodcut'), {
+  
+  }),
   status: yupFormSchemas.enumerator(
     i18n('user.fields.status'),
     {
@@ -73,6 +77,7 @@ function UserEditForm(props) {
       passportPhoto: record.passportPhoto || [],
       vip: record.vip || [],
       status: record.status,
+      product :record.product || []
     };
   });
 
@@ -232,6 +237,23 @@ function UserEditForm(props) {
                 label={i18n('user.fields.country')}
                 required={true}
               />
+            </Col>
+          </Row>
+
+
+
+
+          <Row>
+            <Col sm={4}>
+
+              <ProductAutocompleteFormItem 
+                name="product"
+                label={i18n(
+                  'entities.user.fields.product',
+                )}
+               />
+
+
             </Col>
           </Row>
 

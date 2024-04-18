@@ -196,6 +196,9 @@ class AuthService {
         user.id,
         options
       );
+      
+
+
 
       if (!currentPassword) {
         throw new Error400(options.language, "auth.wrongPassword");

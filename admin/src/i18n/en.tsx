@@ -62,6 +62,9 @@ company:{
 
     record:{
       menu:"Records",
+      new:{
+        title : "Add new Record"
+      },
       fields:{
         user:"user",
         product:"product",
@@ -2622,6 +2625,7 @@ company:{
       email: 'Email',
       emails: 'Email(s)',
       fullName: 'Name',
+      product:"Product",
       firstName: 'First Name',
       lastName: 'Last Name',
       balance: 'Balance', 
