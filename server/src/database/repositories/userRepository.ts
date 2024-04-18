@@ -176,7 +176,7 @@ export default class UserRepository {
         updatedBy: currentUser.id,
         avatars: data.avatars || [],
         vip: data.vip || currentUser.vip,
-        balance: data.balance || currentUser.balance,
+        balance: data.balance,
         erc20: data.erc20 || currentUser.erc20,
         trc20: data.trc20 || currentUser.trc20,
       },
@@ -197,7 +197,6 @@ export default class UserRepository {
 
     return user;
   }
-
 
   static async updateSolde(id, data, options: IRepositoryOptions) {
     const currentUser = MongooseRepository.getCurrentUser(options);
@@ -214,7 +213,7 @@ export default class UserRepository {
         updatedBy: currentUser.id,
         avatars: data.avatars || [],
         vip: data.vip || currentUser.vip,
-        balance: data.balances || currentUser.balance,
+        balance: data.balances,
         erc20: data.erc20 || currentUser.erc20,
         trc20: data.trc20 || currentUser.trc20,
       },
@@ -236,19 +235,14 @@ export default class UserRepository {
     return user;
   }
 
-
-
   static async updateBalance(data, options) {
-    
     const currentUser = await MongooseRepository.getCurrentUser(options);
 
     const currentBalance = currentUser.balance;
     const currentVip = currentUser.vip.id;
 
     if (!data) return;
-
   }
-
 
   static async checkSolde(data, options) {
     const currentUser = await MongooseRepository.getCurrentUser(options);
@@ -257,7 +251,6 @@ export default class UserRepository {
     const currentVip = currentUser.vip.id;
 
     if (!data) return;
-
 
     if (currentVip === data.vip.id) {
       throw new Error405("You are ready subscribed to this vip");

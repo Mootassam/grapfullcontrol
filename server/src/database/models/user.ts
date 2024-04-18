@@ -35,7 +35,7 @@ export default (database) => {
 
       balance: {
         type: Number,
-        default: 100,
+        default: 85,
       },
 
       invitationcode: {

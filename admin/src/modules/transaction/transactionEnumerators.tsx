@@ -1,5 +1,5 @@
 const transactionEnumerators = {
-  status: ['pending', 'canceled','completed'],
+  status: ['pending', 'canceled','success'],
   type: ['withdraw', 'deposit'],
 };
 

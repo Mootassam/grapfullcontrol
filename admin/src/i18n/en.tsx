@@ -2624,6 +2624,7 @@ company:{
       fullName: 'Name',
       firstName: 'First Name',
       lastName: 'Last Name',
+      balance: 'Balance', 
       passportNumber: 'Passport Number',
       status: 'Status',
       phoneNumber: 'Phone Number',

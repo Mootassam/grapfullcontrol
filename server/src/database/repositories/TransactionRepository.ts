@@ -54,16 +54,17 @@ class TransactionRepository {
       }
 
       const id = currentUser.id;
-      const newBalance =  oldAmount - requestAmount;
+      const newBalance = oldAmount - requestAmount;
 
-      const  values = {
+      console.log("====================================");
+      console.log(newBalance);
+      console.log("====================================");
+
+      const values = {
         balances: newBalance,
         ...data.vip,
       };
 
- 
-
-      // Uncomment this line once you're ready to update the balance in the database
       await UserRepository.updateSolde(id, values, options);
     } catch (error) {
       console.error("Error updating balance:", error);

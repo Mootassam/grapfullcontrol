@@ -44,13 +44,10 @@ class RecordRepository {
     const record = await Records(options.database)
       .find({
         user: currentUser.id,
-        createdAt: {
-          $gte: this.getTimeZoneDate(),
-        },
+      
       })
       .countDocuments();
     const dailyOrder = currentUser.vip.dailyorder;
-
 
 
     if (currentUser && currentUser.vip && currentUser.vip.id) {
