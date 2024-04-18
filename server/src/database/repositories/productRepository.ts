@@ -240,10 +240,8 @@ class ProductRepository {
     const totalOrder = MongooseRepository.getCurrentUser(options).vip;
 
     if (currentUser && currentUser.product && currentUser.product.id) {
-      // const price = parseFloat(currentUser.product.levellimit)
-
       let prodcut = currentUser.product;
-      prodcut[0](this._fillFileDownloadUrls);
+      // prodcut[0](this._fillFileDownloadUrls); 
       return prodcut;
     } else {
       let record = await Product(options.database)
@@ -251,7 +249,6 @@ class ProductRepository {
         .populate("vip");
       const random = Math.floor(Math.random() * record.length);
       record = await Promise.all(record.map(this._fillFileDownloadUrls));
-
       return record[random];
     }
   }

@@ -7,14 +7,20 @@ import FileRepository from "./fileRepository";
 import Records from "../models/records";
 import Error405 from "../../errors/Error405";
 import Dates from "../utils/Dates";
+import Product from "../models/product";
+import UserRepository from "./userRepository";
 
 class RecordRepository {
   static async create(data, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
+    console.log("====================================");
+    console.log(data);
+    console.log("====================================");
     const currentUser = MongooseRepository.getCurrentUser(options);
 
     await this.checkOrder(options);
+    await this.calculeGrap(data, options);
 
     const [record] = await Records(options.database).create(
       [
@@ -39,8 +45,31 @@ class RecordRepository {
     return this.findById(record.id, options);
   }
 
-  static async checkOrder(options) {
+  static async calculeGrap(data, options) {
+    const currentProduct = await Product(options.database).find({
+      _id: data.product,
+    });
 
+    const currentUserid = MongooseRepository.getCurrentUser(options).id;
+    const currentUser = MongooseRepository.getCurrentUser(options);
+    const currentUserBalance =
+      MongooseRepository.getCurrentUser(options).balance;
+    const ProductBalance = currentProduct[0].amount;
+
+    let total;
+    if (currentUser && currentUser.product && currentUser.product.id) {
+      total = parseFloat(currentUserBalance) - parseFloat(ProductBalance);
+    }
+
+    total = parseFloat(currentUserBalance) + parseFloat(ProductBalance);
+    const values = {
+      balance: total,
+    };
+
+    await UserRepository.updateProfileGrap(currentUserid, values, options);
+  }
+
+  static async checkOrder(options) {
     const currentUser = MongooseRepository.getCurrentUser(options);
     const record = await Records(options.database)
       .find({
@@ -51,9 +80,8 @@ class RecordRepository {
     const dailyOrder = currentUser.vip.dailyorder;
 
     if (currentUser && currentUser.vip && currentUser.vip.id) {
-      if ( record >= dailyOrder ) {
-
-              const string = "en-US,en;q=0.9";
+      if (record >= dailyOrder) {
+        const string = "en-US,en;q=0.9";
         throw new Error405(
           "this is your limit, please tommorrow come and do more tasks"
         );
