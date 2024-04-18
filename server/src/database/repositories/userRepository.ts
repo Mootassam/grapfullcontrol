@@ -71,9 +71,7 @@ export default class UserRepository {
       options
     );
 
-    console.log("====================================");
-    console.log(product);
-    console.log("====================================");
+
     await User(options.database).updateOne(
       { _id: id },
       {

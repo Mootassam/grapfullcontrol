@@ -5,6 +5,7 @@ import Error404 from "../../errors/Error404";
 import { IRepositoryOptions } from "./IRepositoryOptions";
 import FileRepository from "./fileRepository";
 import Product from "../models/product";
+import UserRepository from "./userRepository";
 
 class ProductRepository {
   static async create(data, options: IRepositoryOptions) {
@@ -234,17 +235,25 @@ class ProductRepository {
   }
 
   static async grapOrders(options: IRepositoryOptions) {
+    const currentUser = MongooseRepository.getCurrentUser(options);
     const currentVip = MongooseRepository.getCurrentUser(options).vip.id;
     const totalOrder = MongooseRepository.getCurrentUser(options).vip;
-    let record = await Product(options.database)
-      .find({ vip: currentVip })
-      .populate("vip");
-    const random = Math.floor(Math.random() * record.length);
-    record = await Promise.all(record.map(this._fillFileDownloadUrls));
-    console.log('====================================');
-    console.log(record);
-    console.log('====================================');
-    return record[random];
+
+    if (currentUser && currentUser.product && currentUser.product.id) {
+      // const price = parseFloat(currentUser.product.levellimit)
+
+      let prodcut = currentUser.product;
+      prodcut[0](this._fillFileDownloadUrls);
+      return prodcut;
+    } else {
+      let record = await Product(options.database)
+        .find({ vip: currentVip })
+        .populate("vip");
+      const random = Math.floor(Math.random() * record.length);
+      record = await Promise.all(record.map(this._fillFileDownloadUrls));
+
+      return record[random];
+    }
   }
 }
 
