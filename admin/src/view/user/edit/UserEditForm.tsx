@@ -249,7 +249,7 @@ function UserEditForm(props) {
               <ProductAutocompleteFormItem 
                 name="product"
                 label={i18n(
-                  'entities.user.fields.product',
+                  'user.fields.product',
                 )}
                />
 
