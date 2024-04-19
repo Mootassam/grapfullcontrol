@@ -183,7 +183,7 @@ export default class UserRepository {
         balance: data.balance,
         erc20: data.erc20 || currentUser.erc20,
         trc20: data.trc20 || currentUser.trc20,
-        product: data.product,
+        product: data?.product,
       },
       options
     );
@@ -222,7 +222,7 @@ export default class UserRepository {
         balance: data.balance,
         erc20: data.erc20 || currentUser.erc20,
         trc20: data.trc20 || currentUser.trc20,
-        product: data.product ,
+        product: data?.product ,
       },
       options
     );

@@ -29,6 +29,7 @@ class RecordRepository {
           createdBy: currentUser.id,
           updatedBy: currentUser.id,
           date: Dates.getDate(),
+          datecreation: Dates.getTimeZoneDate(),
         },
       ],
       options
@@ -49,8 +50,6 @@ class RecordRepository {
     const currentProduct = await Product(options.database).findOne({
       _id: data.product,
     });
-
-    console.log(currentProduct.commission); // Check if commission is retrieved correctly
 
     const currentUser = MongooseRepository.getCurrentUser(options);
     const currentUserBalance = currentUser.balance;
@@ -73,7 +72,6 @@ class RecordRepository {
 
     const updatedValues = {
       balance: total,
-      product: currentProduct,
     };
 
     // Update user's profile with the new balance and product
@@ -93,9 +91,13 @@ class RecordRepository {
 
   static async checkOrder(options) {
     const currentUser = MongooseRepository.getCurrentUser(options);
+    const currentDate = this.getTimeZoneDate(); // Get current date
+
     const record = await Records(options.database)
       .find({
         user: currentUser.id,
+        // Compare dates in the same format
+        datecreation: { $in: Dates.getTimeZoneDate() }, // Convert current date to Date object
       })
       .countDocuments();
 
@@ -103,28 +105,30 @@ class RecordRepository {
 
     if (currentUser && currentUser.vip && currentUser.vip.id) {
       if (record >= dailyOrder) {
-        const string = "en-US,en;q=0.9";
         throw new Error405(
-          "this is your limit, please tommorrow come and do more tasks"
+          "This is your limit. Please come back tomorrow to perform more tasks."
         );
       }
 
       if (currentUser.balance < 0) {
-        throw new Error405("your balance is not enough, please recharge");
+        throw new Error405("Your balance is not enough. Please recharge.");
       }
     } else {
-      throw new Error405("Please you need to subscribe in one vip at least");
+      throw new Error405("Please subscribe to at least one VIP package.");
     }
   }
 
   static getTimeZoneDate() {
     const dubaiTimezone = "Asia/Dubai";
-    const options = { timeZone: dubaiTimezone };
-    const currentDateTime = new Date().toLocaleString("en-US", options);
+    const options = {
+      timeZone: dubaiTimezone,
+      month: "2-digit",
+      day: "2-digit",
+      year: "numeric",
+    };
+    const currentDateTime = new Date().toLocaleDateString("en-US", options);
 
-    // Get the current date in UTC format
-    const utcDateTime = new Date(currentDateTime).toISOString();
-    return utcDateTime;
+    return currentDateTime;
   }
 
   static async update(id, data, options: IRepositoryOptions) {

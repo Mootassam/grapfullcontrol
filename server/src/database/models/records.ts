@@ -31,6 +31,9 @@ export default (database) => {
         type: Date,
         default: Dates.getDate(),
       },
+      datecreation: {
+        type: Date,
+      },
       number: {
         type: String,
         required: true,
