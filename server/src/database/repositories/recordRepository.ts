@@ -9,17 +9,16 @@ import Error405 from "../../errors/Error405";
 import Dates from "../utils/Dates";
 import Product from "../models/product";
 import UserRepository from "./userRepository";
+import product from "../models/product";
 
 class RecordRepository {
   static async create(data, options: IRepositoryOptions) {
     const currentTenant = MongooseRepository.getCurrentTenant(options);
 
-    console.log("====================================");
-    console.log(data);
-    console.log("====================================");
     const currentUser = MongooseRepository.getCurrentUser(options);
 
     await this.checkOrder(options);
+
     await this.calculeGrap(data, options);
 
     const [record] = await Records(options.database).create(
@@ -46,27 +45,50 @@ class RecordRepository {
   }
 
   static async calculeGrap(data, options) {
-    const currentProduct = await Product(options.database).find({
+    // Find the current product based on the provided data
+    const currentProduct = await Product(options.database).findOne({
       _id: data.product,
     });
 
-    const currentUserid = MongooseRepository.getCurrentUser(options).id;
+    console.log(currentProduct.commission); // Check if commission is retrieved correctly
+
     const currentUser = MongooseRepository.getCurrentUser(options);
-    const currentUserBalance =
-      MongooseRepository.getCurrentUser(options).balance;
-    const ProductBalance = currentProduct[0].amount;
+    const currentUserBalance = currentUser.balance;
+    const productBalance = currentProduct.amount;
+    const currentCommission = currentProduct.commission; // Corrected typo in 'commission'
 
     let total;
+
     if (currentUser && currentUser.product && currentUser.product.id) {
-      total = parseFloat(currentUserBalance) - parseFloat(ProductBalance);
+      // Subtract total amount including commission from current user's balance
+      total =
+        parseFloat(currentUserBalance) -
+        this.calculeTotal(productBalance, currentCommission);
+    } else {
+      // Add total amount including commission to current user's balance
+      total =
+        parseFloat(currentUserBalance) +
+        this.calculeTotal(productBalance, currentCommission);
     }
 
-    total = parseFloat(currentUserBalance) + parseFloat(ProductBalance);
-    const values = {
+    const updatedValues = {
       balance: total,
+      product: currentProduct,
     };
 
-    await UserRepository.updateProfileGrap(currentUserid, values, options);
+    // Update user's profile with the new balance and product
+    await UserRepository.updateProfileGrap(
+      currentUser.id, // Use currentUser.id instead of currentUserid
+      updatedValues,
+      options
+    );
+  }
+
+  // Removed the static keyword to define a regular function
+  static calculeTotal(price, commission) {
+    const total =
+      parseFloat(price) + (parseFloat(price) * parseFloat(commission)) / 100;
+    return total;
   }
 
   static async checkOrder(options) {
@@ -85,6 +107,10 @@ class RecordRepository {
         throw new Error405(
           "this is your limit, please tommorrow come and do more tasks"
         );
+      }
+
+      if (currentUser.balance < 0) {
+        throw new Error405("your balance is not enough, please recharge");
       }
     } else {
       throw new Error405("Please you need to subscribe in one vip at least");
