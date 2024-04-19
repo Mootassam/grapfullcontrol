@@ -5,10 +5,8 @@ import RecordServices from "../../services/recordServices";
 
 export default async (req, res, next) => {
   try {
-    new PermissionChecker(req).validateHas(Permissions.values.mandatCreate);
-
-    const payload = await new RecordServices(req).check();
-
+    new PermissionChecker(req).validateHas(Permissions.values.userRead);
+    const payload = await new RecordServices(req).count();
     await ApiResponseHandler.success(req, res, payload);
   } catch (error) {
     await ApiResponseHandler.error(req, res, error);

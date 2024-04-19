@@ -21,7 +21,4 @@ export default class Dates {
 
     return currentDateTime;
   }
-
-
-
 }

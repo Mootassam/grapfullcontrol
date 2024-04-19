@@ -37,9 +37,31 @@ export default class RecordServices {
     }
   }
 
-  async check() {
+  async count() {
+    const session = await MongooseRepository.createSession(
+      this.options.database
+    );
 
-  
+    try {
+      const record = await RecordRepository.CountOrder({
+        ...this.options,
+        session,
+      });
+      return record;
+    } catch (error) {
+      await MongooseRepository.abortTransaction(session);
+
+      MongooseRepository.handleUniqueFieldError(
+        error,
+        this.options.language,
+        "mandat"
+      );
+
+      throw error;
+    }
+  }
+
+  async check() {
     const session = await MongooseRepository.createSession(
       this.options.database
     );

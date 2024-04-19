@@ -89,6 +89,25 @@ class RecordRepository {
     return total;
   }
 
+  static async CountOrder(options) {
+    const currentUser = MongooseRepository.getCurrentUser(options);
+    const currentDate = this.getTimeZoneDate(); // Get current date
+
+    const record = await Records(options.database)
+      .find({
+        user: currentUser.id,
+        // Compare dates in the same format
+        datecreation: { $in: Dates.getTimeZoneDate() }, // Convert current date to Date object
+      })
+      .countDocuments();
+
+    const data = {
+      record: record,
+    };
+
+    return data;
+  }
+
   static async checkOrder(options) {
     const currentUser = MongooseRepository.getCurrentUser(options);
     const currentDate = this.getTimeZoneDate(); // Get current date
